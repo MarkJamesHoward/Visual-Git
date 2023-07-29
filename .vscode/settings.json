@@ -1,0 +1,5 @@
+{
+  "appService.preDeployTask": "publish-release",
+  "appService.deploySubpath": "bin\\Release\\net7.0\\publish",
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/ce2b00d4-956a-406a-9cb5-79a8ccec30f9/resourceGroups/Default-SQL-AustraliaSoutheast/providers/Microsoft.Web/sites/GitVisualiserAPI"
+}
