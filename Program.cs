@@ -13,6 +13,7 @@ builder.Services.AddCors(options =>
                       {
                           policy.WithOrigins("http://localhost:1234",
                           "https://lustrous-creponne-e68ef8.netlify.app",
+                          "https://visualgit.net",
                                               "http://localhost");
                       });
 });
