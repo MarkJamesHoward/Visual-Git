@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GitVisualiserAPI.Models;
+using System.Net.Http;
+
 
 namespace GitVisualiserAPI.Controllers
 {
@@ -54,6 +56,8 @@ namespace GitVisualiserAPI.Controllers
         [HttpPut("{userId}/{id}")]
         public async Task<IActionResult> PutGitInternal(string userId, string id, GitInternal gitInternal)
         {
+            HttpClient client = new();
+
             if (id != gitInternal.Id)
             {
                 return BadRequest();
@@ -64,6 +68,17 @@ namespace GitVisualiserAPI.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+
+                var values = new Dictionary<string, string>
+                {
+                { "thing1", "hello" },
+                { "thing2", "world" }
+                };
+                var content = new FormUrlEncodedContent(values);
+                var response = await client.PostAsync(
+                    "https://prod-27.australiasoutheast.logic.azure.com:443/workflows/64a996a4008b4259be62dd0d05def19b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5NaxJ6hu4Xv8zrc_gkg0jUkWa_8Btap8yLCb6MgORTo", content);
+                var result = await response.Content.ReadAsStringAsync();
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -85,12 +100,25 @@ namespace GitVisualiserAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<GitInternal>> PostGitInternal(GitInternal gitInternal)
         {
+            
+            HttpClient client = new();
+
           if (_context.GitInternals == null)
           {
               return Problem("Entity set 'GitInternalContext.GitInternals'  is null.");
           }
             _context.GitInternals.Add(gitInternal);
             await _context.SaveChangesAsync();
+
+             var values = new Dictionary<string, string>
+                {
+                { "thing1", "hello" },
+                { "thing2", "world" }
+                };
+                var content = new FormUrlEncodedContent(values);
+                var response = await client.PostAsync(
+                    "https://prod-27.australiasoutheast.logic.azure.com:443/workflows/64a996a4008b4259be62dd0d05def19b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5NaxJ6hu4Xv8zrc_gkg0jUkWa_8Btap8yLCb6MgORTo", content);
+                var result = await response.Content.ReadAsStringAsync();
 
             return CreatedAtAction("GetGitInternal", new { userId = gitInternal.UserId, id = gitInternal.Id }, gitInternal);
         }
