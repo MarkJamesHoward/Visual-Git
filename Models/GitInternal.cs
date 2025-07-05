@@ -14,8 +14,10 @@ public class GitInternal
     public string? TreeNodes { get; set; }
 
     public string? BranchNodes { get; set; }
+    
+    public string? TagNodes { get; set; }
 
-    public string? RemoteBranchNodes {get; set;}
+    public string? RemoteBranchNodes { get; set; }
 
     public string? HEADNodes { get; set; }
 
