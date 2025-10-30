@@ -4,4 +4,4 @@ GitVisualiseAPI - in app services - Visual Studio premium with MSDN
 
 docker build -t visual-git-api -f Dockerfile .
 
-docker run -d -p 8080:5078
+docker run -d -p 8080:6000 visual-git-api    
