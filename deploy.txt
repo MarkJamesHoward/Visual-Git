@@ -5,3 +5,43 @@ GitVisualiseAPI - in app services - Visual Studio premium with MSDN
 docker build -t visual-git-api -f Dockerfile .
 
 docker run -d -p 8080:6000 visual-git-api    
+
+
+
+--- Deploying container to Azure ----------------------------
+
+STEP 1 - PUBLUSH to Azure Container Registry (custom registry that you create in portal)
+
+first login on CLUSTER_ID
+    az login --tenant 3b3dbd39-f0c2-4af8-a422-9e388901f651
+
+then login to your container registry
+
+    az acr login --name mycontainerregistryname
+
+We need to tag our container as below 
+
+    docker tag visual-git-api mycontainerregistryname.azurecr.io/visual-git-api
+
+provide access
+    az acr update -n mycontainerregistryname --admin-enabled true  
+
+And finally push to the container registry
+    docker push mycontainerregistryname.azurecr.io/visual-git-api    
+
+
+
+
+-- when creating the container instance in Azure ------------------
+
+1) Create a DNS name so can be accessed (use 'visualgit')
+
+    visualgitapi.dwekhsgffdh0bhf6.newzealandnorth.azurecontainer.io
+
+3) Setup the Port that will be exposed (5078:5078 in this case)
+
+    On the network table remove the existing port 80 and place 5078 there.
+
+4) To connect use the port and the DNS as below:
+
+http://visualgit.bkfsech7gsafefau.australiaeast.azurecontainer.io:5078/api/gitinternals/swagger
