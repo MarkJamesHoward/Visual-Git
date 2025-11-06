@@ -22,12 +22,16 @@ then login to your container registry
 We need to tag our container as below 
 
     docker tag visual-git-api mycontainerregistryname.azurecr.io/visual-git-api
+    docker tag apache/kafka:3.7.1 mycontainerregistryname.azurecr.io/apache/kafka
+
 
 provide access
     az acr update -n mycontainerregistryname --admin-enabled true  
 
 And finally push to the container registry
-    docker push mycontainerregistryname.azurecr.io/visual-git-api    
+    docker push mycontainerregistryname.azurecr.io/visual-git-api 
+    docker push mycontainerregistryname.azurecr.io/mykafka 
+
 
 
 
