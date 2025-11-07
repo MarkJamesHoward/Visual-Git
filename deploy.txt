@@ -33,14 +33,11 @@ And finally push to the container registry
     docker push mycontainerregistryname.azurecr.io/mykafka 
 
 
-
-
-
 -- when creating the container instance in Azure ------------------
 
-1) Create a DNS name so can be accessed (use 'visualgit')
+1) Create a DNS name so can be accessed (use 'visualgitapi')
 
-    visualgitapi.dwekhsgffdh0bhf6.newzealandnorth.azurecontainer.io
+    visualgitapi.dwekhsgffdh0bhf6.australiaeast.azurecontainer.io:5078
 
 3) Setup the Port that will be exposed (5078:5078 in this case)
 
@@ -48,4 +45,4 @@ And finally push to the container registry
 
 4) To connect use the port and the DNS as below:
 
-http://visualgit.bkfsech7gsafefau.australiaeast.azurecontainer.io:5078/api/gitinternals/swagger
+http://visualgitapi.dwekhsgffdh0bhf6.australiaeast.azurecontainer.io:5078/api/gitinternals/swagger

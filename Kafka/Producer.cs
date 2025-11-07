@@ -4,11 +4,11 @@ namespace GitVisualiserAPI.Kafka
 {
     public static class KafkaProducer
     {
-        private static ProducerConfig config = new ProducerConfig
+        public static ProducerConfig config = new ProducerConfig
         {
             // BootstrapServers = "localhost:9092"
             // Azure Container DNS for Kafka Broker
-            BootstrapServers = "apachekafka.dja4e7g9bhenbhe2.australiaeast.azurecontainer.io",
+            BootstrapServers = "mykafka.evgxaxcrfefdgfcc.australiaeast.azurecontainer.io:9094",
         };
 
         public static async Task SendMessage(string data)
@@ -19,10 +19,7 @@ namespace GitVisualiserAPI.Kafka
             try
             {
                 // Create a message to send
-                var message = new Message<Null, string>
-                {
-                    Value = $"Hello from Kafka producer! Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}",
-                };
+                var message = new Message<Null, string> { Value = data };
 
                 // Send the message to the VisualGitTopic topic
                 var deliveryReport = await producer.ProduceAsync("VisualGitTopic", message);
