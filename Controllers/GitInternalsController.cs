@@ -8,6 +8,7 @@ using GitVisualiserAPI.Kafka;
 using GitVisualiserAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 namespace GitVisualiserAPI.Controllers
@@ -25,6 +26,7 @@ namespace GitVisualiserAPI.Controllers
 
         // GET: api/GitInternals
         [HttpGet("{userId}")]
+        [EnableRateLimiting("GlobalPolicy")]
         public async Task<ActionResult<IEnumerable<GitInternal>>> GetGitInternals()
         {
             if (_context.GitInternals == null)
@@ -36,6 +38,7 @@ namespace GitVisualiserAPI.Controllers
 
         // GET: api/GitInternals/5
         [HttpGet("{userId}/{id}")]
+        [EnableRateLimiting("GlobalPolicy")]
         public async Task<ActionResult<GitInternal>> GetGitInternal(string userId, string id)
         {
             if (_context.GitInternals == null)
@@ -104,6 +107,7 @@ namespace GitVisualiserAPI.Controllers
         // POST: api/GitInternals
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [EnableRateLimiting("GlobalPolicy")]
         public async Task<ActionResult<GitInternal>> PostGitInternal(GitInternal gitInternal)
         {
             HttpClient client = new();
