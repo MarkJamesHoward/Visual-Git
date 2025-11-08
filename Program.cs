@@ -65,6 +65,21 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
             )
     );
 
+    // Named Global policy
+    rateLimiterOptions.AddPolicy(
+        "GlobalPolicy",
+        httpContext =>
+            RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                factory: partition => new FixedWindowRateLimiterOptions
+                {
+                    AutoReplenishment = true,
+                    PermitLimit = rateLimitingConfig.GlobalPolicy.PermitLimit,
+                    Window = TimeSpan.FromMinutes(rateLimitingConfig.GlobalPolicy.WindowInMinutes),
+                }
+            )
+    );
+
     // Stricter policy for heavy operations
     rateLimiterOptions.AddPolicy(
         "StrictPolicy",

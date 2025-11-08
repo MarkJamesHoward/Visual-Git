@@ -30,7 +30,7 @@ provide access
 
 And finally push to the container registry
     docker push mycontainerregistryname.azurecr.io/visual-git-api 
-    docker push mycontainerregistryname.azurecr.io/mykafka 
+    docker push mycontainerregistryname.azurecr.io/mykafka
 
 
 -- when creating the container instance in Azure ------------------
