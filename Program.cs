@@ -19,6 +19,7 @@ builder.Services.AddCors(options =>
         {
             policy.WithOrigins(
                 "http://localhost:1234",
+                "http://localhost:4321",
                 "http://localhost:5078",
                 "http://localhost:5000",
                 "https://lustrous-creponne-e68ef8.netlify.app",
