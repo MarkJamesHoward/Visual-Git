@@ -46,3 +46,8 @@ And finally push to the container registry
 4) To connect use the port and the DNS as below:
 
 http://visualgitapi.dwekhsgffdh0bhf6.australiaeast.azurecontainer.io:5078/api/gitinternals/swagger
+
+
+
+---------------- Google cloud Deploying
+gcloud auth configure-docker australia-southeast1-docker.pkg.dev
