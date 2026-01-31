@@ -6,6 +6,13 @@
     <Nullable>enable</Nullable>
     <GenerateProgramFile>false</GenerateProgramFile>
     <VersionPrefix>1.0.0</VersionPrefix>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>visual</ToolCommandName>
+    <PackageId>VisualGit</PackageId>
+    <Authors>MarkJamesHoward</Authors>
+    <Description>Visualize the effects of Git commands on your local repository</Description>
+    <PackageProjectUrl>https://github.com/MarkJamesHoward/Visual-Git</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MarkJamesHoward/Visual-Git</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup>
     <IsPublishable>true</IsPublishable>
