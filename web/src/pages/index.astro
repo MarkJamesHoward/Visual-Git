@@ -52,12 +52,25 @@ import "../styles/mimic.css";
               >
                 Step 1
               </div>
-              <p class="text-align:center">
-                Install the application using .NET SDK
-              </p>
 
-              <div class="display:flex flex-direction:column place-items:center margin-top:md padding:md">
-                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; min-height:220px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left; display:flex; flex-direction:column;">
+              <div class="display:flex flex-direction:column place-items:center margin-top:md">
+                <div class="margin-bottom:md color:c5text1 font-size:sm">
+                  <span>First, install .NET SDK 9.0 - </span>
+                  <a
+                    target="_blank"
+                    href="https://dotnet.microsoft.com/download/dotnet/9.0"
+                    class="terminal-card-link color:c1background3"
+                  >
+                    Download from microsoft.com
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline; vertical-align:middle; margin-left:2px;">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+
+                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left;">
                   <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; background:#181825; color:#a6adc8; font-size:0.85rem; font-family:monospace; border-bottom:1px solid #313244;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="4 17 10 11 4 5"></polyline>
@@ -65,37 +78,16 @@ import "../styles/mimic.css";
                     </svg>
                     <span>Terminal</span>
                   </div>
-                  <div style="padding:20px; display:flex; flex-direction:column; gap:20px; flex:1;">
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                      <span style="color:#a6adc8; font-size:0.85rem;">1. Install .NET SDK 9.0</span>
-                      <a
-                        target="_blank"
-                        href="https://dotnet.microsoft.com/download/dotnet/9.0"
-                        style="display:inline-flex; align-items:center; gap:6px; color:#89b4fa; font-size:0.9rem; text-decoration:none;"
-                      >
-                        Download from microsoft.com
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                          <polyline points="15 3 21 3 21 9"></polyline>
-                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                  <div style="padding:20px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
+                      <code>dotnet tool install --global VisualGit</code>
+                      <button id="copyInstallCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
-                      </a>
+                      </button>
                     </div>
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                      <span style="color:#a6adc8; font-size:0.85rem;">2. Run in your terminal</span>
-                      <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
-                        <code>dotnet tool install --global VisualGit</code>
-                        <button id="copyInstallCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div style="padding:10px 16px; background:#181825; color:#6c7086; font-size:0.8rem; text-align:center; border-top:1px solid #313244;">
-                    Works on Windows, macOS, and Linux
                   </div>
                 </div>
               </div>
@@ -125,8 +117,8 @@ import "../styles/mimic.css";
                 Run VisualGit against your repo
               </p>
 
-              <div class="display:flex flex-direction:column place-items:center margin-top:md padding:md">
-                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; min-height:220px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left; display:flex; flex-direction:column;">
+              <div class="display:flex flex-direction:column place-items:center margin-top:md">
+                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left;">
                   <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; background:#181825; color:#a6adc8; font-size:0.85rem; font-family:monospace; border-bottom:1px solid #313244;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="4 17 10 11 4 5"></polyline>
@@ -134,22 +126,16 @@ import "../styles/mimic.css";
                     </svg>
                     <span>Terminal</span>
                   </div>
-                  <div style="padding:20px; display:flex; flex-direction:column; gap:20px; flex:1;">
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                      <span style="color:#a6adc8; font-size:0.85rem;">Point VisualGit at your repo</span>
-                      <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
-                        <code>visual -p "path/to/your/repo"</code>
-                        <button id="copyRunCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                          </svg>
-                        </button>
-                      </div>
+                  <div style="padding:20px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
+                      <code>visual -p "path/to/your/repo"</code>
+                      <button id="copyRunCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                      </button>
                     </div>
-                  </div>
-                  <div style="padding:10px 16px; background:#181825; color:#6c7086; font-size:0.8rem; text-align:center; border-top:1px solid #313244;">
-                    Replace the path with your local Git repository
                   </div>
                 </div>
               </div>
@@ -174,27 +160,18 @@ import "../styles/mimic.css";
               >
                 Step 3
               </div>
-              <p class="text-align:center">
+              <p class="text-align:center color:c5text1">
                 Experiment and learn
               </p>
 
               <div class="display:flex flex-direction:column place-items:center margin-top:md padding:md">
-                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; min-height:220px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left; display:flex; flex-direction:column;">
-                  <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; background:#181825; color:#a6adc8; font-size:0.85rem; font-family:monospace; border-bottom:1px solid #313244;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="4 17 10 11 4 5"></polyline>
-                      <line x1="12" y1="19" x2="20" y2="19"></line>
-                    </svg>
-                    <span>Terminal</span>
-                  </div>
-                  <div style="padding:20px; display:flex; flex-direction:column; gap:20px; flex:1;">
-                    <p style="color:#cdd6f4; margin:0; font-size:0.95rem; line-height:1.6;">
-                      Make changes to your repo and watch the visualization update in realtime. Branch, commit, rebase, merge &mdash; see exactly how each command affects your repository internals.
-                    </p>
-                  </div>
-                  <div style="padding:10px 16px; background:#181825; color:#6c7086; font-size:0.8rem; text-align:center; border-top:1px solid #313244;">
-                    Build confidence with commands like <strong style="color:#a6e3a1;">git reset --hard</strong>
-                  </div>
+                <div class="max-width:420px">
+                  <p class="color:c5text1 font-size:sm line-height:1.6 text-align:left margin-bottom:md">
+                    Make changes to your repo and watch the visualization update in realtime. Branch, commit, rebase, merge &mdash; see exactly how each command affects your repository internals.
+                  </p>
+                  <p class="color:c5text1 font-size:sm text-align:left">
+                    Build confidence with commands like <strong>git reset --hard</strong>
+                  </p>
                 </div>
               </div>
             </div>
@@ -273,7 +250,7 @@ import "../styles/mimic.css";
             <a
               href="https://www.buymeacoffee.com/ashotofcode"
               target="_blank"
-              class="text-decoration:unerline color:white:hover margin-top:lg color:c1text2"
+              class="text-decoration:underline color:white:hover margin-top:lg color:c1text2"
             >
               <div class="font-size:lg padding-bottom:2xl">buy me a coffee</div>
             </a>
@@ -299,6 +276,17 @@ import "../styles/mimic.css";
     </div>
   </div>
 </Layout>
+
+<style>
+  /* Scoped styles for Steps 1-3 terminal cards */
+  .terminal-card-link {
+    text-decoration: none;
+  }
+
+  .terminal-card-link:hover {
+    text-decoration: underline;
+  }
+</style>
 
 <script src="../EventHandlersForDownloadButton.ts"></script>
 

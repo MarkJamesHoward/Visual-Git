@@ -441,8 +441,11 @@ export const TWStyles = css`
 .color\\:c5text2 {
 	color: #DDDDDD;
 }
-.text-decoration\\:unerline {
-	text-decoration: unerline;
+.text-decoration\\:underline {
+	text-decoration: underline;
+}
+.text-decoration\\:none {
+	text-decoration: none;
 }
 .padding-bottom\\:2xl {
 	padding-bottom: 200px;
