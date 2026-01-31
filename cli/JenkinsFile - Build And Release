@@ -1,23 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Pull latest for VisualGit Cli, API, and Website') {
+        stage('Pull latest for VisualGit Cli, API, and Website - Now in mono repo') {
             steps {
                 
-                dir('D:\\github\\visualgitcmd') {
+                dir('D:\\github\\visual-git') {
                     bat 'git -c core.askpass=true pull --no-edit --ff-only || git pull --no-edit'
                 }
-                 dir('D:\\github\\visualgit') {
-                    bat 'git -c core.askpass=true pull --no-edit --ff-only || git pull --no-edit || echo Skipping pull - auth or repo issue'
-                 }
-                  dir('D:\\github\\visualgitapi') {
-                    bat 'git -c core.askpass=true pull --no-edit --ff-only || git pull --no-edit || echo Skipping pull - auth or repo issue'
-                 }
             }
         }              
         stage('Publish VisualGitCmd') {
             steps {
-                dir('D:\\github\\visualgitcmd') {
+                dir('D:\\github\\visual-gitcmd') {
                     bat 'dotnet restore'
                     bat 'dotnet build'
 
@@ -27,14 +21,14 @@ pipeline {
                     bat 'dotnet publish -r win-x64  --self-contained true -p:PublishSingleFile=true -c release -p:Version=%BUILD_NUMBER%'
                     bat 'dotnet publish -r win-arm64  --self-contained true -p:PublishSingleFile=true -c release -p:Version=%BUILD_NUMBER%'
 
-                    bat 'copy .\\bin\\Release\\net9.0\\win-x64\\publish\\visual.exe D:\\github\\visualgit\\public\\application\\Windowsx64'
-                    bat 'copy .\\bin\\Release\\net9.0\\win-arm64\\publish\\visual.exe D:\\github\\visualgit\\public\\application\\WindowsARM'
-                    bat 'copy .\\bin\\Release\\net9.0\\osx-x64\\publish\\visual D:\\github\\visualgit\\public\\application\\MacOSx64'
-                    bat 'copy .\\bin\\Release\\net9.0\\osx-x64\\publish\\visual D:\\github\\visualgit\\public\\application\\MacOSx64\\visual.bin'
-                    bat 'copy .\\bin\\Release\\net9.0\\osx-arm64\\publish\\visual D:\\github\\visualgit\\public\\application\\MacOSARM'
-                    bat 'copy .\\bin\\Release\\net9.0\\osx-arm64\\publish\\visual D:\\github\\visualgit\\public\\application\\MacOSARM\\visual.bin'
-                    bat 'copy .\\bin\\Release\\net9.0\\linux-x64\\publish\\visual D:\\github\\visualgit\\public\\application\\Linux'
-                    bat 'copy .\\bin\\Release\\net9.0\\linux-x64\\publish\\visual D:\\github\\visualgit\\public\\application\\Linux\\visual.bin'
+                    bat 'copy .\\bin\\Release\\net9.0\\win-x64\\publish\\visual.exe ..\\web\\public\\application\\Windowsx64'
+                    bat 'copy .\\bin\\Release\\net9.0\\win-arm64\\publish\\visual.exe ..\\web\\public\\application\\WindowsARM'
+                    bat 'copy .\\bin\\Release\\net9.0\\osx-x64\\publish\\visual ..\\web\\public\\application\\MacOSx64'
+                    bat 'copy .\\bin\\Release\\net9.0\\osx-x64\\publish\\visual ..\\web\\public\\application\\MacOSx64\\visual.bin'
+                    bat 'copy .\\bin\\Release\\net9.0\\osx-arm64\\publish\\visual ..\\web\\public\\application\\MacOSARM'
+                    bat 'copy .\\bin\\Release\\net9.0\\osx-arm64\\publish\\visual ..\\web\\public\\application\\MacOSARM\\visual.bin'
+                    bat 'copy .\\bin\\Release\\net9.0\\linux-x64\\publish\\visual ..\\web\\public\\application\\Linux'
+                    bat 'copy .\\bin\\Release\\net9.0\\linux-x64\\publish\\visual ..\\web\\public\\application\\Linux\\visual.bin'
 
                 }
             }
