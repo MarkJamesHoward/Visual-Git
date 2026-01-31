@@ -1,0 +1,50 @@
+-- Deploy Steps
+npm run build
+netlify deploy --prod -d dist
+
+-- Debugging
+To run in local debug mode which means we pull data from the localhost version of VisualGitAPI at 
+    https://localhost:7005/api/gitinternals
+
+comment out the calls in main.ts->PerformUpdate()
+
+to run locally and pull data from prod version of VisualGitAPI append the below to the url (replacing data=name)
+visualize/?data=Crandon/1
+
+and provide the API url too - so for Cloud.google
+visualize/?api=https://vgit-api-729645510879.australia-southeast1.run.app&data=Crandon/1
+
+and for Azure container app
+visualize/?api=https://visual-git-api.livelyforest-4bf24ad1.australiasoutheast.azurecontainerapps.io&data=Crandon/1
+
+
+--
+lustrous-creponne-e68ef8
+https://visualgit.net
+
+
+-- Creating InnoSetup package
+
+Open the pulbic\applications\innoSetup.iis files
+Run 'Compile'
+visualgit_setup.exe will be created in public\application\Output folder
+It pulls the visualgit.exe directly from our local folder here:
+    C:\github\VisualGit\public\application\Windows
+So need to copy over the published version from here first
+    C:\github\VisualGitCmd\bin\Release\net8.0\win-x64\publish
+
+
+
+-- Inverted Background css (brightest background)
+background:c5background2 color:c5text1
+
+
+
+
+--------------- How does the build number work with Jenkins
+Jenkins passes the build number on the cli and Astro has built in framework to handle
+this. There is a change in the astro.config.mjs file to store It
+and then in main.ts we access it with this line
+const webversion = __BUILD_NUMBER__;
+It is then set in the BuildVersion LitElement control
+

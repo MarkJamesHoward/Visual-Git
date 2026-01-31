@@ -1,0 +1,49 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import SampleScreenShot from "../images/SampleScreenShot.jpg";
+---
+
+<Layout title="VisualGit Tutorial - Octopus Merge">
+  <main
+    class="color:c1text2 margin-bottom:2xl margin-top:lg lg?margin-top:xl padding:xl"
+  >
+    <div class="display:flex flex-direction:column lg?flex-direction:row">
+      <div
+        class="display:flex lg?margin-left:xl flex-direction:column align-items:center font-size:lg"
+      >
+        <div class="font-size:xl margin-bottom:xl text-align:center">
+          Octopus Merge
+        </div>
+        <div
+          class="max-width:40ch lg?max-width:80ch margin-bottom:xl text-align:justify align-self:center"
+        >
+          When merging multiple branches at the same time Git may chose to use
+          the Octopus merge strategy. We can also force the use of this strategy
+          via the below
+        </div>
+        <code>git merge -s octopus branch1 branch2</code>
+
+        <div
+          class="max-width:40ch lg?max-width:80ch margin-top:xl margin-bottom:lg text-align:justify align-self:center"
+        >
+          With this type of merge our newly created merge commit will have 3 or
+          more parents, hence the octopus naming...
+        </div>
+      </div>
+      <div
+        class="display:flex flex-direction:column gap:40px margin-top:lg align-items:center justify-content:space-around width:100% margin-bottom:lg"
+      >
+        <iframe
+          transition:name="octopusyt"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Fkx8THdQRXA?si=S1DIz7ESSR1H4QA6"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </main>
+</Layout>

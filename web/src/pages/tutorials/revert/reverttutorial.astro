@@ -1,0 +1,78 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import SampleScreenShot from "../images/SampleScreenShot.jpg";
+---
+
+<Layout title="VisualGit Tutorial - Revert">
+  <main class="margin-top:xl margin-bottom:xl lg?margin-bottom:2xl padding:lg">
+    <div
+      class="color:white display:flex flex-direction:column align-items:center font-size:lg"
+    >
+      <div
+        class="font-size:xl margin-bottom:lg text-align:center margin-top:lg"
+      >
+        Revert
+      </div>
+      <div
+        class="max-width:60ch margin-bottom:lg text-align:center align-self:center"
+      >
+        Reverting in Git allows us to remove the changes associated with a
+        commit. The way this is implemented is by creating a new commit that
+        undoes the changes in the commit we are looking to Revert. It is easy to
+        get confused with this command and to think that it will revert the
+        state of the repo back to the commit that is specified, but that is
+        actually handled by the 'Reset' command. Revert only undoes the changes
+        from a single commit.
+      </div>
+
+      <div
+        class="max-width:60ch margin-bottom:lg text-align:center align-self:center"
+      >
+        In the below we've added 3 files F1, F2 and F3 and we'd like to revert
+        the addition of F2. We can do this by running the Revert command against
+        #0194
+      </div>
+
+      <img
+        class="align-self:center width:50%"
+        src="/revertsetup.jpg"
+        alt="revert setup showing branch to be merged"
+      />
+
+      <div
+        class="margin-top:lg margin-bottom:lg align-self:center max-width:60ch"
+      >
+        Once we perform the Revert we get our new commit appended to the current
+        branch. Notice how the F1 and F3 files are still present after the
+        revert, and only the F2 file is reverted.
+      </div>
+
+      <img
+        class="align-self:center width:50%"
+        src="/revertcomplete.jpg"
+        alt="State of play after Revert has been completed"
+      />
+
+      <div
+        class="align-self:center margin-bottom:lg margin-top:lg max-width:60ch"
+      >
+        See the below video for more details on the Revert command using
+        VisualGit. Then give it a try for yourself
+      </div>
+      <div
+        class="display:flex flex-direction:column gap:40px margin-top:lg align-items:center justify-content:space-around width:100% margin-bottom:lg"
+      >
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/XJqQPNudPSY?si=R-wP0Rq06CxadfXk"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { IndexFiles } from "../components/IndexFiles.ts";
+import { BuildVersion } from "../components/BuildVersion.ts";
+import HideThings from "../components/HideThings";
+---
+
+<Layout title="Live Visualisation">
+  <main>
+    <div
+      class="position:fixed font-size:md bottom:0px right:0px color:white z-index:10 background-color:black padding:sm"
+      id="CmdVersionDisplay"
+    >
+        <BuildVersion client:load apiurl="checking" cmdversion="checking" webversion="checking" id="BuildVersion" />
+    </div>
+
+    <div
+      id="ProcessingChanges"
+      class="font-size:lg position:absolute bottom:0px right:0px color:white display:none"
+    >
+      Processing Changes...
+    </div>
+
+    <canvas class="height:100dvh width:100dvw" id="GitGraph"></canvas>
+
+    <div id="WorkingFiles" class="position:absolute bottom:100px left:50px">
+      <div
+        class="margin:md display:flex flex-direction:column border-style:solid border-color:white border-width:sm border-radius:10px"
+      >
+        <div
+          class="cursor:pointer height:30px background-color:indigo"
+          style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
+          id="WorkingFilesHEADER"
+        >
+        </div>
+
+  <div class="padding:md background-color:black border-radius:10px">
+          <IndexFiles
+            client:load
+            class="flex-grow:1"
+            title="Working Area2"
+            id="WorkingAreaLitElement"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="IndexAndWorkingFiles"
+      class="position:absolute bottom:100px left:250px"
+    >
+      <div
+        class="margin:md display:flex flex-direction:column border-style:solid border-color:white border-width:sm border-radius:10px"
+      >
+        <div
+          class="cursor:pointer height:30px background-color:indigo"
+          style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
+
+          id="IndexAndWorkingFilesHEADER"
+        >
+        </div>
+
+  <div class="padding:md background-color:black border-radius:10px">
+          <IndexFiles
+            client:load
+            class="flex-grow:1"
+            title="Staging Area2"
+            id="IndexFilesLitElement"
+          />
+        </div>
+      </div>
+    </div>
+
+    <HideThings client:load />
+    <script src="../main.ts"></script>
+  </main>
+</Layout>

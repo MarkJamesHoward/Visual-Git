@@ -1,0 +1,446 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+// import SampleScreenShot from '../images/SampleScreenShot.jpg';
+import SampleScreenShot from "../images/HiResVisualGit.png";
+
+import WindowsLogo from "../images/windows_logo_download.png";
+import LinuxLogo from "../images/linux_logo_download.png";
+import AppleLogo from "../images/apple_logo_download.png";
+
+import "../styles/mimic.css";
+---
+
+<Layout title="VisualGIT">
+  <div class="margin-bottom:xl md?margin-bottom:2xl">
+    <div class="text-align:center">
+      <div class="color:c1text2 font-size:lg background:c5background1">
+        <p class="text-align:justify place-self:center padding:lg">
+          Looking to learn Git then you've come to the right place!
+        </p>
+
+        <div class="display:flex justify-content:center">
+          <div class="width:90% md?width:50% lg?width:50% xl?width:30%">
+            <img
+              src={SampleScreenShot.src}
+              alt="Sample VisualGit Screen Shot"
+              width="100%"
+              style="object-fit:contain"
+            />
+          </div>
+        </div>
+
+        <div
+          class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
+        >
+          <p>
+            With Visual Git you can visualize the effects of Git commands on
+            your own local repository.
+          </p>
+
+          <p>
+            Knowing what happens to Git internally when we for example Rebase,
+            Revert or Reset will give you much more confidence in performing
+            these commands
+          </p>
+        </div>
+        <div class="background:c5background2 color:c5text1 fade-in-on-scroll">
+          <div
+            class="display:flex flex-direction:column lg?flex-direction:row justify-content:space-between padding-top:xl"
+          >
+            <div
+              style="flex-basis:33%"
+              class="text-align:center flex-basis:33% flex-grow:1 flex-shrink:1 margin-left:xl margin-right:xl margin-top:xl lg?margin-top:0px"
+            >
+              <div
+                class="font-size:lg titleFont font-weight:xl lg?font-weight:xl lg?font-size:xl margin-bottom:xl"
+              >
+                Step 1
+              </div>
+              <p class="text-align:center">
+                Download and install the application
+              </p>
+              <div
+                class="display:flex flex-direction:row justify-content:center"
+              >
+                <div
+                  class="margin-top:sm display:flex flex-direction:column padding:md"
+                >
+                  <div
+                    class="display:flex flex-direction:column md?flex-direction:row sm?flex-direction:row"
+                  >
+                    <div>
+                      <a
+                        id="DownloadButtonx64"
+                        href="/application/Outputx64/visualgit_setupx64.exe"
+                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
+                      >
+                        <div
+                          class="display:flex flex-direction:column min-width:70px"
+                        >
+                          <img
+                            src={WindowsLogo.src}
+                            alt="Windows Logo"
+                            class="width:16px align-self:center"
+                          />
+                          <div>
+                            <div class="color:white margin-top:md">
+                              Windows x64
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <a
+                        id="DownloadButtonARM"
+                        href="/application/OutputARM/visualgit_setupARM.exe"
+                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
+                      >
+                        <div
+                          class="display:flex flex-direction:column min-width:70px"
+                        >
+                          <img
+                            src={WindowsLogo.src}
+                            alt="Windows Logo"
+                            class="width:16px align-self:center"
+                          />
+                          <div>
+                            <div class="color:white margin-top:md">
+                              Windows ARM
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                    <a
+                      id="DownloadButtonLunux"
+                      href="/application/Linux/visual"
+                      class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
+                    >
+                      <div
+                        class="display:flex flex-direction:column min-width:70px"
+                      >
+                        <img
+                          src={LinuxLogo.src}
+                          alt="Windows Logo"
+                          class="width:16px align-self:center"
+                        />
+                        <div>
+                          <div class="color:white margin-top:md">Linux</div>
+                        </div>
+                      </div>
+                    </a>
+
+                    <div>
+                      <a
+                        id="DownloadButtonMacOSx64"
+                        href="/application/MacOSx64/visual"
+                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:c1background1 border-radius:10px"
+                      >
+                        <div
+                          class="display:flex flex-direction:column min-width:70px"
+                        >
+                          <img
+                            src={AppleLogo.src}
+                            alt="Windows Logo"
+                            class="width:16px align-self:center"
+                          />
+                          <div>
+                            <div class="color:white margin-top:md">
+                              MacOS x64
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <a
+                        id="DownloadButtonMacOSARM"
+                        href="/application/MacOSARM/visual"
+                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:c1background1 border-radius:10px"
+                      >
+                        <div
+                          class="display:flex flex-direction:column min-width:70px"
+                        >
+                          <img
+                            src={AppleLogo.src}
+                            alt="Windows Logo"
+                            class="width:16px align-self:center"
+                          />
+                          <div>
+                            <div class="color:white margin-top:md">
+                              MacOS ARM
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div  class="display:flex flex-direction:column place-items:center margin-top:xl">
+                <p>Have dotnet runtime installed on your computer? </p>
+                <p>Then the below will work regardless of whether you are using Mac, Linux or Windows</p>
+                  <a
+                  id="DownloadButtonDotNet"
+                  href="/application/FrameworkDependent/Visual.zip"
+                  class="max-width:100px margin:md text-decoration:none justify-content:center background-color:blue color:white padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
+                >
+                      Download 
+                </a>
+              </div> -->
+
+              <div
+                class="display:flex flex-direction:column text-align:center lg?text-align:left margin-top:xl gap:md"
+              >
+                <div class="">Not sure if you can trust the app?</div>
+                <div>
+                  Grab the source code from Github and build for yourself.
+                </div>
+
+                <a
+                  target="_blank"
+                  class="color:white:hover font-size:sm margin-top:md color:c1background3"
+                  href="https://github.com/MarkJamesHoward/VisualGitCmd"
+                  >Github - VisualGit Command Line App</a
+                >
+              </div>
+            </div>
+
+            <div
+              style="flex-basis:33%"
+              class="flex-basis:33% flex-grow:1 flex-shrink:1 margin-left:xl margin-right:xl margin-top:xl lg?margin-top:0px"
+            >
+              <div
+                class="font-size:lg titleFont lg?font-size:xl margin-bottom:xl font-weight:xl"
+              >
+                Step 2
+              </div>
+              <!-- <div>
+                <div>Ensure you have GIT installed on your computer</div>
+                <a class="color:white:hover color:c1background3 text-decoration:none font-size:sm" target="_blank" href="https://git-scm.com/">Get GIT Here</a>
+              </div> -->
+              <div class="text-align:left">
+                <p>
+                  Navigate to the location of the VisualGit CLI application and
+                  run
+                </p>
+                <!-- <strong>"C:\Program Files (86)\Visual Git"</strong> -->
+                <p>
+                  <span class="font-weight:lg">visual</span> -p "path to repo folder
+                  to examine"
+                </p>
+              </div>
+              <div
+                class="display:flex flex-direction:row justify-content:center margin-top:md lg?margin-top:lg"
+              >
+              </div>
+            </div>
+
+            <div
+              style="flex-basis:33%"
+              class="display:flex flex-direction:column margin-left:xl margin-right:xl flex-basis:33% flex-grow:1 flex-shrink:1 margin-top:xl lg?margin-top:0px"
+            >
+              <div
+                class="font-size:lg titleFont lg?font-size:xl margin-bottom:xl font-weight:xl"
+              >
+                Step 3
+              </div>
+              <div class="max-width:60ch text-align:left align-self:center">
+                <p>
+                  Make changes to the Repo and see the visualization update in
+                  realtime. Create Branches, Commits, perform Rebases, Resets,
+                  Merges to see how they affect the Repo.
+                </p>
+
+                <p>
+                  With a bit of practice and the in depth understanding that
+                  comes with knowing how these commands affect the working area,
+                  staging area and repository you'll be running previously scary
+                  commands like
+                  <strong> Git Reset --Hard</strong> with confidence!
+                </p>
+              </div>
+              <div
+                class="display:flex flex-direction:row justify-content:center margin-top:xl"
+              >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color:c1text2 padding-bottom:xl">
+          <div
+            class="slide-in-right-on-scroll display:flex flex-direction:column lg?flex-direction:row lg?justify-content:flex-end"
+          >
+            <div class="display:flex flex-direction:column">
+              <div
+                class="font-size:xl titleFont margin-top:xl padding:md color:#c1text2"
+              >
+                Visualization Features
+              </div>
+              <div class="display:flex flex-direction:column margin-top:md">
+                <div
+                  class="max-width:40ch font-size:lg text-align:left align-self:left padding-left:xl padding-right:xl"
+                >
+                  <p>
+                    Using this integration should be performed with minimal
+                    commits to the repo, maybe 10 would be the optimal,
+                    otherwise the graph gets too complicated.
+                  </p>
+
+                  <p>
+                    It is designed to be used for learning the changes that
+                    occur to the repo when issuing simple command such as
+                    branching, rebasing, squashing etc.
+                  </p>
+                </div>
+                <a
+                  class="color:c1text2 color:white:hover margin-top:lg font-size:md margin-bottom:lg"
+                  href="/usinglivevisualisation">More Details</a
+                >
+              </div>
+            </div>
+            <div class="lg?width:200px" style="visibility:hidden"></div>
+          </div>
+        </div>
+
+        <div
+          class="slide-in-left-on-scroll background:c5background2 padding-top:xl padding-bottom:xl display:flex flex-direction:column lg?flex-direction:row lg?padding-right:200px"
+        >
+          <div style="visibility:hidden" class="lg?width:200px"></div>
+
+          <div class="display:flex flex-direction:column color:c5text1">
+            <div class="font-size:xl titleFont margin-bottom:xl">
+              Visual Git in Action
+            </div>
+            <div class="display:flex flex-direction:column margin-top:md">
+              <div
+                class="max-width:40ch font-size:lg text-align:left align-self:left padding-left:xl padding-right:xl"
+              >
+                Want to see VisualGit in action? There are lots of videos
+                demonstrating how VisualGit can be used on the A Shot Of Code
+                YouTube channel. Here are some picks:
+              </div>
+              <a
+                class="color:c5text1 color:white:hover margin-top:lg font-size:md margin-bottom:lg"
+                href="/tutorials.html">Tutorials</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-up-fade-in-on-scroll">
+          <div>
+            <div
+              class="font-size:lg titleFont margin-top:xl padding-bottom:xl padding-top:md font-weight:lg color:c5text2"
+            >
+              <div>Enjoying using VisualGit?</div>
+              <div>All support much appreciated here thanks</div>
+            </div>
+            <a
+              href="https://www.buymeacoffee.com/ashotofcode"
+              target="_blank"
+              class="text-decoration:unerline color:white:hover margin-top:lg color:c1text2"
+            >
+              <div class="font-size:lg padding-bottom:2xl">buy me a coffee</div>
+            </a>
+          </div>
+
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6571414832573314"
+            crossorigin="anonymous"></script>
+          <!-- VisualGitHomePage -->
+          <ins
+            class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-6571414832573314"
+            data-ad-slot="4362210660"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script src="../EventHandlersForDownloadButton.ts"></script>
+
+<script is:inline>
+  // Fade-in on scroll for Step 1, 2, 3 sections
+  function fadeInOnScroll() {
+    const elements = document.querySelectorAll(".fade-in-on-scroll");
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  // Slide-in from right for main visualisation section
+  function slideInRightOnScroll() {
+    const elements = document.querySelectorAll(".slide-in-right-on-scroll");
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("slide-in-right-visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", slideInRightOnScroll);
+  }
+
+  // Slide-in from left for Visual Git in Action section
+  function slideInLeftOnScroll() {
+    const elements = document.querySelectorAll(".slide-in-left-on-scroll");
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("slide-in-left-visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  // Slide-up and fade-in for 'Enjoying using VisualGit?' section
+  function slideUpFadeInOnScroll() {
+    const elements = document.querySelectorAll(".slide-up-fade-in-on-scroll");
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("slide-up-fade-in-visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  fadeInOnScroll();
+  slideInRightOnScroll();
+  slideInLeftOnScroll();
+  slideUpFadeInOnScroll();
+</script>

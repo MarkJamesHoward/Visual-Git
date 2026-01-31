@@ -1,0 +1,7 @@
+How can I hide the Tree Nodes in the visualization?
+Click on the "Hide Tree" button in the Toggle View panel to hide or show Tree nodes in the visualization.
+
+How can I collapse the index files box in the visualization?
+Click on the triangle icon in the upper right corner of the index files box to toggle the size.
+
+   

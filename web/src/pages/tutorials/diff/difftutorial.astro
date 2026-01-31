@@ -1,0 +1,58 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import SampleScreenShot from "../images/SampleScreenShot.jpg";
+---
+
+<Layout title="VisualGit Tutorial - Git Diff">
+  <main class="color:c1text2 padding:xl margin-bottom:2xl">
+    <div
+      class="display:flex flex-direction:column lg?flex-direction:row align-items:center font-size:lg"
+    >
+      <div>
+        <!-- <div
+          class="font-size:xl margin-bottom:lg text-align:center margin-top:lg lg?margin-top:xl"
+        >
+          Git Diff
+        </div> -->
+        <div
+          class="max-width:60ch margin-bottom:lg text-align:justify align-self:center"
+        >
+          <p>
+            In this Git tutorial we look at how to use Git Diff against a
+            repository.
+          </p>
+
+          <p>
+            Detailing the default action taken when we run Git Diff without any
+            parameters and which files it will compare in this scenario and
+            examining the output that it provides for both the old and new
+            files.
+          </p>
+
+          <p>
+            We also look at how to specify files to compare based on the Hash
+            and the Git Tag.
+          </p>
+
+          <p>
+            And finally we delve into comparing files in different branches.
+          </p>
+        </div>
+      </div>
+      <div
+        class="display:flex flex-direction:column gap:40px margin-top:lg align-items:center justify-content:space-around width:100% margin-bottom:lg"
+      >
+        <iframe
+          transition:name="diffyt"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/vXN50AmJjgY?si=vc5OxKL5aquvCTDQ"
+          title="Git Diff"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </main>
+</Layout>

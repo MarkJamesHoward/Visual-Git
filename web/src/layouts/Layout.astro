@@ -1,0 +1,118 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+import { Footer } from "../components/Footer.ts";
+import { Header } from "../components/Header.ts";
+import "../styles/mimic.css";
+import "../styles/styles.css";
+
+import { ClientRouter } from "astro:transitions";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <ClientRouter />
+    <!-- <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6571414832573314"
+      crossorigin="anonymous"></script>  -->
+
+<!-- This is in <head> -->
+<!-- Google Tag Manager -->
+<script data-category="analytics" is:inline>
+  (function (w, d, s, l, i) {
+    console.log("GTM");
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-NC98TL28");
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- <script data-category="analytics" is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=GTM-NC98TL28"></script> -->
+
+<script data-category="analytics" is:inline type="text/partytown">
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  // gtag("config", "G-7D9M5LKKR7");
+  // gtag("config", "GTM-NC98TL28");
+
+
+  
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="description" content="VisualGit" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    </head
+  >
+
+  
+  <body
+    class="margin:0px padding:0px mainFont background:c1background1"
+  >
+
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NC98TL28"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <Header client:load title={title} />
+    <div class=" min-height:100vh">
+      <slot />
+    </div>
+    <Footer client:visible />
+    <script is:inline type="module" src="/cookieconsent-config.js"></script>
+  </body>
+  
+</html>
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    margin:0;
+    padding:0;
+    overflow-wrap:break-word;
+    box-sizing: border-box;
+  }
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
+</style>

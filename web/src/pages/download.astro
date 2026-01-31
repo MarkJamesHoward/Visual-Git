@@ -1,0 +1,251 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WindowsLogo from "../images/windows_logo_download.png";
+import LinuxLogo from "../images/linux_logo_download.png";
+import AppleLogo from "../images/apple_logo_download.png";
+---
+
+<Layout title="VisualGIT">
+  <div>
+    <section
+      class="margin-bottom:xl md?margin-bottom:2xl background-color:c1background1"
+    >
+      <div class="padding:md text-align:center">
+        <div class="color:c1text2 font-size:lg">
+          <div
+            class="max-width:60ch text-align:center place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
+          >
+            <h1 class="titleFont font-size:xl">Download</h1>
+            <p class="mainFont">
+              Choose your operating system and download the VisualGit
+              application
+            </p>
+          </div>
+          <div class="color:c1background3">
+            <div
+              class="display:flex flex-direction:column lg?flex-direction:row justify-content:space-between padding-top:xl"
+            >
+              <div
+                style="flex-basis:33%"
+                class="text-align:center flex-basis:33% flex-grow:1 flex-shrink:1 margin-left:xl margin-right:xl margin-top:md lg?margin-top:0px"
+              >
+                <div
+                  class="display:flex flex-direction:row justify-content:center"
+                >
+                  <div
+                    class="margin-top:sm display:flex flex-direction:column padding:md"
+                  >
+                    <div
+                      class="display:flex flex-direction:column sm?flex-direction:row"
+                    >
+                      <div>
+                                         <a
+                          id="DownloadButtonx64Windows"
+                          href="/application/outputx64/visualgit_setupx64.exe"
+                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
+                        >
+                          <div
+                            class="display:flex flex-direction:column color:c1background3"
+                          >
+                            <div
+                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
+                            >
+                              <img
+                                src={WindowsLogo.src}
+                                alt="Windows x64"
+                                class="os-download-img"
+                              />
+                              <div>Windows x64</div>
+                            </div>
+                            <div
+                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
+                            >
+                              <img
+                                src={WindowsLogo.src}
+                                alt="Windows x64"
+                                class="os-download-img"
+                              />
+                              Download x64
+                              <div>(Windows)</div>
+                            </div>
+                          </div>
+                        </a>
+
+                        <a
+                          id="DownloadButtonARMWindows"
+                          href="/application/outputARM/visualgit_setupARM.exe"
+                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
+                        >
+                          <div
+                            class="display:flex flex-direction:column color:c1background3"
+                          >
+                            <div
+                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
+                            >
+                              <img
+                                src={WindowsLogo.src}
+                                alt="Windows ARM"
+                                class="os-download-img"
+                              />
+                              <div>Windows ARM</div>
+                            </div>
+                            <div
+                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
+                            >
+                              <img
+                                src={WindowsLogo.src}
+                                alt="Windows ARM"
+                                class="os-download-img"
+                              />
+                              Download ARM
+                              <div>(Windows)</div>
+                            </div>
+                          </div>
+                        </a>
+                             </div>
+
+                      <a
+                        id="DownloadButtonLunux"
+                        href="/application/Linux/visual"
+                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
+                      >
+                        <div
+                          class="display:flex flex-direction:column color:c1background3"
+                        >
+                          <div
+                            class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
+                          >
+                            <img
+                              src={LinuxLogo.src}
+                              alt="Linux"
+                              class="os-download-img"
+                            />
+                            <div>Linux</div>
+                          </div>
+                          <div
+                            class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
+                          >
+                            <img
+                              src={LinuxLogo.src}
+                              alt="Linux"
+                              class="os-download-img"
+                            />
+                            Download
+                            <div>(Linux)</div>
+                          </div>
+                        </div>
+                      </a>
+
+                      <div>
+                        <a
+                          id="DownloadButtonMacOSARM"
+                          href="/application/MacOSARM/visual"
+                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
+                        >
+                          <div
+                            class="display:flex flex-direction:column color:c1background3"
+                          >
+                            <div
+                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
+                            >
+                              <img
+                                src={AppleLogo.src}
+                                alt="MacOS ARM"
+                                class="os-download-img"
+                              />
+                              <div>MacOS ARM</div>
+                            </div>
+                            <div
+                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
+                            >
+                              <img
+                                src={AppleLogo.src}
+                                alt="MacOS ARM"
+                                class="os-download-img"
+                              />
+                              Download
+                              <div>(MacOS ARM)</div>
+                            </div>
+                          </div>
+                        </a>
+                        <a
+                          id="DownloadButtonMacOSx64"
+                          href="/application/MacOSx64/visual"
+                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
+                        >
+                          <div
+                            class="display:flex flex-direction:column color:c1background3"
+                          >
+                            <div
+                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
+                            >
+                              <img
+                                src={AppleLogo.src}
+                                alt="MacOS x64"
+                                class="os-download-img"
+                              />
+                              <div>MacOS x64</div>
+                            </div>
+                            <div
+                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
+                            >
+                              <img
+                                src={AppleLogo.src}
+                                alt="MacOS x64"
+                                class="os-download-img"
+                              />
+                              Download
+                              <div>(MacOS x64)</div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <style>
+              .os-download-img {
+                height: 48px;
+                width: 48px;
+                margin-bottom: 8px;
+                transition:
+                  height 0.2s,
+                  width 0.2s;
+              }
+              @media (max-width: 600px) {
+                .os-download-img {
+                  height: 32px;
+                  width: 32px;
+                }
+              }
+              .download-btn-hover {
+                transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+              }
+              .download-btn-hover:hover {
+                transform: scale(1.045);
+              }
+            </style>
+
+            <script>
+              // Add the hover class to all download buttons
+              if (typeof window !== "undefined") {
+                window.addEventListener("DOMContentLoaded", () => {
+                  document
+                    .querySelectorAll('a[id^="DownloadButton"]')
+                    .forEach((btn) => {
+                      btn.classList.add("download-btn-hover");
+                    });
+                });
+              }
+            </script>
+          </div>
+
+          <script src="../EventHandlersForDownloadButton.ts"></script>
+        </div>
+      </div>
+    </section>
+  </div></Layout
+>

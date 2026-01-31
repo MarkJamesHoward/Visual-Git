@@ -1,0 +1,115 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import SampleScreenShot from "../images/SampleScreenShot.jpg";
+---
+
+<Layout title="VisualGit Tutorial - Rebasing">
+  <main class="color:c1text2 padding:xl">
+    <div
+      class="display:flex flex-direction:column align-items:center font-size:lg"
+    >
+      <div
+        class="font-size:xl margin-bottom:lg text-align:center margin-top:xl"
+      >
+        Rebasing
+      </div>
+
+      <iframe
+        transition:name="rebaseyt"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/v3viOPSLAOc?si=oTTm7GHvBYvMMSIs"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+
+      <div class="max-width:60ch margin-bottom:lg text-left align-self:center">
+        Rebasing is a type of merge that makes it look as though our changes
+        were actually made on the main branch rather than on a feature branch.
+      </div>
+
+      <div class="margin-bottom:lg align-self:center max-width:60ch">
+        Once we perform a Rebase we get a new copy of all the commits on our
+        branch but now they are parented to the tip of the target branch. The
+        'After Rebasing' diagram below shows the original commits but we should
+        be aware that the garbage collector will clean these up when it runs.
+      </div>
+
+      <div
+        class="display:flex flex-direction:column align-items:center large?flex-direction:row gap:10px justify-content:space-around"
+      >
+        <div class="display:flex flex-direction:column align-items:center">
+          <div class="margin-bottom:lg">Pending Rebase</div>
+          <img
+            width="500px"
+            class="object-fit:contain"
+            src="/step1.jpg"
+            alt="rebase setup showing branch to be rebased"
+          />
+        </div>
+        <div class="display:flex flex-direction:column align-items:center">
+          <div class="margin-bottom:lg">After Rebasing</div>
+          <img
+            width="500px"
+            class="object-fit:contain"
+            src="/rebaseperformed.jpg"
+            alt="rebase setup showing branch to be rebased"
+          />
+        </div>
+      </div>
+
+      <div
+        class="max-width:60ch margin-top:lg margin-bottom:lg text-left align-self:center"
+      >
+        There is another difference between performing a rebase and merge and
+        that relates to how the history will look. With a normal merge we'll
+        have a new commit created that has two parents and hence a branch will
+        be showing in the audit trail. With a rebase we get to keep a linear
+        history and the fact another branch was created is lost. See below with
+        standard merge on the left and a rebase on the right.
+      </div>
+
+      <div
+        class="display:flex flex-direction:column align-items:center gap:10px large?flex-direction:row large?justify-content:space-around"
+      >
+        <div
+          class="display:flex flex-direction:column width:80vw large?width:30vw align-items:center"
+        >
+          <div class="margin-bottom:lg">
+            Standard Merge History (includes Branch)
+          </div>
+          <img
+            width="500px"
+            class="object-fit:contain"
+            src="/logwithbranch.jpg"
+            alt="standard merge history showing branching"
+          />
+        </div>
+        <div
+          class="display:flex flex-direction:column width:80vw large?width:30vw align-items:center"
+        >
+          <div class="margin-bottom:lg">Rebase History (Linear)</div>
+          <img
+            width="500px"
+            class="object-fit:contain"
+            src="/logwithoutbranch.jpg"
+            alt="rebase setup showing branch to be rebased"
+          />
+        </div>
+      </div>
+
+      <div
+        class="align-self:center margin-bottom:lg margin-top:lg max-width:60ch"
+      >
+        See the below videos for more details on Rebasing using VisualGit. Then
+        give it a try for yourself
+      </div>
+      <div
+        class="display:flex flex-direction:column align-items:center gap:10px lg:flex-row margin-top:lg lg:justify-around width:100% margin-bottom:lg"
+      >
+      </div>
+    </div>
+  </main>
+</Layout>

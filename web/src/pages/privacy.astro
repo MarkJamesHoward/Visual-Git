@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Privacy">
+  <main class="margin-bottom:2xl padding:xl">
+    <h1 class="titleFont color:c1text2 font-size:xl text-align:center margin-bottom:xl">Privacy</h1>
+    <div
+      class="margin-bottom:lg lg?margin-bottom:2xl display:flex flex-direction:column lg?flex-direction:row lg?align-items:start justify-content:space-around gap:xl"
+    >
+      <div
+        class="display:flex  background:c5background3 border-radius:md padding:xl lg?min-height:80vh  color:c1text2 flex-direction:column align-items:center justify-content:space-around"
+      >
+        <div
+          class="font-size:lg titleFont font-weight:xl text-align:center"
+        >
+          What do we extract from the Repo?
+        </div>
+
+        <div
+          class="max-width:40ch text-align:left font-size:lg padding:xs"
+        >
+          <p>
+            By default we do NOT extract the contents of the files in the repo.
+            You can ask VisualGit to extract file contents by using the command
+            line parameter
+          </p>
+          <strong class="text-align:left" style="white-space: nowrap"
+            >--extract</strong
+          >.
+
+          <p>
+            Just be sure that you are happy for the file contents to be sent to
+            the server.
+          </p>
+
+          <p>
+            The details of files when
+            <strong style="white-space: nowrap">--extract</strong> is applied are
+            kept for up to day - but after that are permanently deleted.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="display:flex flex-direction:column border-radius:md background:c5background3 padding:xl lg?min-height:80vh color:c1text2 margin-top:xl lg?margin-top:0 lg?align-items:center"
+      >
+        <div class="font-size:lg titleFont text-align:center font-weight:xl">
+          Data Retention
+        </div>
+
+        <div
+          class="max-width:40ch text-align:left font-size:lg"
+        >
+          <p>
+            The Cloud API is cycled each hour and so any data we store is removed
+            at this point permanently
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Implementation">
+	<main class="">
+      
+    <div class="margin-bottom:lg lg?margin-bottom:2xl">
+
+      <div class="margin-top:xl text-align:center margin-bottom:xl">
+        <div class="font-size:xl lg?font-size:xl titleFont color:c1text2">
+          How Does It Work?
+        </div>
+      </div>
+
+    <section>
+      <div class="font-size:lg text-align:center">
+        <div
+          class="color:white display:flex flex-direction:column width:100% place-items:center"
+        >
+          <div class="display:flex align-items:center padding:md width:100% flex-direction:column">
+            <div class="display:none">
+              <div class="font-weight:800 margin-bottom:md">
+                GitHub Repositories - PRs Welcome
+              </div>
+              <div>
+                <div
+                  class="display:flex flex-direction:column items-start margin-bottom:lg align-self:center"
+                >
+                  <a
+                    class="self-start"
+                    href="https://github.com/MarkJamesHoward/VisualGitCmd"
+                    >https://github.com/MarkJamesHoward/VisualGitCmd</a
+                  >
+                  <a href="https://github.com/MarkJamesHoward/VisualGit"
+                    >https://github.com/MarkJamesHoward/VisualGit</a
+                  >
+                  <a href="https://github.com/MarkJamesHoward/VisualGitAPI"
+                    >https://github.com/MarkJamesHoward/VisualGitAPI</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="max-width:50ch margin:lg background:c5background2 color:c5text1  padding:xl border-radius:md">
+              <div class="font-weight:800 text-align:left margin-bottom:lg">
+                Step 1: Extract details from Repo into Json form
+              </div>
+              <div class="text-align:left">
+                The application delves into the .git folder and looks at all the
+                objects that are contained within. By running 'git cat-file'
+                against these objects we can determine various details and use
+                this to construct the git graph in Json form.
+              </div>
+            </div>
+          </div>
+          <div
+            class="display:flex align-items:center flex-direction:column width:100% margin-top:xl margin-bottom:xl"
+          >
+            <div  class="max-width:50ch margin:lg background:c5background2 color:c5text1 padding:xl border-radius:md">
+              <div class="font-weight:800 text-align:left margin-bottom:lg">
+                Step 2: Upload the Json to the cloud
+              </div>
+              <div class="text-align:left">
+                The extracted Json from step 1 is now uploaded to the cloud and
+                assigned a unique random ID so that it can be accessed only by
+                yourself.
+              </div>
+            </div>
+          </div>
+          <div
+            class="display:flex width:100% flex-direction:column  align-items:center margin-bottom:xl"
+          >
+          <div  class="max-width:50ch margin:lg background:c5background2 color:c5text1 padding:xl border-radius:md">
+            <div class="font-weight:800 text-align:left margin-bottom:lg">
+              Step 3: The Visual Git website extracts this information
+            </div>
+            <div class="text-align:left">
+              Poll the Cloud storage and compare the data against our current
+              data. If different then draw the Json objects to the screen
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+	</main>
+</Layout>

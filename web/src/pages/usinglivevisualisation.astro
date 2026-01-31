@@ -1,0 +1,295 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import WorkingArea from "../images/workingarea.png";
+import StagingArea from "../images/stagingarea.png";
+import AutoUpdateWithArrow from "../images/autoupdatewitharrow.png";
+import HideTreeWithArrow from "../images/hidetreewitharrow.png";
+import HideBlobWithArrow from "../images/hideblobwitharrow.png";
+import WorkingAreaWithArrow from "../images/workingareawitharrow.png";
+import StagingAreaWithArrow from "../images/staging_area_with_arrow.png";
+
+import workingareawitharrow_on_header_bar from "../images/workingareawitharrow_on_header_bar.png";
+import staging_area_with_arrow_header_bar from "../images/staging_area_with_arrow_header_bar.png";
+
+import GraphWithTreeHidden from "../images/graphwithtreehidden.png";
+import GraphWithBlobHidden from "../images/graphwithblobhidden.png";
+---
+
+<Layout title="Live Visualisation UI Explanation">
+  <section
+    class="margin-bottom:xl color:c1text2 font-size:lg md?margin-bottom:2xl background-color:c1background1"
+  >
+    <div class="padding:md text-align:left">
+      <!-- <div class="fontTitle font-size:xl">Working and Staging Area Boxes</div> -->
+
+  
+      <div class="display:flex flex-direction:column align-items:center">
+        <h1 class="titleFont font-size:xl text-align:center">UI Explained</h1>
+        
+        <p class="font-size:lg">
+          The live visualization page has various features available to
+          customize the display
+        </p>
+
+
+          <div class="display:flex flex-direction:column sm?flex-direction:row">
+            <div class="border-width:2px border-style:solid border-color:c1text1 border-radius:md padding:lg margin:lg text-align:center">
+              The visibility of the Trees and Blobs can be toggled on and off
+            </div>
+            <div class="border-width:2px border-style:solid border-color:c1text1 border-radius:md padding:lg margin:lg text-align:center">
+              The view can be paused and moved back and forth through time
+            </div>
+            <div class="border-width:2px border-style:solid border-color:c1text1 border-radius:md padding:lg margin:lg text-align:center">
+              All of the objects such as Trees, Blobs, Commits, HEAD and
+              branches can be moved by clicking and dragging.
+              The position of these objects will be retained even when the page is updated after a change made to the repo.
+            </div>
+          </div>
+      </div>
+
+      <div class="display:flex flex-direction:column padding-top:xl border:2pxsolidblack border-radius:md margin:lg align-items:center">
+        <h1 class="font-size:xl titleFont text-align:center">Working Area Window</h1>
+
+        <div
+          class="display:flex justify-content:between flex-direction:column sm?flex-direction:row "
+        >
+        
+          <div class=" width:50% align-self:center sm?width:30% md?width:20%">
+            <img
+              src={WorkingArea.src}
+              alt="Working Area screen shot"
+              width="100%"
+              style="object-fit:contain"
+            />
+          </div>
+          <div
+            class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
+          >
+            <p>View the files that GIT can see in your file system</p>
+            <p>
+              The screenshot here shows file1.txt and file2.txt are present in the working area
+              </p>
+              <p>When a file is initally created it will appear only here and not in the staging area or repository</p>
+            <p>
+              Additionally if file content extraction is enabled then we'll see each files contents here
+            </p>
+            <p>
+              Click the * to expand/colapse this UI element
+            </p>
+
+            <p>Click and drag the header bar to move this UI elements position</p>
+          </div>
+        </div>
+      </div>
+
+      <div class=" background-color:c1background2 display:flex border-color:white flex-direction:column padding-top:xl border:2pxsolidblack border-radius:md margin:lg align-items:center">
+        <h1 class="font-size:xl titleFont text-align:center color:c1background1">Staging Area Window</h1>
+
+        <div
+          class="display:flex justify-content:center  color:c1background1 padding:xl flex-direction:column lg?flex-direction:row"
+        >
+          <div class=" width:50% align-self:center sm?width:30% md?width:20%">
+            <img
+              src={StagingArea.src}
+              alt="Staging Area screen shot"
+              width="100%"
+              style="object-fit:contain"
+            />
+          </div>
+          <div
+            class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
+          >
+            <p>View the files that are currently in the GIT Staging/Index</p>
+            <p>
+              If file content extraction is enabled then we'll see each files
+              contents here
+            </p>
+            <p>
+              Click the * to expand/colapse this UI element
+            </p>
+            <p>Click and drag the header bar to move this UI elements position</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="display:flex justify-content:center padding:xl flex-direction:column lg?flex-direction:row border:2pxsolidblack border-radius:md margin:lg align-items:center" >
+        
+        
+        <div>
+          <h1 class="font-size:xl titleFont text-align:center color:c1background1 color:white">Collapsing Windows</h1>
+          <p>
+            Click the * to expand/colapse these Windows
+          </p>
+          
+        </div>
+        <div
+          class="display:flex justify-content:center padding:sm flex-direction:column lg?flex-direction:row margin:lg align-items:center"
+        >
+          <div class="width:90% lg?width:40%">
+            <img
+              src={WorkingAreaWithArrow.src}
+              alt="Staging Area screen shot"
+              width="100%"
+              style="object-fit:contain"
+            />
+          </div>
+          <div
+            class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
+          >
+        
+         
+          </div>
+          <div class="width:90% lg?width:40%">
+            <img
+              src={StagingAreaWithArrow.src}
+              alt="Staging Area screen shot"
+              width="100%"
+              style="object-fit:contain"
+            />
+          </div>
+        </div>
+      </div>
+
+
+      <div class="display:flex justify-content:center padding:xl flex-direction:column lg?flex-direction:row border:2pxsolidblack border-radius:md margin:lg align-items:center">
+
+
+        <div
+          class="display:flex justify-content:center  padding:xl flex-direction:column lg?flex-direction:row margin:lg align-items:center"
+        >
+          <div class="width:100% lg?width:40%">
+            <img
+              src={workingareawitharrow_on_header_bar.src}
+              alt="Staging Area screen shot"
+              width="100%"
+              style="object-fit:contain"
+            />
+          </div>
+         
+          <div class="width:100% lg?width:40%">
+            <img
+              src={staging_area_with_arrow_header_bar.src}
+              alt="Staging Area screen shot"
+              width="100%"
+              style="object-fit:contain"
+            />
+          </div>
+
+        </div>
+
+        <div>
+          <h1 class="font-size:xl titleFont text-align:center color:c1background1 color:white">Moving Windows</h1>
+          <p>Click and drag the header bar to move these Windows position</p>
+        </div>
+
+
+      </div>
+
+      <div
+        class="display:flex justify-content:center color:c1background3 flex-direction:column align-items:center lg?flex-direction:row background-color:c1background2 padding-top:2xl padding-bottom:2xl"
+      >
+        <div class="width:50% lg?width:30%">
+          <img
+            src={AutoUpdateWithArrow.src}
+            alt="Changing Auto Update Checkbox"
+            width="100%"
+            style="object-fit:contain"
+          />
+        </div>
+
+        <div
+          class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
+        >
+          <p class="max-width:40ch">
+            By default the visualisation will update automatically whenever a
+            change is made to the repo
+          </p>
+
+          <p class="max-width:40ch">
+            We can pause the visualisation by unchecking the 'AutoUpdate' check
+            box
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="display:flex flex-direction:column lg?flex-direction:row margin-top:2xl"
+      >
+        <div
+          class="text-align:justify justify-content:center grow:1 flex-basis:50% padding:xl"
+        >
+          <p class="max-width:40ch">
+            The inclusion of Tree objects in the visualisation is only really
+            useful when explicitly looking into how Git Trees work.
+          </p>
+
+          <p class="max-width:40ch">
+            For all other scenarios it is best to remove them to reduce clutter
+            on the screen
+          </p>
+
+          <p>
+            Simply click the <strong>&ltHide Tree&gt</strong> button to remove them
+          </p>
+        </div>
+
+        <div
+          class="display:flex flex-direction:column align-items:center flex-basis:30%"
+        >
+          <img
+            src={HideTreeWithArrow.src}
+            alt="Hiding Trees within the visualisation option"
+            class="width:50% lg?width:80%"
+            style="object-fit:contain"
+          />
+          <img
+            src={GraphWithTreeHidden.src}
+            alt="Graph showing screen when trees are hidden"
+            class="width:50% lg?width:80%"
+
+            style="object-fit:contain"
+          />
+        </div>
+      </div>
+
+      <div
+        class="display:flex flex-direction:column lg?flex-direction:row margin-top:2xl"
+      >
+        <div
+          class="text-align:justify justify-content:center grow:1 flex-basis:50% padding:xl"
+        >
+          <p class="max-width:40ch">
+            Similarly to removing Tree object we can remove BLOB objects if
+            desired too
+          </p>
+          <p>
+            Simply click the <strong>&ltHide Blob&gt</strong> button to remove them
+          </p>
+        </div>
+
+        <div
+          class="display:flex flex-direction:column align-items:center flex-basis:30%"
+        >
+          <img
+            src={HideBlobWithArrow.src}
+            alt="Hiding Blobs within the visualisation option"
+            class="width:50% lg?width:80%"
+
+            style="object-fit:contain"
+          />
+          <img
+            src={GraphWithBlobHidden.src}
+            alt="Graph showing screen when Bloba are hidden"
+            class="width:50% lg?width:80%"
+
+            style="object-fit:contain"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script src="../EventHandlersForDownloadButton.ts"></script>

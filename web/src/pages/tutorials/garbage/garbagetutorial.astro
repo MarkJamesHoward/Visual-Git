@@ -1,0 +1,63 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout title="VisualGit Tutorial - Garbage Collection">
+  <main
+    class="margin-top:lg lg?margin-top:xl margin-bottom:lg lg?margin-bottom:2xl padding:xl"
+  >
+    <div
+      class="color:c1text2 display:flex lg?flex-direction:row flex-direction:column justify-content:space-around font-size:lg"
+    >
+      <div>
+        <div class="font-size:xl titlefonts margin-bottom:xl margin-top:lg">
+          Garbage Collection
+        </div>
+
+        <div class="max-width:30ch margin-bottom:lg">
+          Running the Garbage collector will clean any objects in the repo that
+          are unreachable. To do this we can cle an up the Reflog of any objects
+          that are currently unreachable
+        </div>
+      </div>
+
+      <iframe
+        transition:name="garbageyt"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/uxUmgN0KxkY?si=SOdOn2JGTKNbYqWJ"
+        title="Garbage Collection"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+
+    <div class="font-size:lg color:c1text2 margin-top:xl">
+      <strong class="margin-bottom:lg"
+        >git reflog expire --expire-unreachable=now --all
+      </strong>
+      <div class="margin-bottom:lg">
+        Once this is done we can run the Garbage collector
+      </div>
+      <strong class="margin-bottom:lg">git gc </strong>
+      <div class="max-width:60ch margin-bottom:lg">
+        One thing to note here is that running the Garbage collector will place
+        our objects into the PACK folder, and from here VisualGit can no longer
+        decipher the repo
+      </div>
+      <div class="max-width:60ch margin-bottom:lg">
+        In order to get the data back into the OBJECTS folder so that Visual Git
+        can do its thing we need to perform the below
+      </div>
+
+      <div class="max-width:60ch margin-bottom:lg">
+        First move the files from within the PACK folder to the root of our repo
+      </div>
+
+      <div class="margin-bottom:lg">The run the below</div>
+
+      <strong class="margin-bottom:lg"
+        >type pack*.pack | git unpack-objects</strong
+      >
+    </div>
+  </main>
+</Layout>

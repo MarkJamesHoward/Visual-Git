@@ -1,0 +1,41 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import SampleScreenShot from "../images/SampleScreenShot.jpg";
+---
+
+<Layout title="VisualGit Tutorial - Branching">
+  <main class="padding:xl">
+    <div
+      class="display:flex flex-direction:column lg?flex-direction:row justify-content:space-around color:c1text2"
+    >
+      <div>
+        <div
+          class="font-size:xl margin-bottom:lg text-align:center margin-top:lg lg?margin-top:xl"
+        >
+          Branching
+        </div>
+        <div
+          class="font-size:lg align-self:center margin-bottom:lg margin-top:lg max-width:30ch"
+        >
+          See the below video for more details on Branching using VisualGit.
+          Then give it a try for yourself
+        </div>
+      </div>
+      <div>
+        <iframe
+          transition:name="branchyt"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/nifnpb2WyY4?si=Ud7y2hkUOxMUDRaw"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style></style>

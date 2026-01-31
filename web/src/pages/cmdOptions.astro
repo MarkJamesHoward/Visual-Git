@@ -1,0 +1,216 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import SampleScreenShot from "../images/SampleScreenShot.jpg";
+---
+
+<Layout title="Running VisualGit">
+  <main>
+    <section
+      class="color:white font-size:xl margin-bottom:lg lg?margin-bottom:2xl"
+    >
+      <div
+        class="padding-top:md padding-bottom:md padding-left:md padding-right:md align-text:center lg:py-16 lg:px-12"
+      >
+        <div
+          class="color:white font-size:md display:flex flex-direction:column align-items:center"
+        >
+          <div class="display:flex flex-direction:column margin-top:md">
+            <div
+              class="align-self:center font-size:lg titleFont margin-bottom:xl"
+            >
+              Command Line Options
+            </div>
+            <div class="max-width:60ch border-color:red text-align:center">
+              <div
+                class="border-color:black border-style:solid border-width:1px display:flex flex-direction:row margin-bottom:lg padding:lg"
+              >
+                <div
+                  class="display:flex flex-direction:column flex-basis:25% flex-grow:1 self-left"
+                >
+                  <div class="text-align:left">-w</div>
+                  <div class="text-align:left">--web</div>
+                </div>
+                <div
+                  class="display:flex flex-direction:column align-left text-align:left flex-shrink:1 flex-basis:25%"
+                >
+                  <div>Send Output to VisualGit Website</div>
+                  <div>(Default: true)</div>
+                </div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-width:1px border-color:black padding:lg"
+              >
+                <div
+                  class="display:flex flex-direction:column flex-basis:75% flex-grow:1"
+                >
+                  <div class="text-align:left">-n</div>
+                  <div class="text-align:left">--neo</div>
+                </div>
+                <div class="flex-basis:25% flex-shrink:1">
+                  Send Output to Neo4j
+                </div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-width:1px border-color:black padding:lg"
+              >
+                <div
+                  class="display:flex flex-direction:column flex-basis:25% flex-grow:1"
+                >
+                  <div class="text-align:left">-j</div>
+                  <div class="text-align:left">--json</div>
+                </div>
+                <div class="flex-shrink:1 flex-basis:25% text-left">
+                  Send Output to JSON
+                </div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-width:1px border-color:black padding:lg"
+              >
+                <div
+                  class="display:flex flex-direction:column flex-basis:25% flex-grow:1"
+                >
+                  <div class="text-align:left">-p</div>
+                  <div class="text-align:left">--RepoPath</div>
+                </div>
+                <div class="flex-shrink:1 flex-basis:25%">
+                  Git folder to analyze
+                </div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-width:1px border-color:black padding:lg"
+              >
+                <div
+                  class="display:flex flex-direction:column flex-basis:25% flex-grow:1"
+                >
+                  <div class="text-align:left">-d</div>
+                  <div class="text-align:left">--debug</div>
+                </div>
+                <div class="flex-shrink:1 flex-basis:25%">
+                  Enable debug mode
+                </div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-width:1px border-color:black padding:lg"
+              >
+                <div
+                  class="display:flex flex-direction:column flex-basis:75% flex-grow:1"
+                >
+                  <div class="text-align:left">-b</div>
+                  <div class="text-align:left">--bare</div>
+                </div>
+                <div class="flex-shrink:1 flex-basis:25%">Using Bare Repo</div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-color:black border-width:1px padding:lg"
+              >
+                <div
+                  class="display:flex flex-direction:column flex-basis:25% flex-grow:1"
+                >
+                  <div class="text-align:left">-e</div>
+                  <div class="text-align:left">--extract</div>
+                </div>
+                <div class="text-align:left flex-basis:25% flex-shrink:1">
+                  Extraction from the file contents will take place
+                </div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-color:black border-width:1px padding:lg"
+              >
+                <div class="flex-basis:75% flex-grow:1 text-align:left">
+                  --help
+                </div>
+                <div class="flex-shrink:1 flex-basis:25%">
+                  Display this help screen.
+                </div>
+              </div>
+              <div
+                class="display:flex flex-direction:row margin-bottom:lg border-style:solid border-color:black border-width:1px padding:lg"
+              >
+                <div class="flex-basis:75% flex-grow:1 text-align:left">
+                  --version
+                </div>
+                <div class="flex-basis:25% flex-shrink:1">
+                  Display version information.
+                </div>
+              </div>
+            </div>
+
+            <div class="margin-bottom:xl">
+              <div>
+                Note: Always run the application from a folder other than the
+                Repo that is being examined
+              </div>
+              <div>
+                We do this by using the -p option and providing the path here
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 800px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  .astro-a {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 220px;
+    height: auto;
+    z-index: -1;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .instructions {
+    margin-bottom: 2rem;
+    border: 1px solid rgba(var(--accent-light), 25%);
+    background: linear-gradient(
+      rgba(var(--accent-dark), 66%),
+      rgba(var(--accent-dark), 33%)
+    );
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .instructions code {
+    font-size: 0.8em;
+    font-weight: bold;
+    background: rgba(var(--accent-light), 12%);
+    color: rgb(var(--accent-light));
+    border-radius: 4px;
+    padding: 0.3em 0.4em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent-light));
+  }
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 2rem;
+    padding: 0;
+  }
+</style>
