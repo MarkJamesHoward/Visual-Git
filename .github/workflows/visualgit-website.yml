@@ -1,4 +1,4 @@
-name: VisualGit Website
+name: VisualGit Website Deploy
 
 on:
   push:
