@@ -56,28 +56,28 @@ export class Header extends LitElement {
                 <div class="margin-left:sm color:c1text1 margin-bottom:sm">
                   <a
                     class="color:c1text2 color:c1background2:hover text-decoration:none"
-                    href="/download.html"
+                    href="/download/"
                     >Download</a
                   >
                 </div>
                 <div class="margin-left:sm color:c1text1 margin-bottom:sm">
                   <a
                     class="color:c1text2 color:c1background2:hover text-decoration:none"
-                    href="/tutorials.html"
+                    href="/tutorials/"
                     >Tutorials</a
                   >
                 </div>
                 <div class="margin-left:sm color:c1text1 margin-bottom:sm">
                   <a
                     class="color:c1text2 color:c1background2:hover text-decoration:none"
-                    href="/implementation.html"
+                    href="/implementation/"
                     >Implementation</a
                   >
                 </div>
                 <div class="margin-left:sm color:c1text1 margin-bottom:sm">
                   <a
                     class="color:c1text2 color:c1background2:hover text-decoration:none"
-                    href="/usinglivevisualisation.html"
+                    href="/usinglivevisualisation/"
                     >Learn</a
                   >
                 </div>
@@ -86,7 +86,7 @@ export class Header extends LitElement {
           </div>
           <a
             class="color:c1text1 display:flex flex-direction:row width:100% align-items:stretch justify-self:center text-decoration:none flex-grow:1"
-            href="/index.html"
+            href="/"
           >
             <div
               class="display:none lg?display:block align-self:center padding-right:10px padding-left:10px"
@@ -114,28 +114,28 @@ export class Header extends LitElement {
               <li class="margin-left:sm color:c1text2">
                 <a
                   class="color:c1text2 text-decoration:none"
-                  href="/download.html"
+                  href="/download/"
                   >Download</a
                 >
               </li>
               <li class="margin-left:sm color:c1text1">
                 <a
                   class="color:c1text2 text-decoration:none"
-                  href="/tutorials.html"
+                  href="/tutorials/"
                   >Tutorials</a
                 >
               </li>
               <li class="margin-left:sm color:c1text1">
                 <a
                   class="color:c1text2 text-decoration:none"
-                  href="/implementation.html"
+                  href="/implementation/"
                   >Implementation</a
                 >
               </li>
               <li class="margin-left:sm color:c1text1">
                 <a
                   class="color:c1text2 text-decoration:none"
-                  href="/usinglivevisualisation.html"
+                  href="/usinglivevisualisation/"
                   >UI</a
                 >
               </li>

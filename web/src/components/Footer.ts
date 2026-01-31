@@ -17,13 +17,13 @@ export class Footer extends LitElement {
           >
             <a
               class="color:c1text2 color:white:hover text-decoration:none margin-bottom:lg"
-              href="/index.html"
+              href="/"
               >Home</a
             >
 
             <a
               class="color:c1text2 color:white:hover text-decoration:none"
-              href="/implementation.html"
+              href="/implementation/"
               >Implementation Details</a
             >
           </div>
@@ -33,17 +33,17 @@ export class Footer extends LitElement {
           >
             <a
               class="color:c1text2  color:white:hover text-decoration:none display:none"
-              href="./visualize.html"
+              href="/visualize/"
               >Visualize</a
             >
             <a
               class="color:c1text2 color:white:hover text-decoration:none margin-bottom:lg"
-              href="/tutorials.html"
+              href="/tutorials/"
               >Tutorials</a
             >
             <a
               class="color:c1text2  color:white:hover text-decoration:none"
-              href="/cmdOptions.html"
+              href="/cmdOptions/"
               >Running Visual</a
             >
           </div>
@@ -53,12 +53,12 @@ export class Footer extends LitElement {
           >
             <a
               class="color:c1text2  color:white:hover text-decoration:none margin-bottom:lg"
-              href="/privacy.html"
+              href="/privacy/"
               >Privacy</a
             >
             <a
               class="color:c1text2 color:white:hover text-decoration:none"
-              href="/contactus.html"
+              href="/contactus/"
               >Contact Us</a
             >
           </div>
