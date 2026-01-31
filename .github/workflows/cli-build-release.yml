@@ -88,9 +88,10 @@ jobs:
           ls -la ./nupkgs/
 
       - name: Login to NuGet with trusted publishing
+        id: nuget-login
         uses: NuGet/login@v1
         with:
           user: MarkHoward
 
       - name: Push to NuGet
-        run: dotnet nuget push ./nupkgs/*.nupkg --source nuget --skip-duplicate
+        run: dotnet nuget push ./nupkgs/*.nupkg --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
