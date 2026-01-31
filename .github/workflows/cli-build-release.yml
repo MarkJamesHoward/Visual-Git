@@ -79,8 +79,13 @@ jobs:
           generate_release_notes: true
           files: artifacts/*.zip
 
+      - name: Restore dependencies
+        run: dotnet restore cli/visual.csproj
+
       - name: Pack NuGet package
-        run: dotnet pack cli/visual.csproj -c Release -p:Version=1.0.${{ github.run_number }} -o ./nupkgs
+        run: |
+          dotnet pack cli/visual.csproj -c Release -p:Version=1.0.${{ github.run_number }} -o ./nupkgs
+          ls -la ./nupkgs/
 
       - name: Login to NuGet with trusted publishing
         uses: NuGet/login@v1
