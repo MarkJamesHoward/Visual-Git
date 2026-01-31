@@ -1,13 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import { Image } from "astro:assets";
-// import SampleScreenShot from '../images/SampleScreenShot.jpg';
 import SampleScreenShot from "../images/HiResVisualGit.png";
-
-import WindowsLogo from "../images/windows_logo_download.png";
-import LinuxLogo from "../images/linux_logo_download.png";
-import AppleLogo from "../images/apple_logo_download.png";
 
 import "../styles/mimic.css";
 ---
@@ -47,7 +41,7 @@ import "../styles/mimic.css";
         </div>
         <div class="background:c5background2 color:c5text1 fade-in-on-scroll">
           <div
-            class="display:flex flex-direction:column lg?flex-direction:row justify-content:space-between padding-top:xl"
+            class="display:flex flex-direction:column lg?flex-direction:row justify-content:space-between align-items:stretch padding-top:xl"
           >
             <div
               style="flex-basis:33%"
@@ -59,211 +53,149 @@ import "../styles/mimic.css";
                 Step 1
               </div>
               <p class="text-align:center">
-                Download and install the application
+                Install the application using .NET SDK
               </p>
-              <div
-                class="display:flex flex-direction:row justify-content:center"
-              >
-                <div
-                  class="margin-top:sm display:flex flex-direction:column padding:md"
-                >
-                  <div
-                    class="display:flex flex-direction:column md?flex-direction:row sm?flex-direction:row"
-                  >
-                    <div>
+
+              <div class="display:flex flex-direction:column place-items:center margin-top:md padding:md">
+                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; min-height:220px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left; display:flex; flex-direction:column;">
+                  <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; background:#181825; color:#a6adc8; font-size:0.85rem; font-family:monospace; border-bottom:1px solid #313244;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="4 17 10 11 4 5"></polyline>
+                      <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    <span>Terminal</span>
+                  </div>
+                  <div style="padding:20px; display:flex; flex-direction:column; gap:20px; flex:1;">
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <span style="color:#a6adc8; font-size:0.85rem;">1. Install .NET SDK 9.0</span>
                       <a
-                        id="DownloadButtonx64"
-                        href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-win-x64.zip"
-                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
+                        target="_blank"
+                        href="https://dotnet.microsoft.com/download/dotnet/9.0"
+                        style="display:inline-flex; align-items:center; gap:6px; color:#89b4fa; font-size:0.9rem; text-decoration:none;"
                       >
-                        <div
-                          class="display:flex flex-direction:column min-width:70px"
-                        >
-                          <img
-                            src={WindowsLogo.src}
-                            alt="Windows Logo"
-                            class="width:16px align-self:center"
-                          />
-                          <div>
-                            <div class="color:white margin-top:md">
-                              Windows x64
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                      <a
-                        id="DownloadButtonARM"
-                        href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-win-arm64.zip"
-                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
-                      >
-                        <div
-                          class="display:flex flex-direction:column min-width:70px"
-                        >
-                          <img
-                            src={WindowsLogo.src}
-                            alt="Windows Logo"
-                            class="width:16px align-self:center"
-                          />
-                          <div>
-                            <div class="color:white margin-top:md">
-                              Windows ARM
-                            </div>
-                          </div>
-                        </div>
+                        Download from microsoft.com
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
                       </a>
                     </div>
-
-                    <a
-                      id="DownloadButtonLunux"
-                      href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-linux-x64.zip"
-                      class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
-                    >
-                      <div
-                        class="display:flex flex-direction:column min-width:70px"
-                      >
-                        <img
-                          src={LinuxLogo.src}
-                          alt="Windows Logo"
-                          class="width:16px align-self:center"
-                        />
-                        <div>
-                          <div class="color:white margin-top:md">Linux</div>
-                        </div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <span style="color:#a6adc8; font-size:0.85rem;">2. Run in your terminal</span>
+                      <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
+                        <code>dotnet tool install --global VisualGit</code>
+                        <button id="copyInstallCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                          </svg>
+                        </button>
                       </div>
-                    </a>
-
-                    <div>
-                      <a
-                        id="DownloadButtonMacOSx64"
-                        href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-osx-x64.zip"
-                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:c1background1 border-radius:10px"
-                      >
-                        <div
-                          class="display:flex flex-direction:column min-width:70px"
-                        >
-                          <img
-                            src={AppleLogo.src}
-                            alt="Windows Logo"
-                            class="width:16px align-self:center"
-                          />
-                          <div>
-                            <div class="color:white margin-top:md">
-                              MacOS x64
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                      <a
-                        id="DownloadButtonMacOSARM"
-                        href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-osx-arm64.zip"
-                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 border:1pxsolidblack place-items:center padding:lg font-size:md text-align:center color:c1background1 border-radius:10px"
-                      >
-                        <div
-                          class="display:flex flex-direction:column min-width:70px"
-                        >
-                          <img
-                            src={AppleLogo.src}
-                            alt="Windows Logo"
-                            class="width:16px align-self:center"
-                          />
-                          <div>
-                            <div class="color:white margin-top:md">
-                              MacOS ARM
-                            </div>
-                          </div>
-                        </div>
-                      </a>
                     </div>
+                  </div>
+                  <div style="padding:10px 16px; background:#181825; color:#6c7086; font-size:0.8rem; text-align:center; border-top:1px solid #313244;">
+                    Works on Windows, macOS, and Linux
                   </div>
                 </div>
               </div>
 
-              <!-- <div  class="display:flex flex-direction:column place-items:center margin-top:xl">
-                <p>Have dotnet runtime installed on your computer? </p>
-                <p>Then the below will work regardless of whether you are using Mac, Linux or Windows</p>
-                  <a
-                  id="DownloadButtonDotNet"
-                  href="/application/FrameworkDependent/Visual.zip"
-                  class="max-width:100px margin:md text-decoration:none justify-content:center background-color:blue color:white padding:lg font-size:md text-align:center color:#FAF9F6 border-radius:10px"
-                >
-                      Download 
-                </a>
-              </div> -->
+              <script is:inline>
+                document.getElementById('copyInstallCmd')?.addEventListener('click', function() {
+                  navigator.clipboard.writeText('dotnet tool install --global VisualGit');
+                  this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a6e3a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                  setTimeout(() => {
+                    this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                  }, 2000);
+                });
+              </script>
 
-              <div
-                class="display:flex flex-direction:column text-align:center lg?text-align:left margin-top:xl gap:md"
-              >
-                <div class="">Not sure if you can trust the app?</div>
-                <div>
-                  Grab the source code from Github and build for yourself.
-                </div>
-
-                <a
-                  target="_blank"
-                  class="color:white:hover font-size:sm margin-top:md color:c1background3"
-                  href="https://github.com/MarkJamesHoward/VisualGitCmd"
-                  >Github - VisualGit Command Line App</a
-                >
-              </div>
             </div>
 
             <div
               style="flex-basis:33%"
-              class="flex-basis:33% flex-grow:1 flex-shrink:1 margin-left:xl margin-right:xl margin-top:xl lg?margin-top:0px"
+              class="text-align:center flex-basis:33% flex-grow:1 flex-shrink:1 margin-left:xl margin-right:xl margin-top:xl lg?margin-top:0px"
             >
               <div
-                class="font-size:lg titleFont lg?font-size:xl margin-bottom:xl font-weight:xl"
+                class="font-size:lg titleFont font-weight:xl lg?font-weight:xl lg?font-size:xl margin-bottom:xl"
               >
                 Step 2
               </div>
-              <!-- <div>
-                <div>Ensure you have GIT installed on your computer</div>
-                <a class="color:white:hover color:c1background3 text-decoration:none font-size:sm" target="_blank" href="https://git-scm.com/">Get GIT Here</a>
-              </div> -->
-              <div class="text-align:left">
-                <p>
-                  Navigate to the location of the VisualGit CLI application and
-                  run
-                </p>
-                <!-- <strong>"C:\Program Files (86)\Visual Git"</strong> -->
-                <p>
-                  <span class="font-weight:lg">visual</span> -p "path to repo folder
-                  to examine"
-                </p>
+              <p class="text-align:center">
+                Run VisualGit against your repo
+              </p>
+
+              <div class="display:flex flex-direction:column place-items:center margin-top:md padding:md">
+                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; min-height:220px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left; display:flex; flex-direction:column;">
+                  <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; background:#181825; color:#a6adc8; font-size:0.85rem; font-family:monospace; border-bottom:1px solid #313244;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="4 17 10 11 4 5"></polyline>
+                      <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    <span>Terminal</span>
+                  </div>
+                  <div style="padding:20px; display:flex; flex-direction:column; gap:20px; flex:1;">
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                      <span style="color:#a6adc8; font-size:0.85rem;">Point VisualGit at your repo</span>
+                      <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
+                        <code>visual -p "path/to/your/repo"</code>
+                        <button id="copyRunCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="padding:10px 16px; background:#181825; color:#6c7086; font-size:0.8rem; text-align:center; border-top:1px solid #313244;">
+                    Replace the path with your local Git repository
+                  </div>
+                </div>
               </div>
-              <div
-                class="display:flex flex-direction:row justify-content:center margin-top:md lg?margin-top:lg"
-              >
-              </div>
+
+              <script is:inline>
+                document.getElementById('copyRunCmd')?.addEventListener('click', function() {
+                  navigator.clipboard.writeText('visual -p "path/to/your/repo"');
+                  this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a6e3a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                  setTimeout(() => {
+                    this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                  }, 2000);
+                });
+              </script>
             </div>
 
             <div
               style="flex-basis:33%"
-              class="display:flex flex-direction:column margin-left:xl margin-right:xl flex-basis:33% flex-grow:1 flex-shrink:1 margin-top:xl lg?margin-top:0px"
+              class="text-align:center flex-basis:33% flex-grow:1 flex-shrink:1 margin-left:xl margin-right:xl margin-top:xl lg?margin-top:0px"
             >
               <div
-                class="font-size:lg titleFont lg?font-size:xl margin-bottom:xl font-weight:xl"
+                class="font-size:lg titleFont font-weight:xl lg?font-weight:xl lg?font-size:xl margin-bottom:xl"
               >
                 Step 3
               </div>
-              <div class="max-width:60ch text-align:left align-self:center">
-                <p>
-                  Make changes to the Repo and see the visualization update in
-                  realtime. Create Branches, Commits, perform Rebases, Resets,
-                  Merges to see how they affect the Repo.
-                </p>
+              <p class="text-align:center">
+                Experiment and learn
+              </p>
 
-                <p>
-                  With a bit of practice and the in depth understanding that
-                  comes with knowing how these commands affect the working area,
-                  staging area and repository you'll be running previously scary
-                  commands like
-                  <strong> Git Reset --Hard</strong> with confidence!
-                </p>
-              </div>
-              <div
-                class="display:flex flex-direction:row justify-content:center margin-top:xl"
-              >
+              <div class="display:flex flex-direction:column place-items:center margin-top:md padding:md">
+                <div style="background:#1e1e2e; border-radius:12px; overflow:hidden; width:100%; max-width:420px; min-height:220px; box-shadow:0 4px 24px rgba(0,0,0,0.25); text-align:left; display:flex; flex-direction:column;">
+                  <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; background:#181825; color:#a6adc8; font-size:0.85rem; font-family:monospace; border-bottom:1px solid #313244;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="4 17 10 11 4 5"></polyline>
+                      <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    <span>Terminal</span>
+                  </div>
+                  <div style="padding:20px; display:flex; flex-direction:column; gap:20px; flex:1;">
+                    <p style="color:#cdd6f4; margin:0; font-size:0.95rem; line-height:1.6;">
+                      Make changes to your repo and watch the visualization update in realtime. Branch, commit, rebase, merge &mdash; see exactly how each command affects your repository internals.
+                    </p>
+                  </div>
+                  <div style="padding:10px 16px; background:#181825; color:#6c7086; font-size:0.8rem; text-align:center; border-top:1px solid #313244;">
+                    Build confidence with commands like <strong style="color:#a6e3a1;">git reset --hard</strong>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
