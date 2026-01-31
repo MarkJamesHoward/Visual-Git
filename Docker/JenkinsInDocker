@@ -1,0 +1,45 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+RUN apt-get update
+RUN apt-get install -y git
+
+# Install required packages: wget, and libicu-dev (essential for .NET globalization features)
+RUN apt-get update && \
+    apt-get install -y wget libicu-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Add the Microsoft package signing key and repository
+RUN wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && \
+    rm packages-microsoft-prod.deb
+
+# Update apt-get again to recognize the new repository and install the .NET 8.0 SDK
+RUN apt-get update && \
+    apt-get install -y dotnet-sdk-9.0
+
+# Switch to root user to allow installation of system packages
+USER root
+
+# Install necessary dependencies and the Docker CLI
+RUN apt-get update && \
+    apt-get install -y lsb-release curl gnupg apt-transport-https ca-certificates && \
+    curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc https://download.docker.com/linux/debian/gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.asc] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
+    apt-get update && \
+    apt-get install -y docker-ce-cli && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /App
+
+RUN mkdir docker-test-folder
+
+ARG GIT_TOKEN
+
+RUN git clone https://${GIT_TOKEN}@github.com/MarkJamesHoward/VisualGitAPI.git
+RUN git clone https://github.com/MarkJamesHoward/VisualGitCmd.git
+RUN git clone https://${GIT_TOKEN}@github.com/MarkJamesHoward/VisualGit.git
+
+
+

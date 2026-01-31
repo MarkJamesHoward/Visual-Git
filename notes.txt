@@ -1,0 +1,85 @@
+-- The URL for the API that is in use is defined in JSONGeneration/JSONGeneration.cs
+-- So this can be either Azure AppService/GoogleCloudRun/Azure Container App
+
+-- Build Docker for integration testing
+docker build -t visualgit:test -f Docker/DockerFile .
+docker run -it --volume c:\dev\output:/App/docker-test-folder/output visual-git 
+
+-- running local debug
+This will use the launch.json in the .vscode folder. In particualr this line for the arguments:
+  "args": ["-pC:/dev/test", "-d"]
+
+-- Jenkins in Docker build ---------------------------------------
+
+-- Container build to add our repos and Git support
+docker build --build-arg GIT_TOKEN="PAT" -t jenkins -f JenkinsInDocker .
+
+-- Grab the Admin password
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+-- Setup our volume
+docker volume create my-jenkins-home
+
+--running
+docker run -p 8081:8080 -p 50000:50000 --name jenkins -v my-jenkins-home:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock jenkins
+
+-------------------------------------------------------------------
+
+-- Docker builds
+dotnet publish --os linux --arch x64 /t:PublishContainer
+
+-- *** This is the approach currenlty working for DOCKER***** ------
+
+    -- Create the docker image manually rather than Dotnet doing it for us with /t:publishContainer
+    -- this Docker File copies over the source so we can run 'dotnet run' on the bash in docker
+
+        dotnet build
+        docker build -t visualgit -f Docker/DockerFileLinuxTest .
+
+    --Then update the launch settings in Properties/LaunchSettings.json
+
+        {
+        "profiles": {
+            "visual": {
+            "commandName": "Project",
+            "commandLineArgs": "-p /App/docker-test-folder -d"
+            }
+        }
+        }
+
+    run the container in Docker Desktop and then connect to terminal and run 
+    
+        'dotnet run'
+
+    then open an external terminal and cd to docker-test-folder. Can then run normal git commands which will be picked up
+
+        'git add .'
+
+    --OR to run the container from the command line rather than going to Docker Desktop and using the using
+    docker run -it --volume c:\dev\output:/App/docker-test-folder/output visual-git 
+
+-----------------------------------------------------------------
+
+
+-- Create a base Image that can be used with PublishContainer
+docker build -t bigusbirdicus/ashotofcode:visualgit-baseimage -f DockerFilePub .
+
+-- Building
+dotnet publish --os linux --self-contained true -p:PublishSingleFile=true -c release
+dotnet publish -r osx-x64  --self-contained true -p:PublishSingleFile=true -c release
+dotnet publish -r osx-arm64  --self-contained true -p:PublishSingleFile=true -c release
+dotnet publish -r win-x64  --self-contained true -p:PublishSingleFile=true  -c release
+dotnet publish -r win-arm64  --self-contained true -p:PublishSingleFile=true  -c release
+
+-- Installer - Inno
+-- Creating InnoSetup package
+
+Open the pulbic\applications\innoSetup.iis files
+Run 'Compile'
+visualgit_setup.exe will be created in public\application\Output folder
+It pulls the visualgit.exe directly from our local folder here:
+    C:\github\VisualGit\public\application\Windows
+So need to copy over the published version from here first
+    C:\github\VisualGitCmd\bin\Release\net8.0\win-x64\publish
+
+InnoSetup was installed on local from https://jrsoftware.org/isinfo.php

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "visual": {
+      "commandName": "Project",
+      "commandLineArgs": "-p /mnt/c/dev/test"
+    }
+  }
+}
