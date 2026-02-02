@@ -55,13 +55,12 @@ import "../styles/mimic.css";
 
               <div class="display:flex flex-direction:column place-items:center margin-top:md">
                 <div class="margin-bottom:md color:c5text1 font-size:sm">
-                  <span>First, install .NET SDK 9.0 - </span>
+                  <span>Download the Visual Git desktop app - </span>
                   <a
-                    target="_blank"
-                    href="https://dotnet.microsoft.com/download/dotnet/9.0"
+                    href="/download/"
                     class="terminal-card-link color:c1background3"
                   >
-                    Download from microsoft.com
+                    Go to downloads
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline; vertical-align:middle; margin-left:2px;">
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                       <polyline points="15 3 21 3 21 9"></polyline>
@@ -80,8 +79,8 @@ import "../styles/mimic.css";
                   </div>
                   <div style="padding:20px;">
                     <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
-                      <code>dotnet tool install --global VisualGit</code>
-                      <button id="copyInstallCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
+                      <code>https://github.com/MarkJamesHoward/Visual-Git/releases/latest</code>
+                      <button id="copyInstallCmd" aria-label="Copy link" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -94,7 +93,7 @@ import "../styles/mimic.css";
 
               <script is:inline>
                 document.getElementById('copyInstallCmd')?.addEventListener('click', function() {
-                  navigator.clipboard.writeText('dotnet tool install --global VisualGit');
+                  navigator.clipboard.writeText('https://github.com/MarkJamesHoward/Visual-Git/releases/latest');
                   this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a6e3a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
                   setTimeout(() => {
                     this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
@@ -114,7 +113,7 @@ import "../styles/mimic.css";
                 Step 2
               </div>
               <p class="text-align:center">
-                Run VisualGit against your repo
+                Launch Visual Git and pick your repo
               </p>
 
               <div class="display:flex flex-direction:column place-items:center margin-top:md">
@@ -128,7 +127,7 @@ import "../styles/mimic.css";
                   </div>
                   <div style="padding:20px;">
                     <div style="display:flex; align-items:center; justify-content:space-between; background:#11111b; border:1px solid #313244; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:0.9rem; color:#a6e3a1;">
-                      <code>visual -p "path/to/your/repo"</code>
+                      <code>Open Visual Git → Select Repository</code>
                       <button id="copyRunCmd" aria-label="Copy command" style="background:none; border:none; color:#6c7086; cursor:pointer; padding:4px; border-radius:4px; flex-shrink:0;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -142,7 +141,7 @@ import "../styles/mimic.css";
 
               <script is:inline>
                 document.getElementById('copyRunCmd')?.addEventListener('click', function() {
-                  navigator.clipboard.writeText('visual -p "path/to/your/repo"');
+                  navigator.clipboard.writeText('Open Visual Git → Select Repository');
                   this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a6e3a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
                   setTimeout(() => {
                     this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
@@ -269,7 +268,9 @@ import "../styles/mimic.css";
             data-ad-format="auto"
             data-full-width-responsive="true"></ins>
           <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
+            const adsbygoogle = (window as any).adsbygoogle || [];
+            (window as any).adsbygoogle = adsbygoogle;
+            adsbygoogle.push({});
           </script>
         </div>
       </div>

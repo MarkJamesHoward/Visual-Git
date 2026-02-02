@@ -25,6 +25,7 @@
   "build": {
     "appId": "com.visualgit.electron",
     "productName": "Visual Git",
+    "artifactName": "visualgit-${os}-${arch}.${ext}",
     "files": [
       "dist/**/*"
     ],

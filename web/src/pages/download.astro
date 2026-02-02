@@ -39,9 +39,9 @@ import AppleLogo from "../images/apple_logo_download.png";
                       class="display:flex flex-direction:column sm?flex-direction:row"
                     >
                       <div>
-                                         <a
-                          id="DownloadButtonx64Windows"
-                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-win-x64.zip"
+                                        <a
+                                          id="DownloadButtonx64Windows"
+                                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-win-x64.exe"
                           class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
                         >
                           <div
@@ -71,42 +71,11 @@ import AppleLogo from "../images/apple_logo_download.png";
                           </div>
                         </a>
 
-                        <a
-                          id="DownloadButtonARMWindows"
-                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-win-arm64.zip"
-                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
-                        >
-                          <div
-                            class="display:flex flex-direction:column color:c1background3"
-                          >
-                            <div
-                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
-                            >
-                              <img
-                                src={WindowsLogo.src}
-                                alt="Windows ARM"
-                                class="os-download-img"
-                              />
-                              <div>Windows ARM</div>
-                            </div>
-                            <div
-                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
-                            >
-                              <img
-                                src={WindowsLogo.src}
-                                alt="Windows ARM"
-                                class="os-download-img"
-                              />
-                              Download ARM
-                              <div>(Windows)</div>
-                            </div>
-                          </div>
-                        </a>
                              </div>
 
                       <a
                         id="DownloadButtonLunux"
-                        href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-linux-x64.zip"
+                        href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-linux-x64.AppImage"
                         class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
                       >
                         <div
@@ -139,7 +108,7 @@ import AppleLogo from "../images/apple_logo_download.png";
                       <div>
                         <a
                           id="DownloadButtonMacOSARM"
-                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-osx-arm64.zip"
+                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-mac-arm64.dmg"
                           class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
                         >
                           <div
@@ -168,37 +137,6 @@ import AppleLogo from "../images/apple_logo_download.png";
                             </div>
                           </div>
                         </a>
-                        <a
-                          id="DownloadButtonMacOSx64"
-                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visual-osx-x64.zip"
-                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
-                        >
-                          <div
-                            class="display:flex flex-direction:column color:c1background3"
-                          >
-                            <div
-                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
-                            >
-                              <img
-                                src={AppleLogo.src}
-                                alt="MacOS x64"
-                                class="os-download-img"
-                              />
-                              <div>MacOS x64</div>
-                            </div>
-                            <div
-                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
-                            >
-                              <img
-                                src={AppleLogo.src}
-                                alt="MacOS x64"
-                                class="os-download-img"
-                              />
-                              Download
-                              <div>(MacOS x64)</div>
-                            </div>
-                          </div>
-                        </a>
                       </div>
                     </div>
                   </div>
@@ -207,15 +145,21 @@ import AppleLogo from "../images/apple_logo_download.png";
             </div>
 
             <div class="display:flex flex-direction:column place-items:center margin-top:xl padding:lg">
-              <p>Or install via .NET SDK 9.0 (works on any platform):</p>
-              <code class="background-color:c1background2 color:c1background3 padding:md border-radius:10px font-size:md margin-top:md">
-                dotnet tool install --global VisualGit
-              </code>
-              <a
-                target="_blank"
-                class="color:c1background3 font-size:sm margin-top:md text-decoration:none color:white:hover"
-                href="https://dotnet.microsoft.com/download/dotnet/9.0"
-              >Get .NET SDK 9.0</a>
+              <h2 class="titleFont font-size:lg margin-bottom:md">How to run</h2>
+              <div class="max-width:60ch text-align:left">
+                <p class="margin-bottom:sm">
+                  <strong>Windows:</strong> Download the .exe installer and run it. Launch Visual Git from the Start menu.
+                </p>
+                <p class="margin-bottom:sm">
+                  <strong>macOS (Apple Silicon):</strong> Open the .dmg, drag Visual Git to Applications, then open it from Launchpad.
+                </p>
+                <p>
+                  <strong>Linux:</strong> Download the .AppImage, then run:
+                </p>
+                <code class="background-color:c1background2 color:c1background3 padding:md border-radius:10px font-size:md margin-top:md display:block">
+                  chmod +x visualgit-linux-x64.AppImage && ./visualgit-linux-x64.AppImage
+                </code>
+              </div>
             </div>
 
             <style>
