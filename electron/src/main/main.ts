@@ -12,6 +12,10 @@ import { randomUUID } from "crypto";
 import * as https from "https";
 import { readGitRepo } from "../git/GitReader";
 
+declare const __GA_MEASUREMENT_ID__: string | undefined;
+declare const __GA_API_SECRET__: string | undefined;
+declare const __GA_DEBUG__: string | undefined;
+
 let mainWindow: BrowserWindow | null = null;
 let currentRepoPath: string | null = null;
 let gitWatcher: fs.FSWatcher | null = null;
@@ -19,9 +23,14 @@ let workingDirWatcher: fs.FSWatcher | null = null;
 let debounceTimer: NodeJS.Timeout | null = null;
 
 const analyticsConfig = {
-  measurementId: process.env.GA_MEASUREMENT_ID || "",
-  apiSecret: process.env.GA_API_SECRET || "",
-  debug: process.env.GA_DEBUG === "1" || process.env.GA_DEBUG === "true",
+  measurementId:
+    process.env.GA_MEASUREMENT_ID || __GA_MEASUREMENT_ID__ || "",
+  apiSecret: process.env.GA_API_SECRET || __GA_API_SECRET__ || "",
+  debug:
+    process.env.GA_DEBUG === "1" ||
+    process.env.GA_DEBUG === "true" ||
+    __GA_DEBUG__ === "1" ||
+    __GA_DEBUG__ === "true",
 };
 
 type AnalyticsEventParams = Record<string, string | number | boolean>;
