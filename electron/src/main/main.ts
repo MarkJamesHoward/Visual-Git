@@ -1,4 +1,11 @@
-import { app, BrowserWindow, ipcMain, dialog, Menu } from "electron";
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  dialog,
+  Menu,
+  type MenuItemConstructorOptions,
+} from "electron";
 import * as path from "path";
 import * as fs from "fs";
 import { readGitRepo } from "../git/GitReader";
@@ -9,8 +16,65 @@ let gitWatcher: fs.FSWatcher | null = null;
 let workingDirWatcher: fs.FSWatcher | null = null;
 let debounceTimer: NodeJS.Timeout | null = null;
 
+function buildAppMenu(): Menu {
+  const isMac = process.platform === "darwin";
+  const template: MenuItemConstructorOptions[] = [
+    ...(isMac
+      ? ([
+          {
+            label: app.name,
+            submenu: [
+              { role: "about" },
+              { type: "separator" },
+              { role: "services" },
+              { type: "separator" },
+              { role: "hide" },
+              { role: "hideOthers" },
+              { role: "unhide" },
+              { type: "separator" },
+              { role: "quit" },
+            ],
+          },
+        ] as MenuItemConstructorOptions[])
+      : []),
+    {
+      label: "File",
+      submenu: [{ role: isMac ? "close" : "quit" }],
+    },
+    {
+      label: "View",
+      submenu: [
+        { role: "reload" },
+        { role: "forceReload" },
+        { type: "separator" },
+        { role: "resetZoom" },
+        { role: "zoomIn" },
+        { role: "zoomOut" },
+        { type: "separator" },
+        { role: "togglefullscreen" },
+      ],
+    },
+    {
+      label: "Window",
+      submenu: isMac
+        ? ([
+            { role: "minimize" },
+            { role: "zoom" },
+            { type: "separator" },
+            { role: "front" },
+          ] as MenuItemConstructorOptions[])
+        : ([
+            { role: "minimize" },
+            { role: "close" },
+          ] as MenuItemConstructorOptions[]),
+    },
+  ];
+
+  return Menu.buildFromTemplate(template);
+}
+
 function createWindow() {
-  Menu.setApplicationMenu(null);
+  Menu.setApplicationMenu(buildAppMenu());
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
