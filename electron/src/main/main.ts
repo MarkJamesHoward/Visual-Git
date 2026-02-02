@@ -23,8 +23,7 @@ let workingDirWatcher: fs.FSWatcher | null = null;
 let debounceTimer: NodeJS.Timeout | null = null;
 
 const analyticsConfig = {
-  measurementId:
-    process.env.GA_MEASUREMENT_ID || __GA_MEASUREMENT_ID__ || "",
+  measurementId: process.env.GA_MEASUREMENT_ID || __GA_MEASUREMENT_ID__ || "",
   apiSecret: process.env.GA_API_SECRET || __GA_API_SECRET__ || "",
   debug:
     process.env.GA_DEBUG === "1" ||
