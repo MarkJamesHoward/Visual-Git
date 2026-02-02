@@ -34,10 +34,16 @@ jobs:
       - name: Build app
         working-directory: electron
         run: npm run build
+        env:
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          GA_API_SECRET: ${{ secrets.GA_API_SECRET }}
 
       - name: Build installers
         working-directory: electron
         run: npm run dist
+        env:
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          GA_API_SECRET: ${{ secrets.GA_API_SECRET }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

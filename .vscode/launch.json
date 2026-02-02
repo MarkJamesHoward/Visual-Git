@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Electron (dev)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/electron",
+      "env": {
+        "GA_MEASUREMENT_ID": "G-7D9M5LKKR7",
+        "GA_API_SECRET": "n0_8jytOTxiC0bBKaQWLsg"
+      }
+    }
+  ]
+}

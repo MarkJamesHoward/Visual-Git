@@ -8,6 +8,8 @@ import {
 } from "electron";
 import * as path from "path";
 import * as fs from "fs";
+import { randomUUID } from "crypto";
+import * as https from "https";
 import { readGitRepo } from "../git/GitReader";
 
 let mainWindow: BrowserWindow | null = null;
@@ -15,6 +17,128 @@ let currentRepoPath: string | null = null;
 let gitWatcher: fs.FSWatcher | null = null;
 let workingDirWatcher: fs.FSWatcher | null = null;
 let debounceTimer: NodeJS.Timeout | null = null;
+
+const analyticsConfig = {
+  measurementId: process.env.GA_MEASUREMENT_ID || "",
+  apiSecret: process.env.GA_API_SECRET || "",
+  debug: process.env.GA_DEBUG === "1" || process.env.GA_DEBUG === "true",
+};
+
+type AnalyticsEventParams = Record<string, string | number | boolean>;
+
+function getAnalyticsClientId(): string {
+  const filePath = path.join(app.getPath("userData"), "analytics.json");
+  try {
+    if (fs.existsSync(filePath)) {
+      const raw = fs.readFileSync(filePath, "utf-8");
+      const parsed = JSON.parse(raw) as { clientId?: string };
+      if (parsed.clientId) return parsed.clientId;
+    }
+  } catch (e) {
+    console.warn("Failed to read analytics client id:", e);
+  }
+
+  const clientId = randomUUID();
+  try {
+    fs.writeFileSync(filePath, JSON.stringify({ clientId }));
+  } catch (e) {
+    console.warn("Failed to persist analytics client id:", e);
+  }
+  return clientId;
+}
+
+function sendAnalyticsEvent(name: string, params: AnalyticsEventParams) {
+  if (!analyticsConfig.measurementId || !analyticsConfig.apiSecret) {
+    console.warn(
+      "GA analytics not configured. Set GA_MEASUREMENT_ID and GA_API_SECRET.",
+    );
+    return;
+  }
+
+  const payload = JSON.stringify({
+    client_id: getAnalyticsClientId(),
+    events: [
+      {
+        name,
+        params: {
+          ...params,
+          debug_mode: analyticsConfig.debug,
+          engagement_time_msec: 1,
+        },
+      },
+    ],
+  });
+
+  const sendRequest = (path: string, label: string) => {
+    const request = https.request(
+      {
+        method: "POST",
+        hostname: "www.google-analytics.com",
+        path,
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(payload),
+        },
+      },
+      (response) => {
+        if (analyticsConfig.debug) {
+          console.log(
+            `GA ${label} response status: ${response.statusCode || "unknown"}`,
+          );
+        }
+        if (label === "debug") {
+          let body = "";
+          response.on("data", (chunk) => {
+            body += chunk.toString();
+          });
+          response.on("end", () => {
+            if (body) console.log("GA debug response:", body);
+          });
+        }
+        if (response.statusCode && response.statusCode >= 400) {
+          console.warn(`GA event failed with status ${response.statusCode}.`);
+        }
+        response.resume();
+      },
+    );
+
+    request.on("error", (error) => {
+      console.warn("GA event failed:", error);
+    });
+
+    request.write(payload);
+    request.end();
+  };
+
+  const basePath = `/mp/collect?measurement_id=${encodeURIComponent(
+    analyticsConfig.measurementId,
+  )}&api_secret=${encodeURIComponent(analyticsConfig.apiSecret)}`;
+
+  sendRequest(basePath, "collect");
+
+  if (analyticsConfig.debug) {
+    sendRequest(`/debug${basePath}`, "debug");
+  }
+}
+
+function getRegionFromLocale(locale: string): string {
+  const normalized = locale.replace("_", "-");
+  const parts = normalized.split("-");
+  return parts[1]?.toUpperCase() || "unknown";
+}
+
+function trackAppRun() {
+  const locale = app.getLocale();
+  const timeZone =
+    Intl.DateTimeFormat().resolvedOptions().timeZone || "unknown";
+
+  sendAnalyticsEvent("app_run", {
+    app_region: getRegionFromLocale(locale),
+    app_locale: locale,
+    app_timezone: timeZone,
+    app_version: app.getVersion(),
+  });
+}
 
 function buildAppMenu(): Menu {
   const isMac = process.platform === "darwin";
@@ -148,6 +272,7 @@ function startWatcher(repoPath: string) {
 
 app.whenReady().then(() => {
   createWindow();
+  trackAppRun();
 
   ipcMain.handle("read-git-repo", async (_event, repoPath: string) => {
     currentRepoPath = repoPath;
