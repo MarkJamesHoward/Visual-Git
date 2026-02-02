@@ -46,25 +46,43 @@ let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
 let mouseListenersSetup = false;
 
+function setLoading(isLoading: boolean, message?: string) {
+  const overlay = document.getElementById("loading-overlay");
+  if (!overlay) return;
+  if (message) {
+    const text = document.getElementById("loading-text");
+    if (text) text.textContent = message;
+  }
+  overlay.style.display = isLoading ? "flex" : "none";
+}
+
 // ---------- Data processing ----------
 
 function processData(data: any) {
   const tmpCanvas = document.createElement("canvas");
   const tmpCtx = tmpCanvas.getContext("2d")!;
 
-  ExtractCommitJsonToNodes(JSON.parse(data.commitNodes), state.CommitNodes, tmpCtx);
-  ExtractBranchJsonToNodes(JSON.parse(data.branchNodes), state.BranchNodes, tmpCtx);
+  ExtractCommitJsonToNodes(
+    JSON.parse(data.commitNodes),
+    state.CommitNodes,
+    tmpCtx,
+  );
+  ExtractBranchJsonToNodes(
+    JSON.parse(data.branchNodes),
+    state.BranchNodes,
+    tmpCtx,
+  );
   ExtractTagJsonToNodes(JSON.parse(data.tagNodes), state.TagNodes, tmpCtx);
   ExtractRemoteBranchJsonToNodes(
     JSON.parse(data.remoteBranchNodes),
     state.RemoteBranchNodes,
-    tmpCtx
+    tmpCtx,
   );
   ExtractTreeJsonToNodes(
     JSON.parse(data.treeNodes),
     state.TreeNodes,
     state.CommitNodes,
-    tmpCtx
+    tmpCtx,
   );
   ExtractBlobJsonToNodes(JSON.parse(data.blobNodes), state.BlobNodes, tmpCtx);
   ExtractHeadJsonToNodes(JSON.parse(data.headNodes), state.HEADNodes, tmpCtx);
@@ -136,7 +154,7 @@ function populateIndexFiles(indexFilesJson: string, blobNodes: GitBlob[]) {
             ? `<textarea class="file-entry-contents" rows="2" readonly>${escapeHtml(f.contents)}</textarea>`
             : ""
         }
-      </div>`
+      </div>`,
       )
       .join("");
   } catch {
@@ -167,7 +185,7 @@ function populateWorkingFiles(workingFilesJson: string) {
             ? `<textarea class="file-entry-contents" rows="2" readonly>${escapeHtml(f.contents)}</textarea>`
             : ""
         }
-      </div>`
+      </div>`,
       )
       .join("");
   } catch {
@@ -226,10 +244,7 @@ function makeDraggable(elmnt: HTMLElement) {
 
 // ---------- Collapse/expand toggle ----------
 
-function setupCollapseToggle(
-  toggleId: string,
-  contentId: string
-) {
+function setupCollapseToggle(toggleId: string, contentId: string) {
   const toggle = document.getElementById(toggleId)!;
   const content = document.getElementById(contentId)!;
   let collapsed = false;
@@ -286,15 +301,22 @@ async function openRepo() {
 
   showVisualization(path);
 
-  const data = await window.electronAPI.readGitRepo(path);
-  processData(data);
+  setLoading(true, "Loading repository...");
+  try {
+    const data = await window.electronAPI.readGitRepo(path);
+    processData(data);
+  } finally {
+    setLoading(false);
+  }
 }
 
 // ---------- Init ----------
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("open-repo-btn")!.addEventListener("click", openRepo);
-  document.getElementById("change-repo-btn")!.addEventListener("click", openRepo);
+  document
+    .getElementById("change-repo-btn")!
+    .addEventListener("click", openRepo);
 
   // Toggle checkboxes
   document.getElementById("show-trees")!.addEventListener("change", (e) => {
@@ -322,6 +344,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Listen for file watcher updates from main process
   window.electronAPI.onGitChanged((data) => {
+    setLoading(true, "Refreshing repository...");
     processData(data);
+    setLoading(false);
   });
 });

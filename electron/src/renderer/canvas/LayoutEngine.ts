@@ -3,7 +3,7 @@ import type { GitCommit } from "./Types";
 import { radius } from "./Types";
 
 const PADDING = 80;
-const MIN_NODE_SPACING = 90;
+const MIN_NODE_SPACING = 130;
 const BOTTOM_BAR_HEIGHT = 120;
 const NODE_DIAMETER = radius * 2;
 
@@ -45,7 +45,7 @@ function applyUserOffset(
   computedX: number,
   computedY: number,
   vpW: number,
-  vpH: number
+  vpH: number,
 ): { x: number; y: number } {
   const offset = userOffsets.get(hash);
   if (!offset) return { x: computedX, y: computedY };
@@ -63,13 +63,13 @@ function clamp(val: number, min: number, max: number): number {
 /**
  * Given an array of { key, y } entries in a single column, nudge any that
  * overlap (closer than NODE_DIAMETER) so they no longer sit on top of each other.
- * If the result exceeds maxY, linearly compress all positions into [minY, maxY].
- * This guarantees every node stays within the visible viewport.
+ * If the result exceeds maxY, shift the column up while preserving spacing.
+ * This guarantees no overlaps, even if some nodes extend beyond the viewport.
  */
 function resolveColumnOverlaps(
   entries: Array<{ key: string; y: number }>,
   minY: number = PADDING,
-  maxY: number = Infinity
+  maxY: number = Infinity,
 ): Map<string, number> {
   const result = new Map<string, number>();
   if (entries.length === 0) return result;
@@ -85,18 +85,27 @@ function resolveColumnOverlaps(
     }
   }
 
-  // If nodes overflow the viewport, compress into [minY, maxY]
+  // If nodes overflow the viewport, shift while preserving spacing
   const first = adjusted[0].y;
   const last = adjusted[adjusted.length - 1].y;
   if (adjusted.length === 1) {
     adjusted[0].y = clamp(adjusted[0].y, minY, maxY);
-  } else if (last > maxY || first < minY) {
-    const clampedFirst = Math.max(first, minY);
-    const clampedLast = Math.min(last, maxY);
-    const range = clampedLast - clampedFirst;
-    const spacing = range / (adjusted.length - 1);
-    for (let i = 0; i < adjusted.length; i++) {
-      adjusted[i].y = clampedFirst + i * spacing;
+  } else if (last > maxY) {
+    const shiftUp = last - maxY;
+    for (const entry of adjusted) {
+      entry.y -= shiftUp;
+    }
+    // If shift pushes the first above minY, pin to minY (still no overlap)
+    if (adjusted[0].y < minY) {
+      const delta = minY - adjusted[0].y;
+      for (const entry of adjusted) {
+        entry.y += delta;
+      }
+    }
+  } else if (first < minY) {
+    const shiftDown = minY - first;
+    for (const entry of adjusted) {
+      entry.y += shiftDown;
     }
   }
 
@@ -114,7 +123,7 @@ function resolveColumnOverlaps(
 export function layoutNodes(
   state: VisState,
   viewportWidth: number,
-  viewportHeight: number
+  viewportHeight: number,
 ) {
   lastViewportW = viewportWidth;
   lastViewportH = viewportHeight;
@@ -138,25 +147,69 @@ export function layoutNodes(
     return PADDING + colSpacing * (idx + 1);
   };
 
-  // --- Sort commits chronologically ---
-  const orderedCommits = sortCommitsChronologically(state.CommitNodes);
+  // --- Hierarchical DAG layout for commits ---
+  const orderedCommits = topologicalOrder(state.CommitNodes);
+  const { laneMap, laneCount } = assignCommitLanes(orderedCommits);
 
   const commitCount = orderedCommits.length;
-  // Use a fixed spacing between commits (clamped to fit viewport, never stretched)
   const commitSpacing =
     commitCount <= 1
       ? 0
       : Math.min(MIN_NODE_SPACING, usableHeight / (commitCount - 1));
 
-  const commitX = colX("commits");
+  const commitColX = colX("commits");
+  const maxLaneWidth = Math.min(colSpacing * 0.7, usableWidth * 0.4);
+  const laneSpacing =
+    laneCount <= 1
+      ? 0
+      : Math.min(120, maxLaneWidth / Math.max(1, laneCount - 1));
+  const laneLeft = commitColX - (laneSpacing * (laneCount - 1)) / 2;
 
-  // Position commits
+  const commitEntries: Array<{ key: string; y: number }> = [];
+  const commitDesiredYMap = new Map<string, number>();
+  orderedCommits.forEach((commit, i) => {
+    let desiredY: number | undefined;
+    if (commit.parent.length > 0) {
+      let maxParentY = -Infinity;
+      for (const parentHash of commit.parent) {
+        const parentY = commitDesiredYMap.get(parentHash);
+        if (parentY !== undefined && parentY > maxParentY) {
+          maxParentY = parentY;
+        }
+      }
+      if (maxParentY !== -Infinity) {
+        desiredY = maxParentY + MIN_NODE_SPACING;
+      }
+    }
+
+    if (desiredY === undefined) {
+      desiredY = PADDING + i * commitSpacing;
+    }
+
+    const cy = clamp(desiredY, PADDING, maxNodeY);
+    commitDesiredYMap.set(commit.hash, cy);
+    commitEntries.push({ key: commit.hash, y: cy });
+  });
+  const commitResolved = resolveColumnOverlaps(
+    commitEntries,
+    PADDING,
+    maxNodeY,
+  );
+
   const commitYMap = new Map<string, number>();
   orderedCommits.forEach((commit, i) => {
-    const cx = commitX;
-    const cy = clamp(PADDING + i * commitSpacing, PADDING, maxNodeY);
+    const laneIndex = laneMap.get(commit.hash) ?? 0;
+    const cx =
+      laneSpacing === 0 ? commitColX : laneLeft + laneIndex * laneSpacing;
+    const cy = commitResolved.get(commit.hash) ?? commitEntries[i].y;
     computedPositions.set(commit.hash, { x: cx, y: cy });
-    const pos = applyUserOffset(commit.hash, cx, cy, viewportWidth, viewportHeight);
+    const pos = applyUserOffset(
+      commit.hash,
+      cx,
+      cy,
+      viewportWidth,
+      viewportHeight,
+    );
     commit.xPos = pos.x;
     commit.yPos = pos.y;
     commitYMap.set(commit.hash, cy); // use computed Y for dependent node alignment
@@ -199,13 +252,23 @@ export function layoutNodes(
     const init = treeInitialY[i];
     const cy = treeResolved.get(tree.hash) ?? init.cy;
     computedPositions.set(tree.hash, { x: init.cx, y: cy });
-    const pos = applyUserOffset(tree.hash, init.cx, cy, viewportWidth, viewportHeight);
+    const pos = applyUserOffset(
+      tree.hash,
+      init.cx,
+      cy,
+      viewportWidth,
+      viewportHeight,
+    );
     tree.xPos = pos.x;
     tree.yPos = pos.y;
   }
 
   // --- Blobs ---
   const blobX = colX("blobs");
+  const BLOB_INTRA_SPACING = MIN_NODE_SPACING * 0.6;
+  const BLOB_CLUSTER_GAP = MIN_NODE_SPACING * 0.4;
+  const BLOB_X_OFFSET = 18;
+
   const blobTreeOwnership = new Map<string, Set<string>>();
   for (const tree of state.TreeNodes) {
     for (const blobHash of tree.blobs) {
@@ -215,56 +278,125 @@ export function layoutNodes(
     }
   }
 
-  const exclusiveBlobs: typeof state.BlobNodes = [];
-  const sharedBlobs: typeof state.BlobNodes = [];
+  type BlobCluster = {
+    key: string;
+    blobHashes: string[];
+    anchorY: number;
+    halfHeight: number;
+    xOffset: number;
+  };
+
+  const clusters: BlobCluster[] = [];
+
+  const blobsByTree = new Map<string, typeof state.BlobNodes>();
   for (const blob of state.BlobNodes) {
     const owners = blobTreeOwnership.get(blob.hash);
     if (owners && owners.size === 1) {
-      exclusiveBlobs.push(blob);
-    } else {
-      sharedBlobs.push(blob);
+      const ownerTree = owners.values().next().value as string;
+      if (!blobsByTree.has(ownerTree)) blobsByTree.set(ownerTree, []);
+      blobsByTree.get(ownerTree)!.push(blob);
     }
   }
 
-  const blobsByTree = new Map<string, typeof state.BlobNodes>();
-  for (const blob of exclusiveBlobs) {
-    const ownerTree = blobTreeOwnership.get(blob.hash)?.values().next()
-      .value as string;
-    if (!blobsByTree.has(ownerTree)) blobsByTree.set(ownerTree, []);
-    blobsByTree.get(ownerTree)!.push(blob);
-  }
-
-  // Collect all blob positions, then resolve overlaps across the entire blob column
-  const allBlobEntries: Array<{ key: string; y: number }> = [];
-
   for (const [treeHash, blobs] of blobsByTree) {
     const treeY = treeYMap.get(treeHash) ?? PADDING;
-    const clusterHeight = (blobs.length - 1) * MIN_NODE_SPACING * 0.6;
-    const startY = treeY - clusterHeight / 2;
-    blobs.forEach((blob, i) => {
-      const cy = startY + i * MIN_NODE_SPACING * 0.6;
-      allBlobEntries.push({ key: blob.hash, y: cy });
+    const blobHashes = blobs
+      .slice()
+      .sort((a, b) =>
+        (a.filename || a.hash).localeCompare(b.filename || b.hash),
+      )
+      .map((b) => b.hash);
+    const clusterHeight = (blobHashes.length - 1) * BLOB_INTRA_SPACING;
+    clusters.push({
+      key: `tree:${treeHash}`,
+      blobHashes,
+      anchorY: treeY,
+      halfHeight: clusterHeight / 2,
+      xOffset: 0,
     });
   }
 
-  let maxExclusiveY = PADDING;
-  for (const e of allBlobEntries) {
-    if (e.y > maxExclusiveY) maxExclusiveY = e.y;
-  }
-  const sharedStartY =
-    allBlobEntries.length > 0 ? maxExclusiveY + MIN_NODE_SPACING : PADDING;
-  sharedBlobs.forEach((blob, i) => {
-    const cy = sharedStartY + i * MIN_NODE_SPACING * 0.6;
-    allBlobEntries.push({ key: blob.hash, y: cy });
-  });
-
-  // Resolve all blob overlaps at once
-  const blobResolved = resolveColumnOverlaps(allBlobEntries, PADDING, maxNodeY);
+  const sharedGroups = new Map<string, string[]>();
   for (const blob of state.BlobNodes) {
-    const cx = blobX;
-    const cy = blobResolved.get(blob.hash) ?? PADDING;
+    const owners = blobTreeOwnership.get(blob.hash);
+    if (!owners || owners.size <= 1) continue;
+    const key = Array.from(owners).sort().join("|");
+    if (!sharedGroups.has(key)) sharedGroups.set(key, []);
+    sharedGroups.get(key)!.push(blob.hash);
+  }
+
+  for (const [ownerKey, blobHashes] of sharedGroups) {
+    const ownerTreeHashes = ownerKey.split("|");
+    const ownerYs = ownerTreeHashes
+      .map((hash) => treeYMap.get(hash))
+      .filter((y): y is number => y !== undefined)
+      .sort((a, b) => a - b);
+    const anchorY =
+      ownerYs.length > 0 ? ownerYs[Math.floor(ownerYs.length / 2)] : PADDING;
+    const sortedHashes = blobHashes.slice().sort((a, b) => a.localeCompare(b));
+    const clusterHeight = (sortedHashes.length - 1) * BLOB_INTRA_SPACING;
+    clusters.push({
+      key: `shared:${ownerKey}`,
+      blobHashes: sortedHashes,
+      anchorY,
+      halfHeight: clusterHeight / 2,
+      xOffset: 0,
+    });
+  }
+
+  clusters.sort((a, b) => a.anchorY - b.anchorY);
+  for (let i = 0; i < clusters.length; i++) {
+    const offsetDir = i % 2 === 0 ? -1 : 1;
+    clusters[i].xOffset = offsetDir * BLOB_X_OFFSET;
+  }
+
+  for (let i = 1; i < clusters.length; i++) {
+    const prev = clusters[i - 1];
+    const current = clusters[i];
+    const minCenter =
+      prev.anchorY + prev.halfHeight + current.halfHeight + BLOB_CLUSTER_GAP;
+    if (current.anchorY < minCenter) current.anchorY = minCenter;
+  }
+
+  if (clusters.length > 0) {
+    const first = clusters[0];
+    const last = clusters[clusters.length - 1];
+    const minAllowed = PADDING + first.halfHeight;
+    const maxAllowed = maxNodeY - last.halfHeight;
+    if (maxAllowed > minAllowed) {
+      const currentSpan = last.anchorY - first.anchorY;
+      const allowedSpan = maxAllowed - minAllowed;
+      const scale =
+        currentSpan > 0 ? Math.min(1, allowedSpan / currentSpan) : 1;
+      for (const cluster of clusters) {
+        cluster.anchorY =
+          minAllowed + (cluster.anchorY - first.anchorY) * scale;
+      }
+    }
+  }
+
+  const blobResolved = new Map<string, { y: number; xOffset: number }>();
+  for (const cluster of clusters) {
+    const count = cluster.blobHashes.length;
+    const startY = cluster.anchorY - ((count - 1) * BLOB_INTRA_SPACING) / 2;
+    cluster.blobHashes.forEach((hash, i) => {
+      const cy = startY + i * BLOB_INTRA_SPACING;
+      blobResolved.set(hash, { y: cy, xOffset: cluster.xOffset });
+    });
+  }
+
+  for (const blob of state.BlobNodes) {
+    const resolved = blobResolved.get(blob.hash);
+    const cx = blobX + (resolved?.xOffset ?? 0);
+    const cy = resolved?.y ?? PADDING;
     computedPositions.set(blob.hash, { x: cx, y: cy });
-    const pos = applyUserOffset(blob.hash, cx, cy, viewportWidth, viewportHeight);
+    const pos = applyUserOffset(
+      blob.hash,
+      cx,
+      cy,
+      viewportWidth,
+      viewportHeight,
+    );
     blob.xPos = pos.x;
     blob.yPos = pos.y;
   }
@@ -279,7 +411,11 @@ export function layoutNodes(
     if (commitY === undefined) branchFallbackY += MIN_NODE_SPACING * 0.7;
     branchEntries.push({ key: `branch:${branch.name}`, y: cy });
   }
-  const branchResolved = resolveColumnOverlaps(branchEntries, PADDING, maxNodeY);
+  const branchResolved = resolveColumnOverlaps(
+    branchEntries,
+    PADDING,
+    maxNodeY,
+  );
   for (const branch of state.BranchNodes) {
     const key = `branch:${branch.name}`;
     const cx = branchX;
@@ -321,7 +457,11 @@ export function layoutNodes(
     if (commitY === undefined) remoteFallbackY += MIN_NODE_SPACING * 0.7;
     remoteEntries.push({ key: `remote:${rb.name}`, y: cy });
   }
-  const remoteResolved = resolveColumnOverlaps(remoteEntries, PADDING, maxNodeY);
+  const remoteResolved = resolveColumnOverlaps(
+    remoteEntries,
+    PADDING,
+    maxNodeY,
+  );
   for (const rb of state.RemoteBranchNodes) {
     const key = `remote:${rb.name}`;
     const cx = remoteX;
@@ -336,7 +476,7 @@ export function layoutNodes(
   const headX = colX("head");
   for (const head of state.HEADNodes) {
     const branch = state.BranchNodes.find(
-      (b) => b.name.toLowerCase() === head.hash.toLowerCase()
+      (b) => b.name.toLowerCase() === head.hash.toLowerCase(),
     );
     let cy: number;
     if (branch) {
@@ -365,44 +505,95 @@ export function getNodeLayoutKey(node: any): string {
   return node.hash;
 }
 
-function sortCommitsChronologically(commits: GitCommit[]): GitCommit[] {
+function topologicalOrder(commits: GitCommit[]): GitCommit[] {
   if (commits.length === 0) return [];
 
+  const byHash = new Map<string, GitCommit>();
+  commits.forEach((c) => byHash.set(c.hash, c));
+
   const childMap = new Map<string, GitCommit[]>();
+  const inDegree = new Map<string, number>();
+
+  for (const c of commits) {
+    inDegree.set(c.hash, 0);
+  }
+
   for (const c of commits) {
     for (const ph of c.parent) {
+      if (!byHash.has(ph)) continue;
       if (!childMap.has(ph)) childMap.set(ph, []);
       childMap.get(ph)!.push(c);
+      inDegree.set(c.hash, (inDegree.get(c.hash) ?? 0) + 1);
     }
   }
 
-  const root = commits.find((c) => c.parent.length === 0);
-  if (!root) return [...commits];
+  const queue: GitCommit[] = [];
+  for (const c of commits) {
+    if ((inDegree.get(c.hash) ?? 0) === 0) queue.push(c);
+  }
+
+  queue.sort((a, b) => a.hash.localeCompare(b.hash));
 
   const ordered: GitCommit[] = [];
-  const visited = new Set<string>();
-  const queue: GitCommit[] = [root];
-
   while (queue.length > 0) {
     const current = queue.shift()!;
-    if (visited.has(current.hash)) continue;
-    visited.add(current.hash);
     ordered.push(current);
 
     const children = childMap.get(current.hash) || [];
+    children.sort((a, b) => a.hash.localeCompare(b.hash));
     for (const child of children) {
-      const allParentsVisited = child.parent.every((ph) => visited.has(ph));
-      if (allParentsVisited) {
-        queue.push(child);
-      } else {
+      inDegree.set(child.hash, (inDegree.get(child.hash) ?? 1) - 1);
+      if ((inDegree.get(child.hash) ?? 0) === 0) {
         queue.push(child);
       }
     }
   }
 
-  for (const c of commits) {
-    if (!visited.has(c.hash)) ordered.push(c);
+  if (ordered.length < commits.length) {
+    const missing = commits.filter(
+      (c) => !ordered.find((o) => o.hash === c.hash),
+    );
+    ordered.push(...missing);
   }
 
   return ordered;
+}
+
+function assignCommitLanes(orderedCommits: GitCommit[]): {
+  laneMap: Map<string, number>;
+  laneCount: number;
+} {
+  const byHash = new Map<string, GitCommit>();
+  orderedCommits.forEach((c) => byHash.set(c.hash, c));
+
+  const childMap = new Map<string, GitCommit[]>();
+  for (const c of orderedCommits) {
+    for (const ph of c.parent) {
+      if (!byHash.has(ph)) continue;
+      if (!childMap.has(ph)) childMap.set(ph, []);
+      childMap.get(ph)!.push(c);
+    }
+  }
+
+  const laneMap = new Map<string, number>();
+  let nextLane = 0;
+
+  for (const commit of orderedCommits) {
+    if (!laneMap.has(commit.hash)) {
+      laneMap.set(commit.hash, nextLane++);
+    }
+    const lane = laneMap.get(commit.hash)!;
+    const children = childMap.get(commit.hash) || [];
+    children.sort((a, b) => a.hash.localeCompare(b.hash));
+    children.forEach((child, index) => {
+      if (laneMap.has(child.hash)) return;
+      if (index === 0) {
+        laneMap.set(child.hash, lane);
+      } else {
+        laneMap.set(child.hash, nextLane++);
+      }
+    });
+  }
+
+  return { laneMap, laneCount: nextLane };
 }

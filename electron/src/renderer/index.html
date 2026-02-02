@@ -16,6 +16,15 @@
     <button id="open-repo-btn">Open Repository</button>
   </div>
 
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" style="display:none;">
+    <div class="loading-card">
+      <div class="loading-spinner"></div>
+      <div class="loading-text" id="loading-text">Loading repository...</div>
+      <div class="loading-subtext">This can take a few seconds</div>
+    </div>
+  </div>
+
   <!-- Main App (hidden until repo is opened) -->
   <div id="app-container" style="display:none;">
     <canvas id="GitGraph"></canvas>
