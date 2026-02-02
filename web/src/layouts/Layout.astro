@@ -17,46 +17,36 @@ import { ClientRouter } from "astro:transitions";
 <html lang="en">
   <head>
     <ClientRouter />
-    <!-- <script
+    <!-- Google Tag Manager -->
+    <script data-category="analytics" is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-NC98TL28");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <script
+      data-category="analytics"
       async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6571414832573314"
-      crossorigin="anonymous"></script>  -->
+      src="https://www.googletagmanager.com/gtag/js?id=G-7D9M5LKKR7"></script>
 
-<!-- This is in <head> -->
-<!-- Google Tag Manager -->
-<script data-category="analytics" is:inline>
-  (function (w, d, s, l, i) {
-    console.log("GTM");
-    w[l] = w[l] || [];
-    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != "dataLayer" ? "&l=" + l : "";
-    j.async = true;
-    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-    f.parentNode.insertBefore(j, f);
-  })(window, document, "script", "dataLayer", "GTM-NC98TL28");
-</script>
-<!-- End Google Tag Manager -->
+    <script data-category="analytics" is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<script
-  data-category="analytics"
-  is:inline
-  type="text/partytown"
-  src="https://www.googletagmanager.com/gtag/js?id=G-7D9M5LKKR7"></script>
-
-<script data-category="analytics" is:inline type="text/partytown">
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
-
-  gtag("config", "G-7D9M5LKKR7");
-
-
-  
-</script>
+      // Avoid double page_view if GTM is also sending it
+      gtag("config", "G-7D9M5LKKR7", { send_page_view: false });
+    </script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css" />
 

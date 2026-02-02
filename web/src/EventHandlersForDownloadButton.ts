@@ -23,13 +23,30 @@ function attachDownloadTracking() {
   }
 
   downloadButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (event) => {
       const os = btn.getAttribute("data-download-os") || "unknown";
+      const href =
+        btn instanceof HTMLAnchorElement ? btn.getAttribute("href") : null;
+      const shouldDelayNavigation = Boolean(href);
+
+      const navigate = () => {
+        if (href) window.location.href = href;
+      };
+
+      if (shouldDelayNavigation) {
+        event.preventDefault();
+      }
+
       if (typeof window.gtag === "function") {
         window.gtag("event", "app_download", {
           os,
           page_path: window.location.pathname,
+          transport_type: "beacon",
+          event_callback: shouldDelayNavigation ? navigate : undefined,
         });
+        if (shouldDelayNavigation) {
+          setTimeout(navigate, 1500);
+        }
       } else if (
         window.dataLayer &&
         typeof window.dataLayer.push === "function"
@@ -39,8 +56,14 @@ function attachDownloadTracking() {
           os,
           page_path: window.location.pathname,
         });
+        if (shouldDelayNavigation) {
+          setTimeout(navigate, 150);
+        }
       } else {
         console.log("gtag not available for download tracking");
+        if (shouldDelayNavigation) {
+          navigate();
+        }
       }
     });
   });

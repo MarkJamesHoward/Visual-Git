@@ -3,7 +3,8 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"astro dev --port 4321\" \"mimic -i ./src/ -o ./src/styles/mimic.css -l\"",
+    "dev": "concurrently \"astro dev --port 4321\" \"npm run mimic\"",
+    "mimic": "node -r ./scripts/sentry-profiling-shim.cjs ./node_modules/mimic-css/dist/bin/index.js -i ./src/ -o ./src/styles/mimic.css -l",
     "start": "astro dev --port 4321",
     "build": "astro build",
     "preview": "astro preview",
