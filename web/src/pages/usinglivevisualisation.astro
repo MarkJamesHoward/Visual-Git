@@ -1,295 +1,353 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-import WorkingArea from "../images/workingarea.png";
-import StagingArea from "../images/stagingarea.png";
-import AutoUpdateWithArrow from "../images/autoupdatewitharrow.png";
-import HideTreeWithArrow from "../images/hidetreewitharrow.png";
-import HideBlobWithArrow from "../images/hideblobwitharrow.png";
-import WorkingAreaWithArrow from "../images/workingareawitharrow.png";
-import StagingAreaWithArrow from "../images/staging_area_with_arrow.png";
-
-import workingareawitharrow_on_header_bar from "../images/workingareawitharrow_on_header_bar.png";
-import staging_area_with_arrow_header_bar from "../images/staging_area_with_arrow_header_bar.png";
-
-import GraphWithTreeHidden from "../images/graphwithtreehidden.png";
-import GraphWithBlobHidden from "../images/graphwithblobhidden.png";
+import "../styles/mimic.css";
 ---
 
-<Layout title="Live Visualisation UI Explanation">
-  <section
-    class="margin-bottom:xl color:c1text2 font-size:lg md?margin-bottom:2xl background-color:c1background1"
-  >
-    <div class="padding:md text-align:left">
-      <!-- <div class="fontTitle font-size:xl">Working and Staging Area Boxes</div> -->
+<Layout title="Visual Git - UI Guide">
+  <section class="color:c1text2 background-color:c1background1">
 
-  
-      <div class="display:flex flex-direction:column align-items:center">
-        <h1 class="titleFont font-size:xl text-align:center">UI Explained</h1>
-        
-        <p class="font-size:lg">
-          The live visualization page has various features available to
-          customize the display
+    <!-- Hero -->
+    <div class="text-align:center padding:xl padding-top:2xl">
+      <h1 class="titleFont font-size:xl lg?font-size:xl margin-bottom:lg">Visual Git Desktop UI</h1>
+      <p class="font-size:lg max-width:60ch margin-left:auto margin-right:auto">
+        An interactive visualization of your Git repository internals. Explore commits, branches, trees, blobs and more on a live canvas.
+      </p>
+    </div>
+
+    <!-- Color legend -->
+    <div class="fade-in-on-scroll display:flex flex-wrap:wrap justify-content:center gap:lg padding:xl padding-bottom:xl">
+      <div class="display:flex align-items:center gap:sm"><span class="node-dot node-commit"></span> Commits</div>
+      <div class="display:flex align-items:center gap:sm"><span class="node-dot node-tree"></span> Trees</div>
+      <div class="display:flex align-items:center gap:sm"><span class="node-dot node-blob"></span> Blobs</div>
+      <div class="display:flex align-items:center gap:sm"><span class="node-dot node-branch"></span> Branches</div>
+      <div class="display:flex align-items:center gap:sm"><span class="node-dot node-tag"></span> Tags</div>
+      <div class="display:flex align-items:center gap:sm"><span class="node-dot node-head"></span> HEAD</div>
+    </div>
+
+    <!-- 1. Interactive Git Graph -->
+    <div class="fade-in-on-scroll display:flex flex-direction:column lg?flex-direction:row align-items:center padding:xl gap:xl">
+      <div class="screenshot-placeholder lg?flex-basis:50%">
+        <!-- TODO: Add screenshot of full git graph canvas -->
+        <span>Git Graph Canvas</span>
+      </div>
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Interactive Git Graph</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          The main canvas displays every object in your repository as a color-coded node with directional links showing relationships between commits, trees, blobs, branches and tags.
         </p>
-
-
-          <div class="display:flex flex-direction:column sm?flex-direction:row">
-            <div class="border-width:2px border-style:solid border-color:c1text1 border-radius:md padding:lg margin:lg text-align:center">
-              The visibility of the Trees and Blobs can be toggled on and off
-            </div>
-            <div class="border-width:2px border-style:solid border-color:c1text1 border-radius:md padding:lg margin:lg text-align:center">
-              The view can be paused and moved back and forth through time
-            </div>
-            <div class="border-width:2px border-style:solid border-color:c1text1 border-radius:md padding:lg margin:lg text-align:center">
-              All of the objects such as Trees, Blobs, Commits, HEAD and
-              branches can be moved by clicking and dragging.
-              The position of these objects will be retained even when the page is updated after a change made to the repo.
-            </div>
-          </div>
+        <p class="line-height:1.6">
+          Labels on each node show the hash, commit message, branch name or filename so you always know what you're looking at.
+        </p>
       </div>
+    </div>
 
-      <div class="display:flex flex-direction:column padding-top:xl border:2pxsolidblack border-radius:md margin:lg align-items:center">
-        <h1 class="font-size:xl titleFont text-align:center">Working Area Window</h1>
-
-        <div
-          class="display:flex justify-content:between flex-direction:column sm?flex-direction:row "
-        >
-        
-          <div class=" width:50% align-self:center sm?width:30% md?width:20%">
-            <img
-              src={WorkingArea.src}
-              alt="Working Area screen shot"
-              width="100%"
-              style="object-fit:contain"
-            />
-          </div>
-          <div
-            class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
-          >
-            <p>View the files that GIT can see in your file system</p>
-            <p>
-              The screenshot here shows file1.txt and file2.txt are present in the working area
-              </p>
-              <p>When a file is initally created it will appear only here and not in the staging area or repository</p>
-            <p>
-              Additionally if file content extraction is enabled then we'll see each files contents here
-            </p>
-            <p>
-              Click the * to expand/colapse this UI element
-            </p>
-
-            <p>Click and drag the header bar to move this UI elements position</p>
-          </div>
-        </div>
+    <!-- 2. Toggle Visibility -->
+    <div class="slide-in-right-on-scroll display:flex flex-direction:column-reverse lg?flex-direction:row align-items:center padding:xl gap:xl background-color:c1background2">
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Toggle Visibility</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          Use the checkboxes at the bottom of the screen to show or hide Trees, Blobs and Tags. Hiding trees and blobs reduces clutter so you can focus on the commit history and branch structure.
+        </p>
+        <p class="line-height:1.6">
+          When nodes are hidden, links automatically re-route so the graph stays connected and readable.
+        </p>
       </div>
-
-      <div class=" background-color:c1background2 display:flex border-color:white flex-direction:column padding-top:xl border:2pxsolidblack border-radius:md margin:lg align-items:center">
-        <h1 class="font-size:xl titleFont text-align:center color:c1background1">Staging Area Window</h1>
-
-        <div
-          class="display:flex justify-content:center  color:c1background1 padding:xl flex-direction:column lg?flex-direction:row"
-        >
-          <div class=" width:50% align-self:center sm?width:30% md?width:20%">
-            <img
-              src={StagingArea.src}
-              alt="Staging Area screen shot"
-              width="100%"
-              style="object-fit:contain"
-            />
+      <div class="lg?flex-basis:50% display:flex flex-direction:column align-items:center gap:md">
+        <div class="screenshot-placeholder">
+          <!-- TODO: Add screenshot of toggle checkboxes -->
+          <span>Toggle Controls</span>
+        </div>
+        <!-- CSS-only toggle demo -->
+        <div class="toggle-demo">
+          <div class="toggle-demo-nodes">
+            <span class="node-dot node-commit"></span>
+            <span class="node-dot node-tree toggle-target"></span>
+            <span class="node-dot node-blob toggle-target"></span>
+            <span class="node-dot node-branch"></span>
           </div>
-          <div
-            class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
-          >
-            <p>View the files that are currently in the GIT Staging/Index</p>
-            <p>
-              If file content extraction is enabled then we'll see each files
-              contents here
-            </p>
-            <p>
-              Click the * to expand/colapse this UI element
-            </p>
-            <p>Click and drag the header bar to move this UI elements position</p>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="display:flex justify-content:center padding:xl flex-direction:column lg?flex-direction:row border:2pxsolidblack border-radius:md margin:lg align-items:center" >
-        
-        
-        <div>
-          <h1 class="font-size:xl titleFont text-align:center color:c1background1 color:white">Collapsing Windows</h1>
-          <p>
-            Click the * to expand/colapse these Windows
-          </p>
-          
-        </div>
-        <div
-          class="display:flex justify-content:center padding:sm flex-direction:column lg?flex-direction:row margin:lg align-items:center"
-        >
-          <div class="width:90% lg?width:40%">
-            <img
-              src={WorkingAreaWithArrow.src}
-              alt="Staging Area screen shot"
-              width="100%"
-              style="object-fit:contain"
-            />
-          </div>
-          <div
-            class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
-          >
-        
-         
-          </div>
-          <div class="width:90% lg?width:40%">
-            <img
-              src={StagingAreaWithArrow.src}
-              alt="Staging Area screen shot"
-              width="100%"
-              style="object-fit:contain"
-            />
-          </div>
-        </div>
-      </div>
-
-
-      <div class="display:flex justify-content:center padding:xl flex-direction:column lg?flex-direction:row border:2pxsolidblack border-radius:md margin:lg align-items:center">
-
-
-        <div
-          class="display:flex justify-content:center  padding:xl flex-direction:column lg?flex-direction:row margin:lg align-items:center"
-        >
-          <div class="width:100% lg?width:40%">
-            <img
-              src={workingareawitharrow_on_header_bar.src}
-              alt="Staging Area screen shot"
-              width="100%"
-              style="object-fit:contain"
-            />
-          </div>
-         
-          <div class="width:100% lg?width:40%">
-            <img
-              src={staging_area_with_arrow_header_bar.src}
-              alt="Staging Area screen shot"
-              width="100%"
-              style="object-fit:contain"
-            />
-          </div>
-
-        </div>
-
-        <div>
-          <h1 class="font-size:xl titleFont text-align:center color:c1background1 color:white">Moving Windows</h1>
-          <p>Click and drag the header bar to move these Windows position</p>
-        </div>
-
-
-      </div>
-
-      <div
-        class="display:flex justify-content:center color:c1background3 flex-direction:column align-items:center lg?flex-direction:row background-color:c1background2 padding-top:2xl padding-bottom:2xl"
-      >
-        <div class="width:50% lg?width:30%">
-          <img
-            src={AutoUpdateWithArrow.src}
-            alt="Changing Auto Update Checkbox"
-            width="100%"
-            style="object-fit:contain"
-          />
-        </div>
-
-        <div
-          class="max-width:50ch text-align:left place-self:center padding-left:lg padding-right:lg md?padding-left:xl md?padding-right:xl"
-        >
-          <p class="max-width:40ch">
-            By default the visualisation will update automatically whenever a
-            change is made to the repo
-          </p>
-
-          <p class="max-width:40ch">
-            We can pause the visualisation by unchecking the 'AutoUpdate' check
-            box
-          </p>
-        </div>
-      </div>
-
-      <div
-        class="display:flex flex-direction:column lg?flex-direction:row margin-top:2xl"
-      >
-        <div
-          class="text-align:justify justify-content:center grow:1 flex-basis:50% padding:xl"
-        >
-          <p class="max-width:40ch">
-            The inclusion of Tree objects in the visualisation is only really
-            useful when explicitly looking into how Git Trees work.
-          </p>
-
-          <p class="max-width:40ch">
-            For all other scenarios it is best to remove them to reduce clutter
-            on the screen
-          </p>
-
-          <p>
-            Simply click the <strong>&ltHide Tree&gt</strong> button to remove them
-          </p>
-        </div>
-
-        <div
-          class="display:flex flex-direction:column align-items:center flex-basis:30%"
-        >
-          <img
-            src={HideTreeWithArrow.src}
-            alt="Hiding Trees within the visualisation option"
-            class="width:50% lg?width:80%"
-            style="object-fit:contain"
-          />
-          <img
-            src={GraphWithTreeHidden.src}
-            alt="Graph showing screen when trees are hidden"
-            class="width:50% lg?width:80%"
-
-            style="object-fit:contain"
-          />
-        </div>
-      </div>
-
-      <div
-        class="display:flex flex-direction:column lg?flex-direction:row margin-top:2xl"
-      >
-        <div
-          class="text-align:justify justify-content:center grow:1 flex-basis:50% padding:xl"
-        >
-          <p class="max-width:40ch">
-            Similarly to removing Tree object we can remove BLOB objects if
-            desired too
-          </p>
-          <p>
-            Simply click the <strong>&ltHide Blob&gt</strong> button to remove them
-          </p>
-        </div>
-
-        <div
-          class="display:flex flex-direction:column align-items:center flex-basis:30%"
-        >
-          <img
-            src={HideBlobWithArrow.src}
-            alt="Hiding Blobs within the visualisation option"
-            class="width:50% lg?width:80%"
-
-            style="object-fit:contain"
-          />
-          <img
-            src={GraphWithBlobHidden.src}
-            alt="Graph showing screen when Bloba are hidden"
-            class="width:50% lg?width:80%"
-
-            style="object-fit:contain"
-          />
+          <label class="toggle-label">
+            <input type="checkbox" checked class="toggle-checkbox" />
+            Show Trees &amp; Blobs
+          </label>
         </div>
       </div>
     </div>
+
+    <!-- 3. Drag & Reposition -->
+    <div class="fade-in-on-scroll display:flex flex-direction:column lg?flex-direction:row align-items:center padding:xl gap:xl">
+      <div class="lg?flex-basis:50% display:flex justify-content:center">
+        <div class="drag-demo-container">
+          <span class="drag-dot node-commit"></span>
+          <span class="drag-hint">drag me</span>
+        </div>
+      </div>
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Drag &amp; Reposition Nodes</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          Click and drag any node to reposition it on the canvas. Arrange the graph in whatever layout makes most sense to you.
+        </p>
+        <p class="line-height:1.6">
+          Your custom positions are preserved proportionally when the window is resized or the repository refreshes, so your layout is never lost.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. Working & Staging Panels -->
+    <div class="slide-in-left-on-scroll display:flex flex-direction:column-reverse lg?flex-direction:row align-items:center padding:xl gap:xl background-color:c1background2">
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Working &amp; Staging Area Panels</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          Two draggable panels in the lower-left show the files in your working directory and staging area. Each panel has an indigo header bar you can grab to reposition it.
+        </p>
+        <p class="line-height:1.6 margin-bottom:md">
+          Click the chevron to collapse or expand a panel. File entries show the filename, a short hash and a preview of the file contents.
+        </p>
+      </div>
+      <div class="lg?flex-basis:50% display:flex flex-direction:column align-items:center gap:md">
+        <!-- Panel demo -->
+        <div class="panel-demo">
+          <div class="panel-header">Working Area <span class="chevron">&#9650;</span></div>
+          <div class="panel-body">
+            <div class="panel-file">file1.txt <span class="panel-hash">a1b2</span></div>
+            <div class="panel-file">file2.txt <span class="panel-hash">c3d4</span></div>
+          </div>
+        </div>
+        <div class="panel-demo">
+          <div class="panel-header">Staging Area <span class="chevron">&#9650;</span></div>
+          <div class="panel-body">
+            <div class="panel-file">file1.txt <span class="panel-hash">a1b2</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Real-time Updates -->
+    <div class="fade-in-on-scroll display:flex flex-direction:column lg?flex-direction:row align-items:center padding:xl gap:xl">
+      <div class="lg?flex-basis:50% display:flex justify-content:center">
+        <div class="realtime-demo">
+          <span class="realtime-ring"></span>
+          <span class="realtime-dot"></span>
+          <span class="realtime-label">LIVE</span>
+        </div>
+      </div>
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Real-time Updates</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          A file watcher monitors your <code>.git</code> directory and working tree. When you commit, stage, branch or edit a file, the visualization refreshes automatically within moments.
+        </p>
+        <p class="line-height:1.6">
+          No manual refresh needed. Just work in your terminal and watch the graph evolve in real time.
+        </p>
+      </div>
+    </div>
+
+    <!-- 6. Repository Selection -->
+    <div class="slide-in-right-on-scroll display:flex flex-direction:column-reverse lg?flex-direction:row align-items:center padding:xl padding-bottom:2xl gap:xl background-color:c1background2">
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Repository Selection</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          On launch you are greeted with a welcome screen and an "Open Repository" button. Pick any folder containing a <code>.git</code> directory to start visualizing.
+        </p>
+        <p class="line-height:1.6">
+          Switch repositories at any time using the "Change Repo" button in the bottom info bar, which also displays the current repo path.
+        </p>
+      </div>
+      <div class="screenshot-placeholder lg?flex-basis:50%">
+        <!-- TODO: Add screenshot of welcome / repo selection screen -->
+        <span>Repo Selection Screen</span>
+      </div>
+    </div>
+
   </section>
 </Layout>
 
-<script type="module" src="../EventHandlersForDownloadButton.ts"></script>
+<style>
+  /* Node color dots */
+  .node-dot {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .node-commit { background: #e94560; }
+  .node-tree { background: #4ade80; }
+  .node-blob { background: #60a5fa; }
+  .node-branch { background: #a855f7; }
+  .node-tag { background: #fb923c; }
+  .node-head { background: #facc15; }
+
+  /* Screenshot placeholders */
+  .screenshot-placeholder {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 16 / 10;
+    background: #1e293b;
+    border: 2px dashed #475569;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 1.1rem;
+  }
+
+  /* Toggle demo */
+  .toggle-demo {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .toggle-demo-nodes {
+    display: flex;
+    gap: 16px;
+  }
+  .toggle-checkbox {
+    margin-right: 6px;
+    accent-color: #4ade80;
+  }
+  .toggle-checkbox:not(:checked) ~ .toggle-target,
+  .toggle-demo:has(.toggle-checkbox:not(:checked)) .toggle-target {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+  }
+  .toggle-target {
+    transition: all 0.3s ease;
+  }
+  .toggle-label {
+    color: #cbd5e1;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Drag demo */
+  .drag-demo-container {
+    position: relative;
+    width: 160px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .drag-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    animation: drag-bounce 2.4s ease-in-out infinite;
+    position: absolute;
+  }
+  .drag-hint {
+    position: absolute;
+    bottom: 0;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    animation: drag-hint-fade 2.4s ease-in-out infinite;
+  }
+  @keyframes drag-bounce {
+    0%, 100% { transform: translateX(-40px); }
+    50% { transform: translateX(40px); }
+  }
+  @keyframes drag-hint-fade {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* Panel demo */
+  .panel-demo {
+    width: 220px;
+    border: 1px solid #475569;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+  }
+  .panel-header {
+    background: #4b0082;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: grab;
+  }
+  .chevron { font-size: 0.7rem; }
+  .panel-body { padding: 8px 12px; }
+  .panel-file {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    padding: 3px 0;
+    font-family: monospace;
+  }
+  .panel-hash { color: #94a3b8; }
+
+  /* Real-time pulse demo */
+  .realtime-demo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .realtime-dot {
+    width: 16px;
+    height: 16px;
+    background: #e94560;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .realtime-ring {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #e94560;
+    animation: pulse-ring 1.8s ease-out infinite;
+  }
+  .realtime-label {
+    position: absolute;
+    bottom: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #e94560;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(4); opacity: 0; }
+  }
+
+  code {
+    background: #1e293b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+</style>
+
+<script is:inline>
+  function initScrollAnimations() {
+    const classes = [
+      ["fade-in-on-scroll", "fade-in-visible"],
+      ["slide-in-right-on-scroll", "slide-in-right-visible"],
+      ["slide-in-left-on-scroll", "slide-in-left-visible"],
+    ];
+    classes.forEach(([trigger, visible]) => {
+      const els = document.querySelectorAll("." + trigger);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add(visible);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      els.forEach((el) => observer.observe(el));
+    });
+  }
+  initScrollAnimations();
+</script>

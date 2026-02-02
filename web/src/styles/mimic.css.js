@@ -1,13 +1,19 @@
 import { css } from "lit";
 export const TWStyles = css`
+.margin\\:0px {
+	margin: 0px;
+}
+.padding\\:0px {
+	padding: 0px;
+}
+.background\\:c1background1 {
+	background: #001A1A;
+}
+.min-height\\:100vh {
+	min-height: 100vh;
+}
 .color\\:white {
 	color: white;
-}
-.font-size\\:xl {
-	font-size: 48px;
-}
-.margin-bottom\\:lg {
-	margin-bottom: 20px;
 }
 .padding-top\\:md {
 	padding-top: 8px;
@@ -27,35 +33,17 @@ export const TWStyles = css`
 .font-size\\:md {
 	font-size: 16px;
 }
-.display\\:flex {
-	display: flex;
-}
-.flex-direction\\:column {
-	flex-direction: column;
-}
-.align-items\\:center {
-	align-items: center;
-}
 .margin-top\\:md {
 	margin-top: 8px;
 }
 .align-self\\:center {
 	align-self: center;
 }
-.font-size\\:lg {
-	font-size: 24px;
-}
 .margin-bottom\\:xl {
 	margin-bottom: 50px;
 }
-.max-width\\:60ch {
-	max-width: 60ch;
-}
 .border-color\\:red {
 	border-color: red;
-}
-.text-align\\:center {
-	text-align: center;
 }
 .border-color\\:black {
 	border-color: black;
@@ -87,9 +75,6 @@ export const TWStyles = css`
 .flex-basis\\:75\\% {
 	flex-basis: 75%;
 }
-.color\\:c1text2 {
-	color: #DDDDDD;
-}
 .overflow-wrap\\:break-word {
 	overflow-wrap: break-word;
 }
@@ -113,9 +98,6 @@ export const TWStyles = css`
 }
 .color\\:blue\\:hover:hover {
 	color: blue;
-}
-.background-color\\:c1background1 {
-	background-color: #001A1A;
 }
 .padding\\:md {
 	padding: 8px;
@@ -144,17 +126,11 @@ export const TWStyles = css`
 .margin-right\\:xl {
 	margin-right: 50px;
 }
-.justify-content\\:center {
-	justify-content: center;
-}
 .margin-top\\:sm {
 	margin-top: 4px;
 }
 .margin\\:md {
 	margin: 8px;
-}
-.background-color\\:c1background2 {
-	background-color: #91B58D;
 }
 .place-items\\:center {
 	place-items: center;
@@ -174,9 +150,6 @@ export const TWStyles = css`
 .margin-top\\:xl {
 	margin-top: 50px;
 }
-.margin-bottom\\:md {
-	margin-bottom: 8px;
-}
 .font-weight\\:800 {
 	font-weight: 800;
 }
@@ -192,9 +165,6 @@ export const TWStyles = css`
 .width\\:100\\% {
 	width: 100%;
 }
-.max-width\\:50ch {
-	max-width: 50ch;
-}
 .margin\\:lg {
 	margin: 20px;
 }
@@ -203,9 +173,6 @@ export const TWStyles = css`
 }
 .color\\:c5text1 {
 	color: #041514;
-}
-.padding\\:xl {
-	padding: 50px;
 }
 .border-radius\\:md {
 	border-radius: 10px;
@@ -234,12 +201,6 @@ export const TWStyles = css`
 .max-width\\:420px {
 	max-width: 420px;
 }
-.line-height\\:1.6 {
-	line-height: 1.6;
-}
-.padding-bottom\\:xl {
-	padding-bottom: 50px;
-}
 .color\\:\\#c1text2 {
 	color: #c1text2;
 }
@@ -267,17 +228,11 @@ export const TWStyles = css`
 .text-decoration\\:underline {
 	text-decoration: underline;
 }
-.padding-bottom\\:2xl {
-	padding-bottom: 200px;
-}
 .margin-bottom\\:2xl {
 	margin-bottom: 200px;
 }
 .justify-content\\:space-around {
 	justify-content: space-around;
-}
-.gap\\:xl {
-	gap: 8px;
 }
 .background\\:c5background3 {
 	background: linear-gradient(45deg, #042B2B 0%, #0A3232 100%);
@@ -306,9 +261,6 @@ export const TWStyles = css`
 .width\\:50\\% {
 	width: 50%;
 }
-.flex-wrap\\:wrap {
-	flex-wrap: wrap;
-}
 .gap\\:30px {
 	gap: 30px;
 }
@@ -317,39 +269,6 @@ export const TWStyles = css`
 }
 .background\\:c1background3 {
 	background: #042B2B;
-}
-.border-width\\:2px {
-	border-width: 2px;
-}
-.border-color\\:c1text1 {
-	border-color: #041514;
-}
-.border\\:2pxsolidblack {
-	border: 2px solid black;
-}
-.justify-content\\:between {
-	justify-content: between;
-}
-.border-color\\:white {
-	border-color: white;
-}
-.color\\:c1background1 {
-	color: #001A1A;
-}
-.padding-top\\:2xl {
-	padding-top: 200px;
-}
-.margin-top\\:2xl {
-	margin-top: 200px;
-}
-.grow\\:1 {
-	grow: 1;
-}
-.flex-basis\\:50\\% {
-	flex-basis: 50%;
-}
-.flex-basis\\:30\\% {
-	flex-basis: 30%;
 }
 .position\\:fixed {
 	position: fixed;
@@ -377,6 +296,9 @@ export const TWStyles = css`
 }
 .left\\:50px {
 	left: 50px;
+}
+.border-color\\:white {
+	border-color: white;
 }
 .border-width\\:sm {
 	border-width: 2px;
@@ -462,17 +384,83 @@ export const TWStyles = css`
 .font-weight\\:md {
 	font-weight: 400;
 }
-.margin\\:0px {
-	margin: 0px;
+.color\\:c1text2 {
+	color: #DDDDDD;
 }
-.padding\\:0px {
-	padding: 0px;
+.background-color\\:c1background1 {
+	background-color: #001A1A;
 }
-.background\\:c1background1 {
-	background: #001A1A;
+.text-align\\:center {
+	text-align: center;
 }
-.min-height\\:100vh {
-	min-height: 100vh;
+.padding\\:xl {
+	padding: 50px;
+}
+.padding-top\\:2xl {
+	padding-top: 200px;
+}
+.font-size\\:xl {
+	font-size: 48px;
+}
+.margin-bottom\\:lg {
+	margin-bottom: 20px;
+}
+.font-size\\:lg {
+	font-size: 24px;
+}
+.max-width\\:60ch {
+	max-width: 60ch;
+}
+.margin-left\\:auto {
+	margin-left: auto;
+}
+.margin-right\\:auto {
+	margin-right: auto;
+}
+.display\\:flex {
+	display: flex;
+}
+.flex-wrap\\:wrap {
+	flex-wrap: wrap;
+}
+.justify-content\\:center {
+	justify-content: center;
+}
+.gap\\:lg {
+	gap: 6px;
+}
+.padding-bottom\\:xl {
+	padding-bottom: 50px;
+}
+.align-items\\:center {
+	align-items: center;
+}
+.flex-direction\\:column {
+	flex-direction: column;
+}
+.gap\\:xl {
+	gap: 8px;
+}
+.max-width\\:50ch {
+	max-width: 50ch;
+}
+.margin-bottom\\:md {
+	margin-bottom: 8px;
+}
+.line-height\\:1.6 {
+	line-height: 1.6;
+}
+.flex-direction\\:column-reverse {
+	flex-direction: column-reverse;
+}
+.background-color\\:c1background2 {
+	background-color: #91B58D;
+}
+.gap\\:md {
+	gap: 4px;
+}
+.padding-bottom\\:2xl {
+	padding-bottom: 200px;
 }
 @media (min-width: 640px) {
 .xs\\?flex-direction\\:row {
@@ -500,6 +488,11 @@ export const TWStyles = css`
 	}
 }
 @media (min-width: 1024px) {
+.md\\?margin-bottom\\:2xl {
+	margin-bottom: 200px;
+	}
+}
+@media (min-width: 1024px) {
 .md\\?width\\:50\\% {
 	width: 50%;
 	}
@@ -514,6 +507,21 @@ export const TWStyles = css`
 	width: 30%;
 	}
 }
+@media (min-width: 1024px) {
+.md\\?padding-left\\:xl {
+	padding-left: 50px;
+	}
+}
+@media (min-width: 1024px) {
+.md\\?padding-right\\:xl {
+	padding-right: 50px;
+	}
+}
+@media (min-width: 768px) {
+.sm\\?flex-direction\\:row {
+	flex-direction: row;
+	}
+}
 @media (min-width: 1280px) {
 .lg\\?margin-top\\:0px {
 	margin-top: 0px;
@@ -522,11 +530,6 @@ export const TWStyles = css`
 @media (min-width: 1280px) {
 .lg\\?font-weight\\:xl {
 	font-weight: 800;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?font-size\\:xl {
-	font-size: 48px;
 	}
 }
 @media (min-width: 1280px) {
@@ -589,56 +592,6 @@ export const TWStyles = css`
 	margin-bottom: 200px;
 	}
 }
-@media (min-width: 1024px) {
-.md\\?margin-bottom\\:2xl {
-	margin-bottom: 200px;
-	}
-}
-@media (min-width: 768px) {
-.sm\\?flex-direction\\:row {
-	flex-direction: row;
-	}
-}
-@media (min-width: 768px) {
-.sm\\?width\\:30\\% {
-	width: 30%;
-	}
-}
-@media (min-width: 1024px) {
-.md\\?width\\:20\\% {
-	width: 20%;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?width\\:40\\% {
-	width: 40%;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?width\\:30\\% {
-	width: 30%;
-	}
-}
-@media (min-width: 1024px) {
-.md\\?padding-left\\:xl {
-	padding-left: 50px;
-	}
-}
-@media (min-width: 1024px) {
-.md\\?padding-right\\:xl {
-	padding-right: 50px;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?flex-direction\\:row {
-	flex-direction: row;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?width\\:80\\% {
-	width: 80%;
-	}
-}
 @media (min-width: 1280px) {
 .lg\\?justify-items\\:stretch {
 	justify-items: stretch;
@@ -662,6 +615,21 @@ export const TWStyles = css`
 @media (min-width: 1280px) {
 .lg\\?display\\:block {
 	display: block;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?font-size\\:xl {
+	font-size: 48px;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?flex-direction\\:row {
+	flex-direction: row;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?flex-basis\\:50\\% {
+	flex-basis: 50%;
 	}
 }
  `
