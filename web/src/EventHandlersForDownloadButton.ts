@@ -38,14 +38,20 @@ function attachDownloadTracking() {
       }
 
       if (typeof window.gtag === "function") {
+        window.gtag("event", "file_download", {
+          file_name: href?.split("/").pop() || "unknown",
+          file_extension: href?.split(".").pop() || "unknown",
+          link_url: href || "",
+          os,
+          transport_type: "beacon",
+        });
         window.gtag("event", "app_download", {
           os,
           page_path: window.location.pathname,
           transport_type: "beacon",
-          event_callback: shouldDelayNavigation ? navigate : undefined,
         });
         if (shouldDelayNavigation) {
-          setTimeout(navigate, 1500);
+          setTimeout(navigate, 300);
         }
       } else if (
         window.dataLayer &&
