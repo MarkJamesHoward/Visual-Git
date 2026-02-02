@@ -1,0 +1,41 @@
+{
+  "name": "visual-git-electron",
+  "version": "1.0.0",
+  "description": "Visual Git - Desktop application for visualizing git internals",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "dev": "npm run build && electron .",
+    "build": "npm run build:main && npm run build:preload && npm run build:renderer && npm run copy-assets",
+    "build:main": "esbuild src/main/main.ts --bundle --platform=node --external:electron --outfile=dist/main/main.js",
+    "build:preload": "esbuild src/main/preload.ts --bundle --platform=node --external:electron --outfile=dist/main/preload.js",
+    "build:renderer": "esbuild src/renderer/renderer.ts --bundle --platform=browser --outfile=dist/renderer/renderer.js",
+    "copy-assets": "node -e \"const fs=require('fs');fs.cpSync('src/renderer/index.html','dist/renderer/index.html');fs.cpSync('src/renderer/index.css','dist/renderer/index.css');\"",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "esbuild": "^0.24.0",
+    "electron-builder": "^25.0.0",
+    "typescript": "^5.7.0"
+  },
+  "build": {
+    "appId": "com.visualgit.electron",
+    "productName": "Visual Git",
+    "files": [
+      "dist/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

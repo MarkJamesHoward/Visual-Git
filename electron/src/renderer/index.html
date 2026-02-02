@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'" />
+  <title>Visual Git</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- Welcome Screen -->
+  <div id="welcome-screen">
+    <h1>Visual Git</h1>
+    <p>Visualize your git repository internals</p>
+    <button id="open-repo-btn">Open Repository</button>
+  </div>
+
+  <!-- Main App (hidden until repo is opened) -->
+  <div id="app-container" style="display:none;">
+    <canvas id="GitGraph"></canvas>
+
+    <!-- Toggle Panel -->
+    <div id="toggle-panel">
+      <label><input type="checkbox" id="show-trees" checked /> Trees</label>
+      <label><input type="checkbox" id="show-blobs" checked /> Blobs</label>
+      <label><input type="checkbox" id="show-tags" checked /> Tags</label>
+    </div>
+
+    <!-- Working Area Panel (draggable) -->
+    <div id="WorkingFiles" class="file-panel">
+      <div class="file-panel-header" id="WorkingFilesHEADER">
+        <span class="file-panel-title">WORKING AREA</span>
+        <span class="file-panel-toggle" id="working-files-toggle">&#9650;</span>
+      </div>
+      <div class="file-panel-content" id="working-files-content">
+        <div id="working-files-list"></div>
+      </div>
+    </div>
+
+    <!-- Staging Area Panel (draggable) -->
+    <div id="IndexAndWorkingFiles" class="file-panel">
+      <div class="file-panel-header" id="IndexAndWorkingFilesHEADER">
+        <span class="file-panel-title">STAGING AREA</span>
+        <span class="file-panel-toggle" id="index-files-toggle">&#9650;</span>
+      </div>
+      <div class="file-panel-content" id="index-files-content">
+        <div id="index-files-list"></div>
+      </div>
+    </div>
+
+    <!-- Repo Info Bar -->
+    <div id="repo-info">
+      <span id="repo-path-display"></span>
+      <button id="change-repo-btn">Change Repo</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

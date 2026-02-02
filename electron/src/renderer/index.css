@@ -1,0 +1,229 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #1a1a2e;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+}
+
+/* Welcome screen */
+#welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 16px;
+}
+
+#welcome-screen h1 {
+  font-size: 48px;
+  color: #e94560;
+}
+
+#welcome-screen p {
+  font-size: 18px;
+  color: #aaa;
+}
+
+#open-repo-btn {
+  margin-top: 24px;
+  padding: 12px 32px;
+  font-size: 16px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#open-repo-btn:hover {
+  background: #c73e54;
+}
+
+/* App container */
+#app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#GitGraph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1a1a2e;
+}
+
+/* Toggle panel */
+#toggle-panel {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 30, 60, 0.9);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px 20px;
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+#toggle-panel label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ccc;
+  user-select: none;
+}
+
+#toggle-panel input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* ---- Draggable File Panels ---- */
+.file-panel {
+  position: absolute;
+  bottom: 100px;
+  z-index: 20;
+  min-width: 220px;
+  max-width: 360px;
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#WorkingFiles {
+  left: 50px;
+}
+
+#IndexAndWorkingFiles {
+  left: 300px;
+}
+
+.file-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: #4b0082; /* indigo, matching the web */
+  cursor: move;
+  user-select: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.file-panel-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.file-panel-toggle {
+  font-size: 16px;
+  color: #7b9bff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.file-panel-toggle:hover {
+  color: #fff;
+}
+
+.file-panel-content {
+  padding: 10px 12px;
+  max-height: 250px;
+  overflow-y: auto;
+  transition: max-height 0.2s ease;
+}
+
+.file-panel-content.collapsed {
+  max-height: 0;
+  padding: 0 12px;
+  overflow: hidden;
+}
+
+/* Individual file entries */
+.file-entry {
+  margin-bottom: 6px;
+}
+
+.file-entry-name {
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-entry-hash {
+  font-size: 11px;
+  color: #888;
+  margin-left: 6px;
+}
+
+.file-entry-contents {
+  width: 100%;
+  margin-top: 3px;
+  padding: 4px;
+  font-size: 11px;
+  font-family: monospace;
+  background: #111;
+  color: #aaa;
+  border: 1px solid #333;
+  border-radius: 4px;
+  resize: none;
+  overflow: hidden;
+}
+
+.file-entry-empty {
+  font-size: 12px;
+  color: #555;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+/* Repo info bar */
+#repo-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(20, 20, 40, 0.95);
+  border-top: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 10;
+  font-size: 13px;
+  color: #888;
+}
+
+#change-repo-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  background: #333;
+  color: #ccc;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#change-repo-btn:hover {
+  background: #444;
+}
