@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from "electron";
+import { app, BrowserWindow, ipcMain, dialog, Menu } from "electron";
 import * as path from "path";
 import * as fs from "fs";
 import { readGitRepo } from "../git/GitReader";
@@ -10,6 +10,7 @@ let workingDirWatcher: fs.FSWatcher | null = null;
 let debounceTimer: NodeJS.Timeout | null = null;
 
 function createWindow() {
+  Menu.setApplicationMenu(null);
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -67,11 +68,15 @@ function startWatcher(repoPath: string) {
 
   try {
     // Watch working directory for new/modified/deleted files
-    workingDirWatcher = fs.watch(repoPath, { recursive: true }, (_event, filename) => {
-      // Ignore changes inside .git/ (already handled above)
-      if (filename && filename.startsWith(".git")) return;
-      onRepoChanged();
-    });
+    workingDirWatcher = fs.watch(
+      repoPath,
+      { recursive: true },
+      (_event, filename) => {
+        // Ignore changes inside .git/ (already handled above)
+        if (filename && filename.startsWith(".git")) return;
+        onRepoChanged();
+      },
+    );
   } catch (e) {
     console.error("Error starting working directory watcher:", e);
   }
@@ -98,7 +103,7 @@ app.whenReady().then(() => {
     if (!fs.existsSync(gitDir)) {
       dialog.showErrorBox(
         "Not a Git Repository",
-        "The selected folder does not contain a .git directory."
+        "The selected folder does not contain a .git directory.",
       );
       return null;
     }
