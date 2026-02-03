@@ -2,6 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 
 import SampleScreenShot from "../images/HiResVisualGit.png";
+
+// Step images: a = terminal, b = mainscreen
+import MainScreen1 from "../images/step1b-mainscreen.png";
+import MainScreen2 from "../images/step2b-mainscreen.png";
+import MainScreen3 from "../images/step3b-mainscreen.png";
 import WindowsLogo from "../images/windows_logo_download.png";
 import LinuxLogo from "../images/linux_logo_download.png";
 import AppleLogo from "../images/apple_logo_download.png";
@@ -18,14 +23,72 @@ import "../styles/mimic.css";
           Looking to learn Git then you've come to the right place!
         </p>
 
-        <div class="display:flex justify-content:center">
-          <div class="width:90% md?width:50% lg?width:50% xl?width:30%">
-            <img
-              src={SampleScreenShot.src}
-              alt="Sample VisualGit Screen Shot"
-              width="100%"
-              style="object-fit:contain"
-            />
+        <!-- Animated hero: 3 steps with typing terminal -->
+        <div class="hero-slideshow">
+          <!-- Left: Animated terminal -->
+          <div class="hero-left">
+            <div class="terminal">
+              <div class="terminal-header">
+                <span class="terminal-dot terminal-dot-red"></span>
+                <span class="terminal-dot terminal-dot-yellow"></span>
+                <span class="terminal-dot terminal-dot-green"></span>
+                <span class="terminal-title">Terminal</span>
+              </div>
+              <div class="terminal-body">
+                <!-- Step 1: Edit file -->
+                <div class="terminal-step terminal-step-1">
+                  <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-typing typing-1">echo "Hello World" &gt;&gt; data.txt</span>
+                  </div>
+                  <div class="terminal-output terminal-output-1">File updated</div>
+                </div>
+                <!-- Step 2: git add -->
+                <div class="terminal-step terminal-step-2">
+                  <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-typing typing-2">git add .</span>
+                  </div>
+                  <div class="terminal-output terminal-output-2">Changes staged for commit</div>
+                </div>
+                <!-- Step 3: git commit -->
+                <div class="terminal-step terminal-step-3">
+                  <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-typing typing-3">git commit -m "add data"</span>
+                  </div>
+                  <div class="terminal-output terminal-output-3">[main abc1234] add data<br/>1 file changed</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow (appears after terminal updates, before mainscreen) -->
+          <div class="hero-arrow">
+            <span class="arrow-pulse arrow-pulse-1">→</span>
+            <span class="arrow-pulse arrow-pulse-2">→</span>
+            <span class="arrow-pulse arrow-pulse-3">→</span>
+          </div>
+
+          <!-- Right: Visual Git main screen -->
+          <div class="hero-right">
+            <div class="hero-mainscreen-stack">
+              <img class="hero-img hero-img-1" src={MainScreen1.src} alt="Visual Git showing working directory change" />
+              <img class="hero-img hero-img-2" src={MainScreen2.src} alt="Visual Git showing staged file" />
+              <img class="hero-img hero-img-3" src={MainScreen3.src} alt="Visual Git showing committed changes" />
+            </div>
+          </div>
+
+          <!-- Showcase: Final image zoomed and centered at end of cycle -->
+          <div class="hero-showcase">
+            <img src={MainScreen3.src} alt="Visual Git final result" />
+          </div>
+
+          <!-- Step indicators -->
+          <div class="hero-indicators">
+            <span class="hero-dot hero-dot-1"></span>
+            <span class="hero-dot hero-dot-2"></span>
+            <span class="hero-dot hero-dot-3"></span>
           </div>
         </div>
 
@@ -281,6 +344,362 @@ import "../styles/mimic.css";
     height: 36px;
     width: 36px;
     margin-bottom: 6px;
+  }
+
+  /*
+   * Hero slideshow - 20s total cycle:
+   * Steps 1-3: 0-15s (5s each)
+   * Showcase: 15-20s (final image zooms and centers)
+   */
+  .hero-slideshow {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+    position: relative;
+  }
+
+  .hero-left {
+    flex: 0.35;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: hero-panel-hide 20s infinite;
+  }
+
+  .hero-right {
+    flex: 0.55;
+    animation: hero-panel-hide 20s infinite;
+  }
+
+  .hero-arrow {
+    flex: 0.1;
+    font-size: 3rem;
+    color: #4ade80;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: hero-panel-hide 20s infinite;
+  }
+
+  /* Hide terminal, arrow, and right panel during showcase (75-100% = 15-20s) */
+  @keyframes hero-panel-hide {
+    0%, 72% { opacity: 1; }
+    75%, 97% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* Showcase: centered zoomed image */
+  .hero-showcase {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: hero-showcase 20s infinite;
+    pointer-events: none;
+  }
+
+  .hero-showcase img {
+    max-width: 85%;
+    max-height: 100%;
+    object-fit: contain;
+    transform: scale(0.9);
+    animation: hero-showcase-zoom 20s infinite;
+  }
+
+  @keyframes hero-showcase {
+    0%, 72% { opacity: 0; }
+    78%, 95% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes hero-showcase-zoom {
+    0%, 72% { transform: scale(0.9); }
+    78% { transform: scale(1.05); }
+    95% { transform: scale(1.05); }
+    100% { transform: scale(0.9); }
+  }
+
+  /*
+   * Animated Terminal styling
+   * 20s total cycle, 5s per step (steps 1-3), then 5s showcase
+   */
+
+  .terminal {
+    background: #1a1a2e;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .terminal-header {
+    background: #2d2d44;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .terminal-dot-red { background: #ff5f56; }
+  .terminal-dot-yellow { background: #ffbd2e; }
+  .terminal-dot-green { background: #27ca40; }
+
+  .terminal-title {
+    margin-left: 8px;
+    color: #888;
+    font-size: 0.8rem;
+  }
+
+  .terminal-body {
+    padding: 16px;
+    min-height: 120px;
+    position: relative;
+  }
+
+  .terminal-step {
+    position: absolute;
+    inset: 16px;
+    opacity: 0;
+  }
+
+  .terminal-step-1 { animation: terminal-step-show 20s infinite step-end; animation-delay: 0s; }
+  .terminal-step-2 { animation: terminal-step-show 20s infinite step-end; animation-delay: 5s; }
+  .terminal-step-3 { animation: terminal-step-show 20s infinite step-end; animation-delay: 10s; }
+
+  @keyframes terminal-step-show {
+    0%, 25% { opacity: 1; }
+    25.01%, 100% { opacity: 0; }
+  }
+
+  .terminal-line {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .terminal-prompt {
+    color: #4ade80;
+  }
+
+  .terminal-typing {
+    color: #e2e8f0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    border-right: 2px solid #4ade80;
+  }
+
+  /* Typing animations - 20s cycle, each step is 5s (25% of cycle) */
+  .typing-1 {
+    animation:
+      typing-1 20s infinite step-end,
+      blink 0.7s step-end infinite;
+  }
+  .typing-2 {
+    animation:
+      typing-2 20s infinite step-end,
+      blink 0.7s step-end infinite;
+  }
+  .typing-3 {
+    animation:
+      typing-3 20s infinite step-end,
+      blink 0.7s step-end infinite;
+  }
+
+  /* Step 1 (0-5s = 0-25%): types "echo "Hello World" >> data.txt" (34 chars) */
+  @keyframes typing-1 {
+    0% { width: 0; }
+    1.5% { width: 2ch; }
+    3% { width: 5ch; }
+    4.5% { width: 10ch; }
+    6% { width: 20ch; }
+    7.5% { width: 34ch; border-right-color: transparent; }
+    25% { width: 34ch; border-right-color: transparent; }
+    25.01%, 100% { width: 0; border-right-color: #4ade80; }
+  }
+
+  /* Step 2 (5-10s = 25-50%): types "git add ." (10 chars) */
+  @keyframes typing-2 {
+    0%, 25% { width: 0; }
+    26.5% { width: 3ch; }
+    28% { width: 7ch; }
+    30% { width: 10ch; border-right-color: transparent; }
+    50% { width: 10ch; border-right-color: transparent; }
+    50.01%, 100% { width: 0; border-right-color: #4ade80; }
+  }
+
+  /* Step 3 (10-15s = 50-75%): types "git commit -m "add data"" (25 chars) */
+  @keyframes typing-3 {
+    0%, 50% { width: 0; }
+    51% { width: 3ch; }
+    52.5% { width: 10ch; }
+    54.5% { width: 18ch; }
+    57% { width: 25ch; border-right-color: transparent; }
+    75% { width: 25ch; border-right-color: transparent; }
+    75.01%, 100% { width: 0; border-right-color: #4ade80; }
+  }
+
+  @keyframes blink {
+    50% { border-right-color: transparent; }
+  }
+
+  .terminal-output {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    opacity: 0;
+    margin-top: 8px;
+  }
+
+  /* Output appears after typing completes - 20s cycle */
+  .terminal-output-1 { animation: output-show-1 20s infinite step-end; }
+  .terminal-output-2 { animation: output-show-2 20s infinite step-end; }
+  .terminal-output-3 { animation: output-show-3 20s infinite step-end; }
+
+  @keyframes output-show-1 {
+    0%, 8% { opacity: 0; }
+    9%, 25% { opacity: 1; }
+    25.01%, 100% { opacity: 0; }
+  }
+  @keyframes output-show-2 {
+    0%, 33% { opacity: 0; }
+    34%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+  @keyframes output-show-3 {
+    0%, 58% { opacity: 0; }
+    59%, 75% { opacity: 1; }
+    75.01%, 100% { opacity: 0; }
+  }
+
+  /* Arrow: pulse after terminal output appears - 20s cycle */
+  .arrow-pulse {
+    position: absolute;
+    opacity: 0;
+  }
+  .arrow-pulse-1 { animation: hero-arrow 20s infinite; animation-delay: 2s; }
+  .arrow-pulse-2 { animation: hero-arrow 20s infinite; animation-delay: 7s; }
+  .arrow-pulse-3 { animation: hero-arrow 20s infinite; animation-delay: 12s; }
+
+  @keyframes hero-arrow {
+    0% { opacity: 0; transform: translateX(-10px); }
+    3% { opacity: 1; transform: translateX(0); }
+    7% { opacity: 1; transform: translateX(8px); }
+    10% { opacity: 0; transform: translateX(15px); }
+    100% { opacity: 0; }
+  }
+
+  /* Mainscreen: crossfade between images, hide during showcase - 20s cycle */
+  .hero-mainscreen-stack .hero-img-1 {
+    animation: hero-main-1 20s infinite;
+  }
+  .hero-mainscreen-stack .hero-img-2 {
+    animation: hero-main-2 20s infinite;
+  }
+  .hero-mainscreen-stack .hero-img-3 {
+    animation: hero-main-3 20s infinite;
+  }
+
+  /* 20s cycle: steps 0-15s (75%), showcase 15-20s (75-100%)
+   * Image 1: visible from start (0%) until step 2 takes over (~8s = 40%)
+   * Image 2: visible ~8s to ~13s (37-65%)
+   * Image 3: visible ~13s to showcase start (62-75%)
+   */
+  @keyframes hero-main-1 {
+    0% { opacity: 1; }
+    37% { opacity: 1; }
+    42% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes hero-main-2 {
+    0%, 37% { opacity: 0; }
+    42% { opacity: 1; }
+    62% { opacity: 1; }
+    67% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes hero-main-3 {
+    0%, 62% { opacity: 0; }
+    67% { opacity: 1; }
+    72% { opacity: 1; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  .hero-mainscreen-stack {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .hero-indicators {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+
+  .hero-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+  }
+
+  .hero-dot-1 { animation: hero-dot-active 20s infinite step-end; animation-delay: 0s; }
+  .hero-dot-2 { animation: hero-dot-active 20s infinite step-end; animation-delay: 5s; }
+  .hero-dot-3 { animation: hero-dot-active 20s infinite step-end; animation-delay: 10s; }
+
+  @keyframes hero-dot-active {
+    0%, 25% { background: rgba(255,255,255,1); }
+    25.01%, 100% { background: rgba(255,255,255,0.3); }
+  }
+
+  /* Hide indicators during showcase */
+  .hero-indicators {
+    animation: hero-panel-hide 20s infinite;
+  }
+
+  @media (max-width: 768px) {
+    .hero-slideshow {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .hero-left, .hero-right {
+      flex: none;
+      width: 100%;
+    }
+    .hero-arrow {
+      transform: rotate(90deg);
+      font-size: 2rem;
+    }
   }
 </style>
 

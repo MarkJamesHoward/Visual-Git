@@ -15,15 +15,6 @@ export const TWStyles = css`
 .color\\:white {
 	color: white;
 }
-.font-size\\:xl {
-	font-size: 48px;
-}
-.margin-bottom\\:lg {
-	margin-bottom: 20px;
-}
-.padding-top\\:md {
-	padding-top: 8px;
-}
 .padding-bottom\\:md {
 	padding-bottom: 8px;
 }
@@ -36,38 +27,14 @@ export const TWStyles = css`
 .align-text\\:center {
 	align-text: center;
 }
-.font-size\\:md {
-	font-size: 16px;
-}
-.display\\:flex {
-	display: flex;
-}
-.flex-direction\\:column {
-	flex-direction: column;
-}
-.align-items\\:center {
-	align-items: center;
-}
-.margin-top\\:md {
-	margin-top: 8px;
-}
 .align-self\\:center {
 	align-self: center;
-}
-.font-size\\:lg {
-	font-size: 24px;
-}
-.margin-bottom\\:xl {
-	margin-bottom: 50px;
 }
 .max-width\\:60ch {
 	max-width: 60ch;
 }
 .border-color\\:red {
 	border-color: red;
-}
-.text-align\\:center {
-	text-align: center;
 }
 .border-color\\:black {
 	border-color: black;
@@ -81,32 +48,14 @@ export const TWStyles = css`
 .flex-direction\\:row {
 	flex-direction: row;
 }
-.padding\\:lg {
-	padding: 20px;
-}
 .flex-basis\\:25\\% {
 	flex-basis: 25%;
-}
-.flex-grow\\:1 {
-	flex-grow: 1;
-}
-.text-align\\:left {
-	text-align: left;
-}
-.flex-shrink\\:1 {
-	flex-shrink: 1;
 }
 .flex-basis\\:75\\% {
 	flex-basis: 75%;
 }
-.color\\:c1text2 {
-	color: #DDDDDD;
-}
 .overflow-wrap\\:break-word {
 	overflow-wrap: break-word;
-}
-.margin-left\\:xl {
-	margin-left: 50px;
 }
 .padding-top\\:lg {
 	padding-top: 20px;
@@ -117,9 +66,6 @@ export const TWStyles = css`
 .margin\\:xl {
 	margin: 50px;
 }
-.text-decoration\\:none {
-	text-decoration: none;
-}
 .margin-bottom\\:sm {
 	margin-bottom: 4px;
 }
@@ -129,50 +75,11 @@ export const TWStyles = css`
 .background-color\\:c1background1 {
 	background-color: #001A1A;
 }
-.padding\\:md {
-	padding: 8px;
-}
-.place-self\\:center {
-	place-self: center;
-}
-.padding-left\\:lg {
-	padding-left: 20px;
-}
-.padding-right\\:lg {
-	padding-right: 20px;
-}
-.color\\:c1background3 {
-	color: #042B2B;
-}
-.justify-content\\:space-between {
-	justify-content: space-between;
-}
-.padding-top\\:xl {
-	padding-top: 50px;
-}
-.flex-basis\\:33\\% {
-	flex-basis: 33%;
-}
-.margin-right\\:xl {
-	margin-right: 50px;
-}
-.justify-content\\:center {
-	justify-content: center;
-}
 .margin-top\\:sm {
 	margin-top: 4px;
 }
 .margin\\:md {
 	margin: 8px;
-}
-.background-color\\:c1background2 {
-	background-color: #91B58D;
-}
-.place-items\\:center {
-	place-items: center;
-}
-.border-radius\\:10px {
-	border-radius: 10px;
 }
 .gap\\:xs {
 	gap: 1px;
@@ -183,104 +90,23 @@ export const TWStyles = css`
 .display\\:none {
 	display: none;
 }
-.margin-top\\:xl {
-	margin-top: 50px;
-}
-.margin-bottom\\:md {
-	margin-bottom: 8px;
-}
 .font-weight\\:800 {
 	font-weight: 800;
 }
 .border-width\\:xs {
 	border-width: 1px;
 }
-.text-align\\:justify {
-	text-align: justify;
-}
-.margin-top\\:lg {
-	margin-top: 20px;
-}
 .width\\:100\\% {
 	width: 100%;
 }
-.max-width\\:50ch {
-	max-width: 50ch;
-}
 .margin\\:lg {
 	margin: 20px;
-}
-.background\\:c5background2 {
-	background: linear-gradient(90deg, #91B58D 0%, #B1C59D 100%);
-}
-.color\\:c5text1 {
-	color: #041514;
 }
 .padding\\:xl {
 	padding: 50px;
 }
 .border-radius\\:md {
 	border-radius: 10px;
-}
-.background\\:c5background1 {
-	background: linear-gradient(135deg, #001A1A 0%, #002222 100%);
-}
-.width\\:90\\% {
-	width: 90%;
-}
-.align-items\\:stretch {
-	align-items: stretch;
-}
-.font-weight\\:xl {
-	font-weight: 800;
-}
-.font-size\\:sm {
-	font-size: 12px;
-}
-.gap\\:sm {
-	gap: 2px;
-}
-.padding\\:sm {
-	padding: 4px;
-}
-.max-width\\:420px {
-	max-width: 420px;
-}
-.line-height\\:1.6 {
-	line-height: 1.6;
-}
-.padding-bottom\\:xl {
-	padding-bottom: 50px;
-}
-.color\\:\\#c1text2 {
-	color: #c1text2;
-}
-.max-width\\:40ch {
-	max-width: 40ch;
-}
-.align-self\\:left {
-	align-self: left;
-}
-.padding-left\\:xl {
-	padding-left: 50px;
-}
-.padding-right\\:xl {
-	padding-right: 50px;
-}
-.color\\:white\\:hover:hover {
-	color: white;
-}
-.font-weight\\:lg {
-	font-weight: 600;
-}
-.color\\:c5text2 {
-	color: #DDDDDD;
-}
-.text-decoration\\:underline {
-	text-decoration: underline;
-}
-.padding-bottom\\:2xl {
-	padding-bottom: 200px;
 }
 .margin-bottom\\:2xl {
 	margin-bottom: 200px;
@@ -462,6 +288,177 @@ export const TWStyles = css`
 .font-weight\\:md {
 	font-weight: 400;
 }
+.margin-bottom\\:xl {
+	margin-bottom: 50px;
+}
+.text-align\\:center {
+	text-align: center;
+}
+.color\\:c1text2 {
+	color: #DDDDDD;
+}
+.font-size\\:lg {
+	font-size: 24px;
+}
+.background\\:c5background1 {
+	background: linear-gradient(135deg, #001A1A 0%, #002222 100%);
+}
+.text-align\\:justify {
+	text-align: justify;
+}
+.place-self\\:center {
+	place-self: center;
+}
+.padding\\:lg {
+	padding: 20px;
+}
+.max-width\\:50ch {
+	max-width: 50ch;
+}
+.text-align\\:left {
+	text-align: left;
+}
+.padding-left\\:lg {
+	padding-left: 20px;
+}
+.padding-right\\:lg {
+	padding-right: 20px;
+}
+.background\\:c5background2 {
+	background: linear-gradient(90deg, #91B58D 0%, #B1C59D 100%);
+}
+.color\\:c5text1 {
+	color: #041514;
+}
+.display\\:flex {
+	display: flex;
+}
+.flex-direction\\:column {
+	flex-direction: column;
+}
+.justify-content\\:space-between {
+	justify-content: space-between;
+}
+.align-items\\:stretch {
+	align-items: stretch;
+}
+.padding-top\\:xl {
+	padding-top: 50px;
+}
+.flex-basis\\:33\\% {
+	flex-basis: 33%;
+}
+.flex-grow\\:1 {
+	flex-grow: 1;
+}
+.flex-shrink\\:1 {
+	flex-shrink: 1;
+}
+.margin-left\\:xl {
+	margin-left: 50px;
+}
+.margin-right\\:xl {
+	margin-right: 50px;
+}
+.margin-top\\:xl {
+	margin-top: 50px;
+}
+.font-weight\\:xl {
+	font-weight: 800;
+}
+.place-items\\:center {
+	place-items: center;
+}
+.margin-top\\:md {
+	margin-top: 8px;
+}
+.margin-bottom\\:md {
+	margin-bottom: 8px;
+}
+.font-size\\:sm {
+	font-size: 12px;
+}
+.gap\\:sm {
+	gap: 2px;
+}
+.align-items\\:center {
+	align-items: center;
+}
+.justify-content\\:center {
+	justify-content: center;
+}
+.text-decoration\\:none {
+	text-decoration: none;
+}
+.background-color\\:c1background2 {
+	background-color: #91B58D;
+}
+.padding\\:sm {
+	padding: 4px;
+}
+.border-radius\\:10px {
+	border-radius: 10px;
+}
+.color\\:c1background3 {
+	color: #042B2B;
+}
+.padding\\:md {
+	padding: 8px;
+}
+.max-width\\:420px {
+	max-width: 420px;
+}
+.line-height\\:1.6 {
+	line-height: 1.6;
+}
+.padding-bottom\\:xl {
+	padding-bottom: 50px;
+}
+.font-size\\:xl {
+	font-size: 48px;
+}
+.color\\:\\#c1text2 {
+	color: #c1text2;
+}
+.max-width\\:40ch {
+	max-width: 40ch;
+}
+.align-self\\:left {
+	align-self: left;
+}
+.padding-left\\:xl {
+	padding-left: 50px;
+}
+.padding-right\\:xl {
+	padding-right: 50px;
+}
+.color\\:white\\:hover:hover {
+	color: white;
+}
+.margin-top\\:lg {
+	margin-top: 20px;
+}
+.font-size\\:md {
+	font-size: 16px;
+}
+.margin-bottom\\:lg {
+	margin-bottom: 20px;
+}
+.padding-top\\:md {
+	padding-top: 8px;
+}
+.font-weight\\:lg {
+	font-weight: 600;
+}
+.color\\:c5text2 {
+	color: #DDDDDD;
+}
+.text-decoration\\:underline {
+	text-decoration: underline;
+}
+.padding-bottom\\:2xl {
+	padding-bottom: 200px;
+}
 @media (min-width: 640px) {
 .xs\\?flex-direction\\:row {
 	flex-direction: row;
@@ -485,66 +482,6 @@ export const TWStyles = css`
 @media (min-width: 768px) {
 .sm\\?padding\\:xl {
 	padding: 50px;
-	}
-}
-@media (min-width: 1024px) {
-.md\\?margin-bottom\\:2xl {
-	margin-bottom: 200px;
-	}
-}
-@media (min-width: 1024px) {
-.md\\?width\\:50\\% {
-	width: 50%;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?width\\:50\\% {
-	width: 50%;
-	}
-}
-@media (min-width: 1536px) {
-.xl\\?width\\:30\\% {
-	width: 30%;
-	}
-}
-@media (min-width: 1024px) {
-.md\\?padding-left\\:xl {
-	padding-left: 50px;
-	}
-}
-@media (min-width: 1024px) {
-.md\\?padding-right\\:xl {
-	padding-right: 50px;
-	}
-}
-@media (min-width: 768px) {
-.sm\\?flex-direction\\:row {
-	flex-direction: row;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?margin-top\\:0px {
-	margin-top: 0px;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?font-weight\\:xl {
-	font-weight: 800;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?justify-content\\:flex-end {
-	justify-content: flex-end;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?padding-right\\:200px {
-	padding-right: 200px;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?width\\:200px {
-	width: 200px;
 	}
 }
 @media (min-width: 1280px) {
@@ -593,16 +530,6 @@ export const TWStyles = css`
 	}
 }
 @media (min-width: 1280px) {
-.lg\\?font-size\\:xl {
-	font-size: 48px;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?flex-direction\\:row {
-	flex-direction: row;
-	}
-}
-@media (min-width: 1280px) {
 .lg\\?flex-basis\\:50\\% {
 	flex-basis: 50%;
 	}
@@ -630,6 +557,61 @@ export const TWStyles = css`
 @media (min-width: 1280px) {
 .lg\\?display\\:block {
 	display: block;
+	}
+}
+@media (min-width: 1024px) {
+.md\\?margin-bottom\\:2xl {
+	margin-bottom: 200px;
+	}
+}
+@media (min-width: 1024px) {
+.md\\?padding-left\\:xl {
+	padding-left: 50px;
+	}
+}
+@media (min-width: 1024px) {
+.md\\?padding-right\\:xl {
+	padding-right: 50px;
+	}
+}
+@media (min-width: 768px) {
+.sm\\?flex-direction\\:row {
+	flex-direction: row;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?margin-top\\:0px {
+	margin-top: 0px;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?font-weight\\:xl {
+	font-weight: 800;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?font-size\\:xl {
+	font-size: 48px;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?justify-content\\:flex-end {
+	justify-content: flex-end;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?flex-direction\\:row {
+	flex-direction: row;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?padding-right\\:200px {
+	padding-right: 200px;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?width\\:200px {
+	width: 200px;
 	}
 }
  `
