@@ -36,7 +36,14 @@
       "target": "dmg"
     },
     "linux": {
-      "target": "AppImage"
+      "target": ["deb", "AppImage", "tar.gz"],
+      "category": "Development"
+    },
+    "deb": {
+      "depends": ["git"]
+    },
+    "appImage": {
+      "artifactName": "visualgit-${os}-${arch}.${ext}"
     }
   }
 }
