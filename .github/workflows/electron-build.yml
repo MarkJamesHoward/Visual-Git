@@ -34,6 +34,10 @@ jobs:
         working-directory: electron
         run: npm version ${{ env.APP_VERSION }} --no-git-tag-version
 
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y dpkg fakeroot
+
       - name: Install dependencies
         working-directory: electron
         run: npm ci
