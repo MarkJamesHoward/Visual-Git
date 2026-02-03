@@ -18,29 +18,27 @@ function attachDownloadTracking() {
     document.querySelectorAll<HTMLElement>("[data-download-os]");
 
   if (downloadButtons.length === 0) {
-    console.log("No download buttons found for tracking");
     return;
   }
 
   downloadButtons.forEach((btn) => {
-    btn.addEventListener("click", (event) => {
+    // Open download in new tab so the current page stays alive for GA to fire
+    if (btn instanceof HTMLAnchorElement) {
+      btn.setAttribute("target", "_blank");
+      btn.setAttribute("rel", "noopener");
+    }
+
+    btn.addEventListener("click", () => {
       const os = btn.getAttribute("data-download-os") || "unknown";
       const href =
         btn instanceof HTMLAnchorElement ? btn.getAttribute("href") : null;
-      const shouldDelayNavigation = Boolean(href);
-
-      const navigate = () => {
-        if (href) window.location.href = href;
-      };
-
-      if (shouldDelayNavigation) {
-        event.preventDefault();
-      }
+      const fileName = href?.split("/").pop() || "unknown";
+      const fileExtension = fileName.split(".").pop() || "unknown";
 
       if (typeof window.gtag === "function") {
         window.gtag("event", "file_download", {
-          file_name: href?.split("/").pop() || "unknown",
-          file_extension: href?.split(".").pop() || "unknown",
+          file_name: fileName,
+          file_extension: fileExtension,
           link_url: href || "",
           os,
           transport_type: "beacon",
@@ -50,26 +48,6 @@ function attachDownloadTracking() {
           page_path: window.location.pathname,
           transport_type: "beacon",
         });
-        if (shouldDelayNavigation) {
-          setTimeout(navigate, 300);
-        }
-      } else if (
-        window.dataLayer &&
-        typeof window.dataLayer.push === "function"
-      ) {
-        window.dataLayer.push({
-          event: "app_download",
-          os,
-          page_path: window.location.pathname,
-        });
-        if (shouldDelayNavigation) {
-          setTimeout(navigate, 150);
-        }
-      } else {
-        console.log("gtag not available for download tracking");
-        if (shouldDelayNavigation) {
-          navigate();
-        }
       }
     });
   });

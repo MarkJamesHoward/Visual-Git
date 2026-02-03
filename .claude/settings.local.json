@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(xargs cat:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(ls -la \"d:\\\\github\\\\Visual-Git\\\\electron\\\\scripts\"\" 2>/dev/null || echo \"Scripts directory not found \")",
+      "Bash(tgit status)",
+      "Bash(tgit log --oneline -5)",
+      "Bash(tgit add:*)",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nSend explicit file_download event to GA4 for external download links\n\nGitHub-hosted downloads are on a different domain so GA4 enhanced\nmeasurement won''t auto-track them. Send the standard file_download\nevent manually alongside the custom app_download event.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit push)",
+      "Bash(tgit log --oneline -3)",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nRewrite UI page for Electron app and fix Step 3 font size\n\nReplace outdated WebUI content on usinglivevisualisation page with\nnew Electron desktop app features: interactive graph, toggle visibility,\ndrag nodes, working/staging panels, real-time updates, and repo selection.\nIncludes CSS-only interactive demos and scroll animations.\nAlso remove font-size:sm from Step 3 text on homepage to match other steps.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }
