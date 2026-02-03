@@ -2,6 +2,7 @@
   "name": "visual-git-electron",
   "version": "1.0.10",
   "description": "Visual Git - Desktop application for visualizing git internals",
+  "homepage": "https://github.com/MarkJamesHoward/Visual-Git",
   "main": "dist/main/main.js",
   "scripts": {
     "dev": "npm run build && electron .",
@@ -14,7 +15,10 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
-  "author": "",
+  "author": {
+    "name": "Mark Howard",
+    "email": "visualgit@example.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "electron": "^33.0.0",
@@ -40,7 +44,8 @@
       "category": "Development"
     },
     "deb": {
-      "depends": ["git"]
+      "depends": ["git"],
+      "maintainer": "Mark Howard <visualgit@example.com>"
     }
   }
 }
