@@ -33,7 +33,7 @@ export class Header extends LitElement {
             <div
               @click="${this._handleClick}"
               id="burger"
-              class="position:relative display:block cursor:pointer lg?display:none height:10px width:40px display:flex flex-direction:column justify-items:stretch margin:md"
+              class="position:relative display:block cursor:pointer lg?display:none height:14px width:35px display:flex flex-direction:column justify-content:space-between margin:md flex-shrink:0"
             >
               <div
                 class="border-bottom-width:1px border-bottom-style:solid border-bottom-color:pink flex-grow:1 height:100%"
