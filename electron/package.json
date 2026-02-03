@@ -1,6 +1,6 @@
 {
   "name": "visual-git-electron",
-  "version": "1.0.0",
+  "version": "1.0.10",
   "description": "Visual Git - Desktop application for visualizing git internals",
   "main": "dist/main/main.js",
   "scripts": {

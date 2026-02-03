@@ -282,6 +282,10 @@ app.whenReady().then(() => {
   createWindow();
   trackAppRun();
 
+  ipcMain.handle("get-app-version", () => {
+    return app.getVersion();
+  });
+
   ipcMain.handle("read-git-repo", async (_event, repoPath: string) => {
     currentRepoPath = repoPath;
     startWatcher(repoPath);

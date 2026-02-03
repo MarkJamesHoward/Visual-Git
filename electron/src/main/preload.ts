@@ -8,4 +8,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
   onGitChanged: (callback: (data: GitRepoData) => void) => {
     ipcRenderer.on("git-changed", (_event, data) => callback(data));
   },
+  getAppVersion: (): Promise<string> => ipcRenderer.invoke("get-app-version"),
 });

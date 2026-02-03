@@ -25,6 +25,7 @@ declare global {
       selectRepo: () => Promise<string | null>;
       readGitRepo: (path: string) => Promise<any>;
       onGitChanged: (callback: (data: any) => void) => void;
+      getAppVersion: () => Promise<string>;
     };
   }
 }
@@ -312,11 +313,18 @@ async function openRepo() {
 
 // ---------- Init ----------
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("open-repo-btn")!.addEventListener("click", openRepo);
   document
     .getElementById("change-repo-btn")!
     .addEventListener("click", openRepo);
+
+  // Display app version on welcome screen
+  const versionEl = document.getElementById("app-version");
+  if (versionEl) {
+    const version = await window.electronAPI.getAppVersion();
+    versionEl.textContent = `v${version}`;
+  }
 
   // Toggle checkboxes
   document.getElementById("show-trees")!.addEventListener("change", (e) => {

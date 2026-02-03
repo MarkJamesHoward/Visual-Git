@@ -99,6 +99,12 @@ body {
   background: #c73e54;
 }
 
+#app-version {
+  margin-top: 24px;
+  font-size: 13px;
+  color: #666;
+}
+
 /* App container */
 #app-container {
   position: relative;
