@@ -44,7 +44,14 @@
       "category": "Development"
     },
     "deb": {
-      "depends": ["git"],
+      "depends": [
+        "git",
+        "libgtk-3-0 | libgtk-3-0t64",
+        "libnss3",
+        "libxss1",
+        "libasound2 | libasound2t64",
+        "libgbm1"
+      ],
       "maintainer": "Mark Howard <visualgit@example.com>"
     }
   }
