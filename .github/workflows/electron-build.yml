@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "electron/**"
+      - ".github/workflows/electron-build.yml"
   workflow_dispatch:
 
 permissions:
