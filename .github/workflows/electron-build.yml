@@ -122,12 +122,12 @@ jobs:
             ls -la "$APP_DIR"
           fi
 
-          # Find the actual executable (lowercase, no extension)
-          BINARY_PATH=$(find /opt -maxdepth 2 -type f -executable -name "visual-git" 2>/dev/null | head -1)
+          # Find the actual executable (the main electron binary)
+          BINARY_PATH=$(find /opt -maxdepth 2 -type f -executable -name "visual-git*" ! -name "*.so" 2>/dev/null | grep -v chrome | head -1)
 
-          # If not found, try finding any executable in the app dir
+          # If not found, look for common electron binary patterns
           if [ -z "$BINARY_PATH" ] && [ -n "$APP_DIR" ]; then
-            BINARY_PATH=$(find "$APP_DIR" -maxdepth 1 -type f -executable | head -1)
+            BINARY_PATH="$APP_DIR/visual-git-electron"
           fi
 
           echo "Found binary at: $BINARY_PATH"
