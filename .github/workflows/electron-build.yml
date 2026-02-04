@@ -109,14 +109,33 @@ jobs:
           Xvfb :99 -screen 0 1024x768x24 &
           sleep 2
 
-          # Find the installed binary
-          BINARY_PATH=$(find /opt -name "visual-git" -o -name "Visual Git" 2>/dev/null | head -1)
-          if [ -z "$BINARY_PATH" ]; then
-            # Try common electron app locations
-            BINARY_PATH=$(find /usr -name "visual-git" 2>/dev/null | head -1)
+          # List what was installed in /opt
+          echo "Contents of /opt:"
+          ls -la /opt/
+
+          # Find the app directory
+          APP_DIR=$(find /opt -maxdepth 1 -type d -name "*isual*" | head -1)
+          echo "Found app directory: $APP_DIR"
+
+          if [ -n "$APP_DIR" ]; then
+            echo "Contents of app directory:"
+            ls -la "$APP_DIR"
+          fi
+
+          # Find the actual executable (lowercase, no extension)
+          BINARY_PATH=$(find /opt -maxdepth 2 -type f -executable -name "visual-git" 2>/dev/null | head -1)
+
+          # If not found, try finding any executable in the app dir
+          if [ -z "$BINARY_PATH" ] && [ -n "$APP_DIR" ]; then
+            BINARY_PATH=$(find "$APP_DIR" -maxdepth 1 -type f -executable | head -1)
           fi
 
           echo "Found binary at: $BINARY_PATH"
+
+          if [ -z "$BINARY_PATH" ]; then
+            echo "❌ Could not find executable"
+            exit 1
+          fi
 
           # Launch app with timeout (no-sandbox required in container)
           timeout 20 "$BINARY_PATH" --no-sandbox &
@@ -135,8 +154,69 @@ jobs:
             exit 1
           fi
 
+  test-macos-install:
+    needs: build
+    runs-on: macos-latest
+
+    steps:
+      - name: Download macOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: electron-macos-latest
+          path: ./artifacts
+
+      - name: List artifacts
+        run: ls -la ./artifacts/
+
+      - name: Mount DMG and install app
+        run: |
+          DMG_FILE=$(find ./artifacts -name "*.dmg" | head -1)
+          echo "Found DMG: $DMG_FILE"
+
+          # Mount the DMG
+          hdiutil attach "$DMG_FILE" -nobrowse -quiet
+
+          # Find the mounted volume
+          VOLUME=$(find /Volumes -maxdepth 1 -name "Visual*" | head -1)
+          echo "Mounted at: $VOLUME"
+
+          # List contents
+          ls -la "$VOLUME"
+
+          # Copy app to Applications
+          cp -R "$VOLUME"/*.app /Applications/
+
+          # Unmount
+          hdiutil detach "$VOLUME" -quiet
+
+          echo "✅ App installed successfully"
+
+      - name: Test app launches
+        run: |
+          # Find the installed app
+          APP_PATH=$(find /Applications -maxdepth 1 -name "Visual*.app" | head -1)
+          echo "Found app at: $APP_PATH"
+
+          # Launch the app
+          open -a "$APP_PATH" &
+
+          # Wait for app to initialize
+          sleep 10
+
+          # Check if process is running
+          if pgrep -f "Visual Git" > /dev/null || pgrep -f "visual-git" > /dev/null; then
+            echo "✅ App launched successfully and is running"
+
+            # Clean up - quit the app
+            osascript -e 'quit app "Visual Git"' 2>/dev/null || pkill -f "Visual Git" || true
+            exit 0
+          else
+            echo "❌ App failed to start"
+            exit 1
+          fi
+
   release:
-    needs: [build, test-linux-install]
+    needs: [build, test-linux-install, test-macos-install]
     runs-on: ubuntu-latest
     permissions:
       contents: write
