@@ -75,8 +75,68 @@ jobs:
             electron/dist/*.blockmap
           if-no-files-found: warn
 
-  release:
+  test-linux-install:
     needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:22.04
+      options: --user root
+
+    steps:
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: electron-ubuntu-latest
+          path: ./artifacts
+
+      - name: List artifacts
+        run: ls -la ./artifacts/
+
+      - name: Install dependencies and .deb package
+        run: |
+          apt-get update
+          apt-get install -y xvfb libgbm1 libasound2 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libgtk-3-0 libnss3 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxss1 libxtst6
+
+          # Install the .deb package
+          apt-get install -y ./artifacts/*.deb
+
+          echo "✅ Package installed successfully"
+
+      - name: Test app launches
+        run: |
+          # Start virtual display
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1024x768x24 &
+          sleep 2
+
+          # Find the installed binary
+          BINARY_PATH=$(find /opt -name "visual-git" -o -name "Visual Git" 2>/dev/null | head -1)
+          if [ -z "$BINARY_PATH" ]; then
+            # Try common electron app locations
+            BINARY_PATH=$(find /usr -name "visual-git" 2>/dev/null | head -1)
+          fi
+
+          echo "Found binary at: $BINARY_PATH"
+
+          # Launch app with timeout (no-sandbox required in container)
+          timeout 20 "$BINARY_PATH" --no-sandbox &
+          APP_PID=$!
+
+          # Wait for app to initialize
+          sleep 10
+
+          # Check if process is still running (didn't crash on startup)
+          if kill -0 $APP_PID 2>/dev/null; then
+            echo "✅ App launched successfully and is running"
+            kill $APP_PID 2>/dev/null || true
+            exit 0
+          else
+            echo "❌ App crashed or failed to start"
+            exit 1
+          fi
+
+  release:
+    needs: [build, test-linux-install]
     runs-on: ubuntu-latest
     permissions:
       contents: write
