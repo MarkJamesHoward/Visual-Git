@@ -15,6 +15,12 @@ export const TWStyles = css`
 .color\\:white {
 	color: white;
 }
+.margin-bottom\\:lg {
+	margin-bottom: 20px;
+}
+.padding-top\\:md {
+	padding-top: 8px;
+}
 .padding-bottom\\:md {
 	padding-bottom: 8px;
 }
@@ -30,9 +36,6 @@ export const TWStyles = css`
 .align-self\\:center {
 	align-self: center;
 }
-.max-width\\:60ch {
-	max-width: 60ch;
-}
 .border-color\\:red {
 	border-color: red;
 }
@@ -44,9 +47,6 @@ export const TWStyles = css`
 }
 .border-width\\:1px {
 	border-width: 1px;
-}
-.flex-direction\\:row {
-	flex-direction: row;
 }
 .flex-basis\\:25\\% {
 	flex-basis: 25%;
@@ -66,29 +66,8 @@ export const TWStyles = css`
 .margin\\:xl {
 	margin: 50px;
 }
-.margin-bottom\\:sm {
-	margin-bottom: 4px;
-}
 .color\\:blue\\:hover:hover {
 	color: blue;
-}
-.background-color\\:c1background1 {
-	background-color: #001A1A;
-}
-.margin-top\\:sm {
-	margin-top: 4px;
-}
-.margin\\:md {
-	margin: 8px;
-}
-.gap\\:xs {
-	gap: 1px;
-}
-.display\\:block {
-	display: block;
-}
-.display\\:none {
-	display: none;
 }
 .font-weight\\:800 {
 	font-weight: 800;
@@ -96,17 +75,86 @@ export const TWStyles = css`
 .border-width\\:xs {
 	border-width: 1px;
 }
+.text-align\\:justify {
+	text-align: justify;
+}
+.margin-top\\:lg {
+	margin-top: 20px;
+}
 .width\\:100\\% {
 	width: 100%;
 }
+.max-width\\:50ch {
+	max-width: 50ch;
+}
 .margin\\:lg {
 	margin: 20px;
+}
+.background\\:c5background2 {
+	background: linear-gradient(90deg, #91B58D 0%, #B1C59D 100%);
+}
+.color\\:c5text1 {
+	color: #041514;
 }
 .padding\\:xl {
 	padding: 50px;
 }
 .border-radius\\:md {
 	border-radius: 10px;
+}
+.background\\:c5background1 {
+	background: linear-gradient(135deg, #001A1A 0%, #002222 100%);
+}
+.align-items\\:stretch {
+	align-items: stretch;
+}
+.font-weight\\:xl {
+	font-weight: 800;
+}
+.gap\\:sm {
+	gap: 2px;
+}
+.padding\\:sm {
+	padding: 4px;
+}
+.max-width\\:420px {
+	max-width: 420px;
+}
+.line-height\\:1.6 {
+	line-height: 1.6;
+}
+.padding-bottom\\:xl {
+	padding-bottom: 50px;
+}
+.color\\:\\#c1text2 {
+	color: #c1text2;
+}
+.max-width\\:40ch {
+	max-width: 40ch;
+}
+.align-self\\:left {
+	align-self: left;
+}
+.padding-left\\:xl {
+	padding-left: 50px;
+}
+.padding-right\\:xl {
+	padding-right: 50px;
+}
+.color\\:white\\:hover:hover {
+	color: white;
+}
+.font-weight\\:lg {
+	font-weight: 600;
+}
+.color\\:c5text2 {
+	color: #DDDDDD;
+}
+.text-decoration\\:underline {
+	text-decoration: underline;
+}
+.padding-bottom\\:2xl {
+	padding-bottom: 200px;
 }
 .margin-bottom\\:2xl {
 	margin-bottom: 200px;
@@ -243,14 +291,14 @@ export const TWStyles = css`
 .position\\:relative {
 	position: relative;
 }
-.height\\:10px {
-	height: 10px;
+.height\\:14px {
+	height: 14px;
 }
-.width\\:40px {
-	width: 40px;
+.width\\:35px {
+	width: 35px;
 }
-.justify-items\\:stretch {
-	justify-items: stretch;
+.flex-shrink\\:0 {
+	flex-shrink: 0;
 }
 .border-bottom-width\\:1px {
 	border-bottom-width: 1px;
@@ -291,6 +339,12 @@ export const TWStyles = css`
 .margin-bottom\\:xl {
 	margin-bottom: 50px;
 }
+.background-color\\:c1background1 {
+	background-color: #001A1A;
+}
+.padding\\:md {
+	padding: 8px;
+}
 .text-align\\:center {
 	text-align: center;
 }
@@ -300,23 +354,11 @@ export const TWStyles = css`
 .font-size\\:lg {
 	font-size: 24px;
 }
-.background\\:c5background1 {
-	background: linear-gradient(135deg, #001A1A 0%, #002222 100%);
-}
-.text-align\\:justify {
-	text-align: justify;
+.max-width\\:60ch {
+	max-width: 60ch;
 }
 .place-self\\:center {
 	place-self: center;
-}
-.padding\\:lg {
-	padding: 20px;
-}
-.max-width\\:50ch {
-	max-width: 50ch;
-}
-.text-align\\:left {
-	text-align: left;
 }
 .padding-left\\:lg {
 	padding-left: 20px;
@@ -324,11 +366,14 @@ export const TWStyles = css`
 .padding-right\\:lg {
 	padding-right: 20px;
 }
-.background\\:c5background2 {
-	background: linear-gradient(90deg, #91B58D 0%, #B1C59D 100%);
+.font-size\\:sm {
+	font-size: 12px;
 }
-.color\\:c5text1 {
-	color: #041514;
+.margin-top\\:sm {
+	margin-top: 4px;
+}
+.color\\:c1background3 {
+	color: #042B2B;
 }
 .display\\:flex {
 	display: flex;
@@ -338,9 +383,6 @@ export const TWStyles = css`
 }
 .justify-content\\:space-between {
 	justify-content: space-between;
-}
-.align-items\\:stretch {
-	align-items: stretch;
 }
 .padding-top\\:xl {
 	padding-top: 50px;
@@ -360,32 +402,17 @@ export const TWStyles = css`
 .margin-right\\:xl {
 	margin-right: 50px;
 }
-.margin-top\\:xl {
-	margin-top: 50px;
-}
-.font-weight\\:xl {
-	font-weight: 800;
-}
-.place-items\\:center {
-	place-items: center;
-}
 .margin-top\\:md {
 	margin-top: 8px;
 }
-.margin-bottom\\:md {
-	margin-bottom: 8px;
-}
-.font-size\\:sm {
-	font-size: 12px;
-}
-.gap\\:sm {
-	gap: 2px;
-}
-.align-items\\:center {
-	align-items: center;
+.flex-direction\\:row {
+	flex-direction: row;
 }
 .justify-content\\:center {
 	justify-content: center;
+}
+.margin\\:md {
+	margin: 8px;
 }
 .text-decoration\\:none {
 	text-decoration: none;
@@ -393,71 +420,41 @@ export const TWStyles = css`
 .background-color\\:c1background2 {
 	background-color: #91B58D;
 }
-.padding\\:sm {
-	padding: 4px;
+.place-items\\:center {
+	place-items: center;
 }
-.border-radius\\:10px {
-	border-radius: 10px;
-}
-.color\\:c1background3 {
-	color: #042B2B;
-}
-.padding\\:md {
-	padding: 8px;
-}
-.max-width\\:420px {
-	max-width: 420px;
-}
-.line-height\\:1.6 {
-	line-height: 1.6;
-}
-.padding-bottom\\:xl {
-	padding-bottom: 50px;
-}
-.font-size\\:xl {
-	font-size: 48px;
-}
-.color\\:\\#c1text2 {
-	color: #c1text2;
-}
-.max-width\\:40ch {
-	max-width: 40ch;
-}
-.align-self\\:left {
-	align-self: left;
-}
-.padding-left\\:xl {
-	padding-left: 50px;
-}
-.padding-right\\:xl {
-	padding-right: 50px;
-}
-.color\\:white\\:hover:hover {
-	color: white;
-}
-.margin-top\\:lg {
-	margin-top: 20px;
+.padding\\:lg {
+	padding: 20px;
 }
 .font-size\\:md {
 	font-size: 16px;
 }
-.margin-bottom\\:lg {
-	margin-bottom: 20px;
+.border-radius\\:10px {
+	border-radius: 10px;
 }
-.padding-top\\:md {
-	padding-top: 8px;
+.align-items\\:center {
+	align-items: center;
 }
-.font-weight\\:lg {
-	font-weight: 600;
+.gap\\:xs {
+	gap: 1px;
 }
-.color\\:c5text2 {
-	color: #DDDDDD;
+.display\\:block {
+	display: block;
 }
-.text-decoration\\:underline {
-	text-decoration: underline;
+.display\\:none {
+	display: none;
 }
-.padding-bottom\\:2xl {
-	padding-bottom: 200px;
+.margin-top\\:xl {
+	margin-top: 50px;
+}
+.margin-bottom\\:md {
+	margin-bottom: 8px;
+}
+.text-align\\:left {
+	text-align: left;
+}
+.margin-bottom\\:sm {
+	margin-bottom: 4px;
 }
 @media (min-width: 640px) {
 .xs\\?flex-direction\\:row {
@@ -469,19 +466,24 @@ export const TWStyles = css`
 	flex-wrap: wrap;
 	}
 }
-@media (min-width: 768px) {
-.sm\\?display\\:none {
-	display: none;
+@media (min-width: 1280px) {
+.lg\\?font-weight\\:xl {
+	font-weight: 800;
 	}
 }
-@media (min-width: 768px) {
-.sm\\?display\\:flex {
-	display: flex;
+@media (min-width: 1280px) {
+.lg\\?justify-content\\:flex-end {
+	justify-content: flex-end;
 	}
 }
-@media (min-width: 768px) {
-.sm\\?padding\\:xl {
-	padding: 50px;
+@media (min-width: 1280px) {
+.lg\\?padding-right\\:200px {
+	padding-right: 200px;
+	}
+}
+@media (min-width: 1280px) {
+.lg\\?width\\:200px {
+	width: 200px;
 	}
 }
 @media (min-width: 1280px) {
@@ -530,6 +532,11 @@ export const TWStyles = css`
 	}
 }
 @media (min-width: 1280px) {
+.lg\\?font-size\\:xl {
+	font-size: 48px;
+	}
+}
+@media (min-width: 1280px) {
 .lg\\?flex-basis\\:50\\% {
 	flex-basis: 50%;
 	}
@@ -574,8 +581,8 @@ export const TWStyles = css`
 	padding-right: 50px;
 	}
 }
-@media (min-width: 768px) {
-.sm\\?flex-direction\\:row {
+@media (min-width: 1280px) {
+.lg\\?flex-direction\\:row {
 	flex-direction: row;
 	}
 }
@@ -584,34 +591,24 @@ export const TWStyles = css`
 	margin-top: 0px;
 	}
 }
-@media (min-width: 1280px) {
-.lg\\?font-weight\\:xl {
-	font-weight: 800;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?font-size\\:xl {
-	font-size: 48px;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?justify-content\\:flex-end {
-	justify-content: flex-end;
-	}
-}
-@media (min-width: 1280px) {
-.lg\\?flex-direction\\:row {
+@media (min-width: 768px) {
+.sm\\?flex-direction\\:row {
 	flex-direction: row;
 	}
 }
-@media (min-width: 1280px) {
-.lg\\?padding-right\\:200px {
-	padding-right: 200px;
+@media (min-width: 768px) {
+.sm\\?display\\:none {
+	display: none;
 	}
 }
-@media (min-width: 1280px) {
-.lg\\?width\\:200px {
-	width: 200px;
+@media (min-width: 768px) {
+.sm\\?display\\:flex {
+	display: flex;
+	}
+}
+@media (min-width: 768px) {
+.sm\\?padding\\:xl {
+	padding: 50px;
 	}
 }
  `

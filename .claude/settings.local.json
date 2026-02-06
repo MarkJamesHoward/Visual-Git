@@ -10,7 +10,26 @@
       "Bash(tgit commit -m \"$\\(cat <<''EOF''\nSend explicit file_download event to GA4 for external download links\n\nGitHub-hosted downloads are on a different domain so GA4 enhanced\nmeasurement won''t auto-track them. Send the standard file_download\nevent manually alongside the custom app_download event.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(tgit push)",
       "Bash(tgit log --oneline -3)",
-      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nRewrite UI page for Electron app and fix Step 3 font size\n\nReplace outdated WebUI content on usinglivevisualisation page with\nnew Electron desktop app features: interactive graph, toggle visibility,\ndrag nodes, working/staging panels, real-time updates, and repo selection.\nIncludes CSS-only interactive demos and scroll animations.\nAlso remove font-size:sm from Step 3 text on homepage to match other steps.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nRewrite UI page for Electron app and fix Step 3 font size\n\nReplace outdated WebUI content on usinglivevisualisation page with\nnew Electron desktop app features: interactive graph, toggle visibility,\ndrag nodes, working/staging panels, real-time updates, and repo selection.\nIncludes CSS-only interactive demos and scroll animations.\nAlso remove font-size:sm from Step 3 text on homepage to match other steps.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(ls:*)",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nAdd animated terminal hero with sequenced step transitions\n\nReplace static terminal screenshots with CSS-animated terminal that\ntypes out commands with blinking cursor. Three steps cycle through:\n1. echo \"Hello World\" >> data.txt\n2. git add .\n3. git commit -m \"add data\"\n\nEach step shows terminal typing, then arrow pulses, then mainscreen\ncrossfades. After all steps, showcase phase zooms final result.\nRenamed step images to step1a/1b, step2a/2b, step3a/3b convention.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nUpdate homepage tagline to focus on Git visualization\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nFix burger menu button sizing and prevent compression\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nFix text color visibility on download page instructions\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit diff)",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nAdd version display and auto-increment from GitHub Actions\n\n- Display app version on Electron welcome screen via IPC\n- Show version on website download page from environment variable\n- Auto-increment version using github.run_number \\(1.0.XX\\)\n- Electron build updates package.json before build\n- Website fetches latest release version from GitHub API\n- Improve homepage tagline text\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nAdd .deb package for Linux and fix Ubuntu sandbox issues\n\nAppImages have known issues on modern Ubuntu due to FUSE requirements\nand Chrome sandbox restrictions. Add .deb as primary Linux target which\nintegrates properly with the system package manager.\n\n- Build now produces .deb, AppImage, and tar.gz for Linux\n- Updated download links on homepage and download page to use .deb\n- Updated installation instructions for dpkg\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nAdd Linux build dependencies for .deb packaging\n\nInstall dpkg and fakeroot on Ubuntu runner to enable building\n.deb packages with electron-builder.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nTrigger electron build on workflow file changes\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nRemove AppImage from Linux build targets\n\nAppImage causes builds to hang on headless CI and was the problematic\nformat to begin with. Keep .deb \\(primary\\) and tar.gz \\(fallback\\) only.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nAdd required metadata for .deb package build\n\n- Add homepage URL\n- Add author with email\n- Add deb maintainer\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(tgit commit -m \"$\\(cat <<''EOF''\nFix .deb dependencies for modern Ubuntu\n\n- Use alternative package names \\(pkg | pkgt64\\) for Ubuntu 24.04+ compatibility\n- Override default electron-builder deps that reference obsolete packages\n- Change install instruction to use apt install which resolves deps automatically\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(for d in 1 2 3)",
+      "Bash(do mkdir -p \"$d/src/components\" \"$d/src/pages\")",
+      "Bash(echo:*)",
+      "Bash(done)"
     ]
   }
 }
