@@ -78,8 +78,12 @@ jobs:
   test-linux-install:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu-version: ["22.04", "24.04"]
     container:
-      image: ubuntu:22.04
+      image: ubuntu:${{ matrix.ubuntu-version }}
       options: --user root
 
     steps:
@@ -95,12 +99,25 @@ jobs:
       - name: Install dependencies and .deb package
         run: |
           apt-get update
-          apt-get install -y xvfb libgbm1 libasound2 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libgtk-3-0 libnss3 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxss1 libxtst6
+
+          # Install common dependencies (package names vary by Ubuntu version)
+          apt-get install -y xvfb libgbm1 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libnss3 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxss1 libxtst6
+
+          # Install version-specific packages (t64 suffix on Ubuntu 24.04+)
+          apt-get install -y libgtk-3-0 libasound2 2>/dev/null || apt-get install -y libgtk-3-0t64 libasound2t64
 
           # Install the .deb package
           apt-get install -y ./artifacts/*.deb
 
-          echo "✅ Package installed successfully"
+          echo "✅ Package installed successfully on Ubuntu ${{ matrix.ubuntu-version }}"
+
+      - name: Verify postinst ran correctly
+        run: |
+          echo "Checking chrome-sandbox permissions..."
+          ls -la "/opt/Visual Git/chrome-sandbox" || echo "chrome-sandbox not found"
+
+          echo "Checking AppArmor profile..."
+          cat /etc/apparmor.d/visual-git 2>/dev/null || echo "AppArmor profile not found"
 
       - name: Test app launches
         run: |
@@ -137,7 +154,7 @@ jobs:
             exit 1
           fi
 
-          # Launch app with timeout (no-sandbox required in container)
+          # Launch app with timeout (no-sandbox required in container - AppArmor not available)
           timeout 20 "$BINARY_PATH" --no-sandbox &
           APP_PID=$!
 
@@ -146,11 +163,11 @@ jobs:
 
           # Check if process is still running (didn't crash on startup)
           if kill -0 $APP_PID 2>/dev/null; then
-            echo "✅ App launched successfully and is running"
+            echo "✅ App launched successfully on Ubuntu ${{ matrix.ubuntu-version }}"
             kill $APP_PID 2>/dev/null || true
             exit 0
           else
-            echo "❌ App crashed or failed to start"
+            echo "❌ App crashed or failed to start on Ubuntu ${{ matrix.ubuntu-version }}"
             exit 1
           fi
 
