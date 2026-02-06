@@ -6,6 +6,11 @@ import {
   Menu,
   type MenuItemConstructorOptions,
 } from "electron";
+
+// Linux: Disable sandbox due to AppArmor restrictions on modern distros (Ubuntu 24.04+)
+if (process.platform === "linux") {
+  app.commandLine.appendSwitch("no-sandbox");
+}
 import * as path from "path";
 import * as fs from "fs";
 import { randomUUID } from "crypto";
