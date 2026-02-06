@@ -6,21 +6,6 @@ import {
   Menu,
   type MenuItemConstructorOptions,
 } from "electron";
-import { spawn } from "child_process";
-
-// Linux: Relaunch with --no-sandbox if not present (required for Ubuntu 24.04+ AppArmor)
-if (
-  process.platform === "linux" &&
-  !process.argv.includes("--no-sandbox") &&
-  !app.commandLine.hasSwitch("no-sandbox")
-) {
-  const args = [...process.argv.slice(1), "--no-sandbox"];
-  spawn(process.execPath, args, {
-    detached: true,
-    stdio: "ignore",
-  }).unref();
-  app.exit(0);
-}
 import * as path from "path";
 import * as fs from "fs";
 import { randomUUID } from "crypto";

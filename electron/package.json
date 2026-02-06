@@ -33,6 +33,7 @@
     "files": [
       "dist/**/*"
     ],
+    "afterPack": "scripts/afterPack.js",
     "win": {
       "target": "nsis"
     },
