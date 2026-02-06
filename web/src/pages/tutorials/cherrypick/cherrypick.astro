@@ -27,10 +27,13 @@ import { Image } from "astro:assets";
           transition:name="cherryyt"
           width="560"
           height="315"
-          src="https://www.youtube.com/embed/TkCawsNWuCY?si=M8V8WLhxH5Rqc7ND"
+          src="https://www.youtube-nocookie.com/embed/TkCawsNWuCY"
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+          referrerpolicy="origin"
+          loading="lazy"
+          allowfullscreen
+          class="tutorial-thumb"></iframe>
       </div>
     </div>
   </main>
