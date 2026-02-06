@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Visual Git
-Exec="/opt/Visual Git/visual-git-electron" --no-sandbox %U
+Exec="/opt/Visual Git/visual-git-electron" %U
 Terminal=false
 Type=Application
 Icon=visual-git-electron

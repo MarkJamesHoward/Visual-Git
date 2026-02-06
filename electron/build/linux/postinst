@@ -1,36 +1,48 @@
 #!/bin/bash
 # Post-install script for Visual Git Electron
 
-# Fix chrome-sandbox permissions for Electron
-# The sandbox requires setuid root to function properly
+set -e
 
-# Find chrome-sandbox in common install locations
-SANDBOX_PATHS=(
-    "/opt/Visual Git/chrome-sandbox"
-    "/opt/visual-git/chrome-sandbox"
-    "/opt/Visual-Git/chrome-sandbox"
-    "/opt/visual-git-electron/chrome-sandbox"
-)
+APP_DIR="/opt/Visual Git"
+SANDBOX_PATH="$APP_DIR/chrome-sandbox"
+APPARMOR_PROFILE="/etc/apparmor.d/visual-git"
 
-# Also search dynamically
-FOUND_SANDBOX=$(find /opt -name "chrome-sandbox" -type f 2>/dev/null | head -1)
-
-if [ -n "$FOUND_SANDBOX" ]; then
-    chown root:root "$FOUND_SANDBOX"
-    chmod 4755 "$FOUND_SANDBOX"
-    echo "chrome-sandbox permissions configured at: $FOUND_SANDBOX"
-    exit 0
+# Fix chrome-sandbox permissions (setuid root required for sandbox)
+if [ -f "$SANDBOX_PATH" ]; then
+    chown root:root "$SANDBOX_PATH"
+    chmod 4755 "$SANDBOX_PATH"
+    echo "chrome-sandbox permissions configured"
 fi
 
-# Try hardcoded paths
-for SANDBOX_PATH in "${SANDBOX_PATHS[@]}"; do
-    if [ -f "$SANDBOX_PATH" ]; then
-        chown root:root "$SANDBOX_PATH"
-        chmod 4755 "$SANDBOX_PATH"
-        echo "chrome-sandbox permissions configured at: $SANDBOX_PATH"
-        exit 0
-    fi
-done
+# Install AppArmor profile for Ubuntu 24.04+ user namespace support
+if command -v apparmor_parser >/dev/null 2>&1; then
+    cat > "$APPARMOR_PROFILE" << 'APPARMOR_EOF'
+abi <abi/4.0>,
+include <tunables/global>
 
-echo "Warning: chrome-sandbox not found. App may need --no-sandbox flag to run."
+profile visual-git /opt/Visual\ Git/visual-git-electron flags=(unconfined) {
+  userns,
+
+  include <abstractions/base>
+  include <abstractions/consoles>
+  include <abstractions/nameservice>
+
+  capability,
+  network,
+  mount,
+  remount,
+  umount,
+  pivot_root,
+  ptrace,
+  signal,
+  dbus,
+  unix,
+  file,
+}
+APPARMOR_EOF
+
+    apparmor_parser -r "$APPARMOR_PROFILE" 2>/dev/null || true
+    echo "AppArmor profile installed"
+fi
+
 exit 0
