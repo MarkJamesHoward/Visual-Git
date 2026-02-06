@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Visual Git
+Exec="/opt/Visual Git/visual-git-electron" --no-sandbox %U
+Terminal=false
+Type=Application
+Icon=visual-git-electron
+StartupWMClass=Visual Git
+Comment=Desktop application for visualizing git internals
+Categories=Development;

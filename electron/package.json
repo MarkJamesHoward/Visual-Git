@@ -41,7 +41,8 @@
     },
     "linux": {
       "target": ["deb", "tar.gz"],
-      "category": "Development"
+      "category": "Development",
+      "desktop": "build/linux/visual-git.desktop"
     },
     "deb": {
       "depends": [
@@ -52,7 +53,8 @@
         "libasound2 | libasound2t64",
         "libgbm1"
       ],
-      "maintainer": "Mark Howard <visualgit@example.com>"
+      "maintainer": "Mark Howard <visualgit@example.com>",
+      "afterInstall": "build/linux/postinst"
     }
   }
 }

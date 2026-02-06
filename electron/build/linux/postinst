@@ -1,0 +1,36 @@
+#!/bin/bash
+# Post-install script for Visual Git Electron
+
+# Fix chrome-sandbox permissions for Electron
+# The sandbox requires setuid root to function properly
+
+# Find chrome-sandbox in common install locations
+SANDBOX_PATHS=(
+    "/opt/Visual Git/chrome-sandbox"
+    "/opt/visual-git/chrome-sandbox"
+    "/opt/Visual-Git/chrome-sandbox"
+    "/opt/visual-git-electron/chrome-sandbox"
+)
+
+# Also search dynamically
+FOUND_SANDBOX=$(find /opt -name "chrome-sandbox" -type f 2>/dev/null | head -1)
+
+if [ -n "$FOUND_SANDBOX" ]; then
+    chown root:root "$FOUND_SANDBOX"
+    chmod 4755 "$FOUND_SANDBOX"
+    echo "chrome-sandbox permissions configured at: $FOUND_SANDBOX"
+    exit 0
+fi
+
+# Try hardcoded paths
+for SANDBOX_PATH in "${SANDBOX_PATHS[@]}"; do
+    if [ -f "$SANDBOX_PATH" ]; then
+        chown root:root "$SANDBOX_PATH"
+        chmod 4755 "$SANDBOX_PATH"
+        echo "chrome-sandbox permissions configured at: $SANDBOX_PATH"
+        exit 0
+    fi
+done
+
+echo "Warning: chrome-sandbox not found. App may need --no-sandbox flag to run."
+exit 0
