@@ -13,7 +13,8 @@
     "copy-assets": "node -e \"const fs=require('fs');fs.cpSync('src/renderer/index.html','dist/renderer/index.html');fs.cpSync('src/renderer/index.css','dist/renderer/index.css');\"",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "test:a11y": "node tests/accessibility.test.js"
   },
   "author": {
     "name": "Mark Howard",
@@ -21,9 +22,11 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "axe-core": "^4.10.0",
     "electron": "^33.0.0",
     "esbuild": "^0.24.0",
     "electron-builder": "^25.0.0",
+    "playwright": "^1.49.0",
     "typescript": "^5.7.0"
   },
   "build": {
