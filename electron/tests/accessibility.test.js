@@ -5,9 +5,20 @@ const fs = require("fs");
 async function runAccessibilityTests() {
   console.log("Starting accessibility tests...");
 
+  // Get the path to the Electron executable
+  const electronPath = require("electron");
+
+  console.log("Electron path:", electronPath);
+  console.log("Main script:", path.join(__dirname, "..", "dist", "main", "main.js"));
+
   // Launch Electron app
   const electronApp = await electron.launch({
+    executablePath: electronPath,
     args: [path.join(__dirname, "..", "dist", "main", "main.js")],
+    env: {
+      ...process.env,
+      NODE_ENV: "test",
+    },
   });
 
   // Get the first window
