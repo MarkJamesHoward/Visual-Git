@@ -87,7 +87,7 @@ body {
   margin-top: 24px;
   padding: 12px 32px;
   font-size: 16px;
-  background: #e94560;
+  background: #c7354a;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -96,13 +96,13 @@ body {
 }
 
 #open-repo-btn:hover {
-  background: #c73e54;
+  background: #a62d3f;
 }
 
 #app-version {
   margin-top: 24px;
   font-size: 13px;
-  color: #666;
+  color: #9a9a9a;
 }
 
 /* App container */
