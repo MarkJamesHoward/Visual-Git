@@ -25,153 +25,96 @@ const appVersion = import.meta.env.APP_VERSION || "1.0.0";
               Current version: <strong>{appVersion}</strong>
             </p>
           </div>
-          <div class="color:c1background3">
-            <div
-              class="display:flex flex-direction:column lg?flex-direction:row justify-content:space-between padding-top:xl"
-            >
-              <div
-                style="flex-basis:33%"
-                class="text-align:center flex-basis:33% flex-grow:1 flex-shrink:1 margin-left:xl margin-right:xl margin-top:md lg?margin-top:0px"
+          <div class="display:flex flex-direction:column lg?flex-direction:row justify-content:center gap:xl padding-top:xl padding-left:lg padding-right:lg">
+            <!-- Windows -->
+            <div class="download-card border-radius:10px padding:lg text-align:center">
+              <a
+                id="DownloadButtonx64Windows"
+                data-download-os="windows"
+                href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-win-x64.exe"
+                class="display:flex text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
               >
-                <div
-                  class="display:flex flex-direction:row justify-content:center"
-                >
-                  <div
-                    class="margin-top:sm display:flex flex-direction:column padding:md"
+                <div class="display:flex flex-direction:column color:c1background3 align-items:center padding:md">
+                  <img src={WindowsLogo.src} alt="Windows x64" class="os-download-img" />
+                  <div class="font-size:lg">Download</div>
+                  <div>(Windows x64)</div>
+                </div>
+              </a>
+              <p class="color:c1text2 font-size:sm margin-top:lg">
+                Run the .exe installer and launch from the Start menu.
+              </p>
+            </div>
+
+            <!-- Linux -->
+            <div class="download-card border-radius:10px padding:lg text-align:center">
+              <a
+                id="DownloadButtonLinux"
+                data-download-os="linux"
+                href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-linux-amd64.deb"
+                class="display:flex text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
+              >
+                <div class="display:flex flex-direction:column color:c1background3 align-items:center padding:md">
+                  <img src={LinuxLogo.src} alt="Linux" class="os-download-img" />
+                  <div class="font-size:lg">Download</div>
+                  <div>(Linux .deb)</div>
+                </div>
+              </a>
+              <div class="color:c1text2 font-size:sm margin-top:lg">
+                <p class="margin-bottom:sm">Install with:</p>
+                <div class="copy-command-container">
+                  <code id="linux-install-cmd" class="background-color:black color:c1text2 padding:sm border-radius:5px font-size:sm display:block">sudo apt install ./visualgit-linux-amd64.deb</code>
+                  <button
+                    type="button"
+                    class="copy-btn"
+                    data-copy-target="linux-install-cmd"
+                    aria-label="Copy to clipboard"
                   >
-                    <div
-                      class="display:flex flex-direction:column sm?flex-direction:row"
-                    >
-                      <div>
-                                        <a
-                                          id="DownloadButtonx64Windows"
-                                          data-download-os="windows"
-                                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-win-x64.exe"
-                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
-                        >
-                          <div
-                            class="display:flex flex-direction:column color:c1background3"
-                          >
-                            <div
-                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
-                            >
-                              <img
-                                src={WindowsLogo.src}
-                                alt="Windows x64"
-                                class="os-download-img"
-                              />
-                              <div>Windows x64</div>
-                            </div>
-                            <div
-                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
-                            >
-                              <img
-                                src={WindowsLogo.src}
-                                alt="Windows x64"
-                                class="os-download-img"
-                              />
-                              Download x64
-                              <div>(Windows)</div>
-                            </div>
-                          </div>
-                        </a>
-
-                             </div>
-
-                      <a
-                        id="DownloadButtonLinux"
-                        data-download-os="linux"
-                        href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-linux-amd64.deb"
-                        class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
-                      >
-                        <div
-                          class="display:flex flex-direction:column color:c1background3"
-                        >
-                          <div
-                            class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
-                          >
-                            <img
-                              src={LinuxLogo.src}
-                              alt="Linux"
-                              class="os-download-img"
-                            />
-                            <div>Linux (.deb)</div>
-                          </div>
-                          <div
-                            class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
-                          >
-                            <img
-                              src={LinuxLogo.src}
-                              alt="Linux"
-                              class="os-download-img"
-                            />
-                            Download
-                            <div>(Linux .deb)</div>
-                          </div>
-                        </div>
-                      </a>
-
-                      <div>
-                        <a
-                          id="DownloadButtonMacOSARM"
-                          data-download-os="macos"
-                          href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-mac-arm64.dmg"
-                          class="display:flex margin:md text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
-                        >
-                          <div
-                            class="display:flex flex-direction:column color:c1background3"
-                          >
-                            <div
-                              class="display:flex flex-direction:column align-items:center justify-content:center gap:xs display:block sm?display:none"
-                            >
-                              <img
-                                src={AppleLogo.src}
-                                alt="MacOS ARM"
-                                class="os-download-img"
-                              />
-                              <div>MacOS ARM</div>
-                            </div>
-                            <div
-                              class="display:none sm?display:flex flex-direction:column align-items:center font-size:lg sm?padding:xl"
-                            >
-                              <img
-                                src={AppleLogo.src}
-                                alt="MacOS ARM"
-                                class="os-download-img"
-                              />
-                              Download
-                              <div>(MacOS ARM)</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
 
+            <!-- macOS -->
+            <div class="download-card border-radius:10px padding:lg text-align:center">
+              <a
+                id="DownloadButtonMacOSARM"
+                data-download-os="macos"
+                href="https://github.com/MarkJamesHoward/Visual-Git/releases/latest/download/visualgit-mac-arm64.dmg"
+                class="display:flex text-decoration:none justify-content:center background-color:c1background2 place-items:center padding:lg font-size:md text-align:center border-radius:10px"
+              >
+                <div class="display:flex flex-direction:column color:c1background3 align-items:center padding:md">
+                  <img src={AppleLogo.src} alt="macOS ARM" class="os-download-img" />
+                  <div class="font-size:lg">Download</div>
+                  <div>(macOS ARM)</div>
+                </div>
+              </a>
+              <div class="color:c1text2 font-size:sm margin-top:lg">
+                <p class="margin-bottom:sm">Open the .dmg, drag to Applications. First time, run:</p>
+                <code class="background-color:black color:c1text2 padding:xs border-radius:5px font-size:xs display:block">xattr -cr "/Applications/Visual Git.app"</code>
+              </div>
+            </div>
+          </div>
+
             <div class="display:flex flex-direction:column place-items:center margin-top:xl padding:lg color:c1text2">
-              <h2 class="titleFont font-size:lg margin-bottom:md">How to run</h2>
-              <div class="max-width:60ch text-align:left">
-                <p class="margin-bottom:sm">
-                  <strong>Windows:</strong> Download the .exe installer and run it. Launch Visual Git from the Start menu.
-                </p>
-                <p class="margin-bottom:sm">
-                  <strong>macOS (Apple Silicon):</strong> Open the .dmg, drag Visual Git to Applications. Before opening for the first time, run this command in Terminal:
-                </p>
-                <code class="background-color:c1background2 color:c1text2 padding:md border-radius:10px font-size:md margin-bottom:sm display:block">
-                  xattr -cr "/Applications/Visual Git.app"
-                </code>
-                <p class="margin-bottom:sm font-size:sm">
-                  Then open it from Launchpad. This is only needed once after installation.
-                </p>
+              <h2 class="titleFont font-size:lg margin-bottom:md">Previous Versions</h2>
+              <div class="max-width:60ch text-align:center">
                 <p>
-                  <strong>Linux (Ubuntu/Debian):</strong> Download the .deb package and install:
+                  Need to rollback to a previous version? You can find all previous releases on GitHub.
                 </p>
-                <code class="background-color:c1background2 color:c1text2 padding:md border-radius:10px font-size:md margin-top:md display:block">
-                  sudo apt install ./visualgit-linux-amd64.deb
-                </code>
+                <div class="margin-top:lg">
+                  <a
+                    href="https://github.com/MarkJamesHoward/Visual-Git/releases"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="display:inline-block text-decoration:none background-color:c1background2 color:c1text2 padding:lg border-radius:10px previous-versions-link"
+                  >
+                    Releases
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -190,11 +133,46 @@ const appVersion = import.meta.env.APP_VERSION || "1.0.0";
                   width: 32px;
                 }
               }
+              .download-card {
+                flex: 1;
+                max-width: 280px;
+                min-width: 220px;
+              }
               .download-btn-hover {
                 transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
               }
               .download-btn-hover:hover {
                 transform: scale(1.045);
+              }
+              .previous-versions-link {
+                transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+              }
+              .previous-versions-link:hover {
+                transform: scale(1.045);
+              }
+              .copy-command-container {
+                position: relative;
+                display: inline-block;
+                width: 100%;
+              }
+              .copy-btn {
+                position: absolute;
+                top: 50%;
+                right: 8px;
+                transform: translateY(-50%);
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 4px;
+                color: inherit;
+                opacity: 0.6;
+                transition: opacity 0.2s;
+              }
+              .copy-btn:hover {
+                opacity: 1;
+              }
+              .copy-btn.copied {
+                color: #4ade80;
               }
             </style>
 
@@ -207,6 +185,21 @@ const appVersion = import.meta.env.APP_VERSION || "1.0.0";
                     .forEach((btn) => {
                       btn.classList.add("download-btn-hover");
                     });
+
+                  // Copy button functionality
+                  document.querySelectorAll('.copy-btn').forEach((btn) => {
+                    btn.addEventListener('click', async () => {
+                      const targetId = btn.getAttribute('data-copy-target');
+                      if (!targetId) return;
+                      const target = document.getElementById(targetId);
+                      if (target) {
+                        const text = target.textContent?.trim() || '';
+                        await navigator.clipboard.writeText(text);
+                        btn.classList.add('copied');
+                        setTimeout(() => btn.classList.remove('copied'), 1500);
+                      }
+                    });
+                  });
                 });
               }
             </script>
