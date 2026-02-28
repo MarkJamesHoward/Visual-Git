@@ -67,10 +67,14 @@ async function runAccessibilityTests() {
     path.join(__dirname, "..", "dist", "main", "main.js"),
   );
 
-  // Launch Electron app
+  // Launch Electron app (--no-sandbox needed for CI/container environments)
+  const isCI = process.env.CI === "true" || process.env.CI === true;
   const electronApp = await electron.launch({
     executablePath: electronPath,
-    args: [path.join(__dirname, "..", "dist", "main", "main.js")],
+    args: [
+      path.join(__dirname, "..", "dist", "main", "main.js"),
+      ...(isCI ? ["--no-sandbox", "--disable-gpu"] : []),
+    ],
     env: {
       ...process.env,
       NODE_ENV: "test",
