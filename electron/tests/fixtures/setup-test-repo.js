@@ -21,8 +21,8 @@ function setupTestRepo() {
     execSync(cmd, { cwd: TEST_REPO_PATH, stdio: "pipe" });
   };
 
-  // Initialize repo
-  run("git init");
+  // Initialize repo with main as default branch
+  run("git init -b main");
   run('git config user.email "test@example.com"');
   run('git config user.name "Test User"');
 
