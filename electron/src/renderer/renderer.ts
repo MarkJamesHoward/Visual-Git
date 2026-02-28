@@ -18,6 +18,12 @@ import {
 import { ReDraw, type VisState } from "./canvas/Redraw";
 import { CreateMouseListenerHandler } from "./canvas/MouseEvents";
 import { layoutNodes } from "./canvas/LayoutEngine";
+import {
+  createKeyboardHandler,
+  buildFocusableList,
+  getFocusedNode,
+} from "./canvas/KeyboardNav";
+import type { GitNode } from "./canvas/Types";
 
 declare global {
   interface Window {
@@ -46,6 +52,7 @@ const state: VisState = {
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
 let mouseListenersSetup = false;
+let keyboardListenersSetup = false;
 
 function setLoading(isLoading: boolean, message?: string) {
   const overlay = document.getElementById("loading-overlay");
@@ -97,7 +104,8 @@ function processData(data: any) {
 function redraw() {
   if (canvas && ctx) {
     layoutNodes(state, canvas.width, canvas.height);
-    ReDraw(canvas, ctx, state);
+    buildFocusableList(state);
+    ReDraw(canvas, ctx, state, getFocusedNode() as GitNode | null);
   }
 }
 
@@ -285,6 +293,11 @@ function showVisualization(repoPath: string) {
     CreateMouseListenerHandler(canvas, ctx, state);
     mouseListenersSetup = true;
   }
+
+  if (!keyboardListenersSetup) {
+    createKeyboardHandler(canvas, state, redraw);
+    keyboardListenersSetup = true;
+  }
 }
 
 async function openRepo() {
@@ -299,6 +312,7 @@ async function openRepo() {
   state.RemoteBranchNodes = [];
   state.HEADNodes = [];
   mouseListenersSetup = false;
+  keyboardListenersSetup = false;
 
   showVisualization(path);
 

@@ -28,7 +28,8 @@
 
   <!-- Main App (hidden until repo is opened) -->
   <div id="app-container" style="display:none;">
-    <canvas id="GitGraph"></canvas>
+    <canvas id="GitGraph" tabindex="0" role="application" aria-label="Git repository graph. Use arrow keys to navigate between nodes."></canvas>
+    <div id="node-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 
     <!-- Toggle Panel -->
     <div id="toggle-panel">

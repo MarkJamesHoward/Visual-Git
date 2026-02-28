@@ -13,7 +13,8 @@ import type { GitNode } from "./Types";
 export function DrawCircle(
   ctx: CanvasRenderingContext2D,
   node: GitNode,
-  dragging: boolean
+  dragging: boolean,
+  isFocused: boolean = false
 ) {
   var innerRadius = 1,
     outerRadius = 20;
@@ -84,4 +85,24 @@ export function DrawCircle(
 
   DrawText(ctx, node);
   ctx.closePath();
+
+  // Draw focus ring for keyboard navigation
+  if (isFocused) {
+    ctx.beginPath();
+    let focusRadius = radius;
+    if (node.type === NodeType.head) focusRadius = radiusHEAD;
+    else if (node.type === NodeType.branch) focusRadius = radiusBRANCH;
+    else if (node.type === NodeType.tag) focusRadius = radiusTAG;
+    else if (node.type === NodeType.remotebranch) focusRadius = radiusBRANCH;
+    else if (node.type === NodeType.tree) focusRadius = radiusTREE;
+    else if (node.type === NodeType.blob) focusRadius = radiusBLOB;
+
+    ctx.arc(node.xPos, node.yPos, focusRadius + 8, 0, 2 * Math.PI);
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "#fff";
+    ctx.setLineDash([8, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.closePath();
+  }
 }

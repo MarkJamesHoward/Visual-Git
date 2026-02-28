@@ -35,26 +35,27 @@ export interface VisState {
 export function ReDraw(
   canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
-  state: VisState
+  state: VisState,
+  focusedNode: GitNode | null = null
 ) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  DrawNodes(ctx, state.CommitNodes);
+  DrawNodes(ctx, state.CommitNodes, focusedNode);
 
   if (state.showTrees) {
-    DrawNodes(ctx, state.TreeNodes);
+    DrawNodes(ctx, state.TreeNodes, focusedNode);
   }
 
   if (state.showBlobs) {
-    DrawNodes(ctx, state.BlobNodes);
+    DrawNodes(ctx, state.BlobNodes, focusedNode);
   }
 
-  DrawNodes(ctx, state.BranchNodes);
+  DrawNodes(ctx, state.BranchNodes, focusedNode);
   if (state.showTags) {
-    DrawNodes(ctx, state.TagNodes);
+    DrawNodes(ctx, state.TagNodes, focusedNode);
   }
-  DrawNodes(ctx, state.RemoteBranchNodes);
-  DrawNodes(ctx, state.HEADNodes);
+  DrawNodes(ctx, state.RemoteBranchNodes, focusedNode);
+  DrawNodes(ctx, state.HEADNodes, focusedNode);
 
   if (state.showTrees) {
     DrawCommitToTreeLinks(ctx, state.CommitNodes, state.TreeNodes);

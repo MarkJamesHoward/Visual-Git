@@ -48,16 +48,23 @@ export function DrawText(ctx: CanvasRenderingContext2D, node: GitNode) {
   }
 }
 
-export function DrawNodes<T>(ctx: CanvasRenderingContext2D, nodes: Array<T>) {
+export function DrawNodes<T>(
+  ctx: CanvasRenderingContext2D,
+  nodes: Array<T>,
+  focusedNode: GitNode | null = null
+) {
   nodes.forEach((node) => {
-    DrawNode(ctx, node as unknown as GitNode, false);
+    const n = node as unknown as GitNode;
+    const isFocused = focusedNode !== null && n.hash === focusedNode.hash && n.type === focusedNode.type;
+    DrawNode(ctx, n, false, isFocused);
   });
 }
 
 export function DrawNode(
   ctx: CanvasRenderingContext2D,
   node: GitNode,
-  dragging: boolean
+  dragging: boolean,
+  isFocused: boolean = false
 ) {
-  DrawCircle(ctx, node, dragging);
+  DrawCircle(ctx, node, dragging, isFocused);
 }
