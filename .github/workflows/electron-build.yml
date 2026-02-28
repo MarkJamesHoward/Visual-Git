@@ -78,7 +78,11 @@ jobs:
 
   test-accessibility:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -101,9 +105,15 @@ jobs:
         working-directory: electron
         run: npm run build
 
-      - name: Run accessibility tests
+      - name: Run accessibility tests (Linux)
+        if: runner.os == 'Linux'
         working-directory: electron
         run: xvfb-run --auto-servernum npm run test:a11y
+
+      - name: Run accessibility tests (macOS/Windows)
+        if: runner.os != 'Linux'
+        working-directory: electron
+        run: npm run test:a11y
 
   test-integration:
     needs: build
