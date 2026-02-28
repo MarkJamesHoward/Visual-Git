@@ -78,9 +78,11 @@ async function runIntegrationTests() {
       // Hide welcome screen, show app container
       const welcomeScreen = document.getElementById("welcome-screen");
       const appContainer = document.getElementById("app-container");
+      const repoPathDisplay = document.getElementById("repo-path-display");
 
       if (welcomeScreen) welcomeScreen.style.display = "none";
       if (appContainer) appContainer.style.display = "block";
+      if (repoPathDisplay) repoPathDisplay.textContent = repoPath;
 
       // Call the electronAPI to load the repo
       if (window.electronAPI && window.electronAPI.readGitRepo) {
