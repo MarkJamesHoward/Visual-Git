@@ -1,6 +1,7 @@
 const { _electron: electron } = require("playwright");
 const path = require("path");
 const fs = require("fs");
+const { setupTestRepo } = require("./fixtures/setup-test-repo");
 
 async function runAxeAudit(window, pageName) {
   console.log(`\n--- Running accessibility audit on: ${pageName} ---`);
@@ -94,8 +95,8 @@ async function runAccessibilityTests() {
     allViolations.push(...welcomeViolations);
 
     // ========== TEST 2: Repository View ==========
-    // Find a git repository to open (use the project root or parent)
-    const repoPath = path.resolve(__dirname, "..", "..");
+    // Create/ensure test repo with minimal commits for clean visualization
+    const repoPath = setupTestRepo();
     const gitDir = path.join(repoPath, ".git");
 
     if (fs.existsSync(gitDir)) {
