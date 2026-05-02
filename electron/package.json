@@ -14,8 +14,8 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "test:a11y": "node tests/accessibility.test.js",
-    "test:integration": "node tests/integration.test.js"
+    "test:a11y": "npm run build && node tests/accessibility.test.js",
+    "test:integration": "npm run build && node tests/integration.test.js"
   },
   "author": {
     "name": "Mark Howard",

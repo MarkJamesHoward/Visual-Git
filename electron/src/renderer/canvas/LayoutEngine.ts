@@ -265,8 +265,8 @@ export function layoutNodes(
 
   // --- Blobs ---
   const blobX = colX("blobs");
-  const BLOB_INTRA_SPACING = MIN_NODE_SPACING * 0.6;
-  const BLOB_CLUSTER_GAP = MIN_NODE_SPACING * 0.4;
+  const BLOB_INTRA_SPACING = MIN_NODE_SPACING * 0.85;
+  const BLOB_CLUSTER_GAP = MIN_NODE_SPACING * 0.85;
   const BLOB_X_OFFSET = 18;
 
   const blobTreeOwnership = new Map<string, Set<string>>();
@@ -323,6 +323,29 @@ export function layoutNodes(
     const key = Array.from(owners).sort().join("|");
     if (!sharedGroups.has(key)) sharedGroups.set(key, []);
     sharedGroups.get(key)!.push(blob.hash);
+  }
+
+  // Blobs not yet referenced by any tree (e.g. freshly staged via `git add`
+  // but not committed) — group them into a single cluster so they don't pile
+  // up at the same coordinates.
+  const unownedBlobs = state.BlobNodes.filter(
+    (b) => !blobTreeOwnership.has(b.hash),
+  );
+  if (unownedBlobs.length > 0) {
+    const sortedHashes = unownedBlobs
+      .slice()
+      .sort((a, b) =>
+        (a.filename || a.hash).localeCompare(b.filename || b.hash),
+      )
+      .map((b) => b.hash);
+    const clusterHeight = (sortedHashes.length - 1) * BLOB_INTRA_SPACING;
+    clusters.push({
+      key: "unowned",
+      blobHashes: sortedHashes,
+      anchorY: PADDING + clusterHeight / 2,
+      halfHeight: clusterHeight / 2,
+      xOffset: 0,
+    });
   }
 
   for (const [ownerKey, blobHashes] of sharedGroups) {

@@ -49,6 +49,8 @@ const state: VisState = {
   showTags: true,
 };
 
+(window as any).__visState = state;
+
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
 let mouseListenersSetup = false;
