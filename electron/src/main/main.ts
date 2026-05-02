@@ -21,6 +21,65 @@ let currentRepoPath: string | null = null;
 let gitWatcher: fs.FSWatcher | null = null;
 let workingDirWatcher: fs.FSWatcher | null = null;
 let debounceTimer: NodeJS.Timeout | null = null;
+let lastNodeCounts: Record<string, number> = {};
+
+function countNodesByType(data: {
+  commitNodes: string;
+  blobNodes: string;
+  treeNodes: string;
+  branchNodes: string;
+  tagNodes: string;
+}): Record<string, number> {
+  const safeLen = (json: string) => {
+    try {
+      const arr = JSON.parse(json);
+      return Array.isArray(arr) ? arr.length : 0;
+    } catch {
+      return 0;
+    }
+  };
+  return {
+    commit: safeLen(data.commitNodes),
+    blob: safeLen(data.blobNodes),
+    tree: safeLen(data.treeNodes),
+    branch: safeLen(data.branchNodes),
+    tag: safeLen(data.tagNodes),
+  };
+}
+
+function trackNodeDeltas(
+  before: Record<string, number>,
+  after: Record<string, number>,
+) {
+  const added: Record<string, number> = {};
+  const removed: Record<string, number> = {};
+  let anyAdded = false;
+  let anyRemoved = false;
+  for (const type of Object.keys(after)) {
+    const delta = (after[type] ?? 0) - (before[type] ?? 0);
+    if (delta > 0) {
+      added[`${type}_added`] = delta;
+      anyAdded = true;
+    } else if (delta < 0) {
+      removed[`${type}_removed`] = -delta;
+      anyRemoved = true;
+    }
+  }
+  if (anyAdded) {
+    sendAnalyticsEvent("nodes_created", {
+      ...added,
+      app_version: app.getVersion(),
+      platform: process.platform,
+    });
+  }
+  if (anyRemoved) {
+    sendAnalyticsEvent("nodes_deleted", {
+      ...removed,
+      app_version: app.getVersion(),
+      platform: process.platform,
+    });
+  }
+}
 
 const analyticsConfig = {
   measurementId: process.env.GA_MEASUREMENT_ID || __GA_MEASUREMENT_ID__ || "",
@@ -244,6 +303,9 @@ function onRepoChanged() {
     if (mainWindow && currentRepoPath) {
       try {
         const data = readGitRepo(currentRepoPath);
+        const newCounts = countNodesByType(data);
+        trackNodeDeltas(lastNodeCounts, newCounts);
+        lastNodeCounts = newCounts;
         mainWindow.webContents.send("git-changed", data);
       } catch (e) {
         console.error("Error reading git repo on change:", e);
@@ -290,7 +352,11 @@ app.whenReady().then(() => {
   ipcMain.handle("read-git-repo", async (_event, repoPath: string) => {
     currentRepoPath = repoPath;
     startWatcher(repoPath);
-    return readGitRepo(repoPath);
+    const data = readGitRepo(repoPath);
+    // Initial load — establish baseline counts but don't fire a creation event;
+    // we only want to track nodes the user creates while the app is running.
+    lastNodeCounts = countNodesByType(data);
+    return data;
   });
 
   ipcMain.handle("select-repo", async () => {
@@ -309,6 +375,11 @@ app.whenReady().then(() => {
       );
       return null;
     }
+
+    sendAnalyticsEvent("open_repo", {
+      app_version: app.getVersion(),
+      platform: process.platform,
+    });
 
     return repoPath;
   });

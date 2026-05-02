@@ -247,7 +247,7 @@ async function runIntegrationTests() {
     const NEW_FILE_CONTENTS = "hello from integration test\n";
     const newFilePath = path.join(repoPath, NEW_FILE);
     const runGit = (cmd) => execSync(cmd, { cwd: repoPath, stdio: "pipe" });
-    const waitForWatcher = () => window.waitForTimeout(1500);
+    const waitForWatcher = () => window.waitForTimeout(2500);
 
     const baseline = await window.evaluate(() => ({
       commitCount: window.__visState.CommitNodes.length,
@@ -550,8 +550,11 @@ async function runIntegrationTests() {
     console.log(`  Failed: ${testsFailed}`);
     console.log(`  Total:  ${testsPassed + testsFailed}`);
 
-    // Hold the window open briefly so the final state can be inspected visually
-    await window.waitForTimeout(5000);
+    // Hold the window open briefly so the final state can be inspected visually.
+    // Skipped in CI to avoid wasting runner minutes.
+    if (!isCI) {
+      await window.waitForTimeout(10000);
+    }
 
     await electronApp.close();
 
