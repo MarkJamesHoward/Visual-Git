@@ -15,6 +15,7 @@ export let radiusBRANCH = 45;
 export let radiusTAG = 40;
 export let radiusTREE = 40;
 export let radiusBLOB = 50;
+export let radiusWORKTREE = 50;
 
 export enum NodePositionX {
   column1 = 100,
@@ -33,6 +34,7 @@ export enum NodeType {
   head = 4,
   remotebranch = 5,
   tag = 6,
+  worktree = 7,
 }
 
 export interface IndexFile {
@@ -128,6 +130,20 @@ export interface GitTag {
   type: NodeType;
   hash: string;
   name: string;
+  text: string;
+  xPos: number;
+  yPos: number;
+}
+
+export interface GitWorktree {
+  type: NodeType;
+  hash: string;
+  name: string;
+  path: string;
+  branch: string;
+  detached: boolean;
+  bare: boolean;
+  isCurrent: boolean;
   text: string;
   xPos: number;
   yPos: number;

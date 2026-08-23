@@ -9,11 +9,13 @@ import { readRemoteBranches } from "./RemoteBranchReader";
 import { readHead } from "./HeadReader";
 import { readIndexFiles } from "./IndexReader";
 import { readWorkingFiles } from "./WorkingFilesReader";
+import { readWorktrees } from "./WorktreeReader";
+import { resolveGitPaths } from "./GitPaths";
 import type { Commit, Tree, Blob, GitRepoData } from "./types";
 
 export function readGitRepo(repoPath: string): GitRepoData {
-  const gitDir = path.join(repoPath, ".git");
-  const objectsPath = path.join(gitDir, "objects");
+  const gitPaths = resolveGitPaths(repoPath);
+  const objectsPath = path.join(gitPaths.commonGitDir, "objects");
 
   const commits: Commit[] = [];
   const trees: Tree[] = [];
@@ -81,10 +83,11 @@ export function readGitRepo(repoPath: string): GitRepoData {
     }
   }
 
-  const branches = readBranches(gitDir);
-  const tags = readTags(gitDir);
-  const remoteBranches = readRemoteBranches(gitDir);
-  const head = readHead(gitDir);
+  const branches = readBranches(gitPaths.commonGitDir);
+  const tags = readTags(gitPaths.commonGitDir);
+  const remoteBranches = readRemoteBranches(gitPaths.commonGitDir);
+  const worktrees = readWorktrees(repoPath);
+  const head = readHead(gitPaths.worktreeGitDir);
   const indexFiles = readIndexFiles(repoPath);
   const workingFiles = readWorkingFiles(repoPath);
 
@@ -93,6 +96,7 @@ export function readGitRepo(repoPath: string): GitRepoData {
     branchNodes: JSON.stringify(branches),
     tagNodes: JSON.stringify(tags),
     remoteBranchNodes: JSON.stringify(remoteBranches),
+    worktreeNodes: JSON.stringify(worktrees),
     treeNodes: JSON.stringify(trees),
     blobNodes: JSON.stringify(blobs),
     headNodes: JSON.stringify(head),

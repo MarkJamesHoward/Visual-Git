@@ -5,6 +5,7 @@ import {
   radiusTAG,
   radiusTREE,
   radiusBLOB,
+  radiusWORKTREE,
   NodeType,
 } from "./Types";
 
@@ -15,6 +16,7 @@ import type {
   GitCommit,
   GitBranch,
   GitTag,
+  GitWorktree,
 } from "./Types";
 
 const ArrowFit = 5;
@@ -69,6 +71,16 @@ function canvas_arrow(
     MoveYArrow = Math.sin(LineAngle) * (radiusTREE + ArrowFit);
     MoveX = Math.cos(LineAngle) * radiusTREE;
     MoveY = Math.sin(LineAngle) * radiusTREE;
+  } else if (parentType == NodeType.worktree && childType == NodeType.branch) {
+    MoveXArrow = Math.cos(LineAngle) * (radiusBRANCH + ArrowFit);
+    MoveYArrow = Math.sin(LineAngle) * (radiusBRANCH + ArrowFit);
+    MoveX = Math.cos(LineAngle) * radiusWORKTREE;
+    MoveY = Math.sin(LineAngle) * radiusWORKTREE;
+  } else if (parentType == NodeType.worktree && childType == NodeType.commit) {
+    MoveXArrow = Math.cos(LineAngle) * (radius + ArrowFit);
+    MoveYArrow = Math.sin(LineAngle) * (radius + ArrowFit);
+    MoveX = Math.cos(LineAngle) * radiusWORKTREE;
+    MoveY = Math.sin(LineAngle) * radiusWORKTREE;
   } else if (childType == NodeType.tree && parentType == NodeType.commit) {
     MoveXArrow = Math.cos(LineAngle) * (radiusTREE + ArrowFit);
     MoveYArrow = Math.sin(LineAngle) * (radiusTREE + ArrowFit);
@@ -271,5 +283,47 @@ export function DrawTreeToParentTreeLinks(
         canvas_arrow(ctx, parentTree.xPos, parentTree.yPos, tn.xPos, tn.yPos, NodeType.tree, NodeType.tree);
       }
     });
+  });
+}
+
+export function DrawWorktreeToRefLinks(
+  ctx: CanvasRenderingContext2D,
+  WorktreeNodes: Array<GitWorktree>,
+  BranchNodes: Array<GitBranch>,
+  CommitNodes: Array<GitCommit>
+) {
+  WorktreeNodes.forEach((wn) => {
+    if (wn.branch) {
+      const branchNode = BranchNodes.find(
+        (bn) => bn.name.toLowerCase() === wn.branch.toLowerCase()
+      );
+      if (branchNode) {
+        canvas_arrow(
+          ctx,
+          wn.xPos,
+          wn.yPos,
+          branchNode.xPos,
+          branchNode.yPos,
+          NodeType.branch,
+          NodeType.worktree
+        );
+        return;
+      }
+    }
+
+    const commitNode = CommitNodes.find(
+      (cn) => cn.hash.toLowerCase() === wn.hash.toLowerCase()
+    );
+    if (commitNode) {
+      canvas_arrow(
+        ctx,
+        wn.xPos,
+        wn.yPos,
+        commitNode.xPos,
+        commitNode.yPos,
+        NodeType.commit,
+        NodeType.worktree
+      );
+    }
   });
 }

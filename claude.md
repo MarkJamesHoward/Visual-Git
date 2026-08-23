@@ -24,3 +24,5 @@ git status  # ❌
 ## Additional Documentation
 
 - See [web/claude.md](web/claude.md) for website-specific development notes (mimic.css workflow, styling conventions)
+
+- Electron is the currenlty  maintained solution - the api/cli and web are legacy and should not be modified

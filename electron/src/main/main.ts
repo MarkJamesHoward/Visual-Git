@@ -11,6 +11,7 @@ import * as fs from "fs";
 import { randomUUID } from "crypto";
 import * as https from "https";
 import { readGitRepo } from "../git/GitReader";
+import { resolveGitPaths } from "../git/GitPaths";
 
 declare const __GA_MEASUREMENT_ID__: string | undefined;
 declare const __GA_API_SECRET__: string | undefined;
@@ -19,6 +20,7 @@ declare const __GA_DEBUG__: string | undefined;
 let mainWindow: BrowserWindow | null = null;
 let currentRepoPath: string | null = null;
 let gitWatcher: fs.FSWatcher | null = null;
+let worktreeGitWatcher: fs.FSWatcher | null = null;
 let workingDirWatcher: fs.FSWatcher | null = null;
 let debounceTimer: NodeJS.Timeout | null = null;
 let lastNodeCounts: Record<string, number> = {};
@@ -29,6 +31,7 @@ function countNodesByType(data: {
   treeNodes: string;
   branchNodes: string;
   tagNodes: string;
+  worktreeNodes: string;
 }): Record<string, number> {
   const safeLen = (json: string) => {
     try {
@@ -44,6 +47,7 @@ function countNodesByType(data: {
     tree: safeLen(data.treeNodes),
     branch: safeLen(data.branchNodes),
     tag: safeLen(data.tagNodes),
+    worktree: safeLen(data.worktreeNodes),
   };
 }
 
@@ -291,6 +295,10 @@ function stopWatcher() {
     gitWatcher.close();
     gitWatcher = null;
   }
+  if (worktreeGitWatcher) {
+    worktreeGitWatcher.close();
+    worktreeGitWatcher = null;
+  }
   if (workingDirWatcher) {
     workingDirWatcher.close();
     workingDirWatcher = null;
@@ -316,13 +324,26 @@ function onRepoChanged() {
 
 function startWatcher(repoPath: string) {
   stopWatcher();
-  const gitDir = path.join(repoPath, ".git");
+  const gitPaths = resolveGitPaths(repoPath);
 
   try {
-    // Watch .git/ for commits, staging, branch changes etc.
-    gitWatcher = fs.watch(gitDir, { recursive: true }, onRepoChanged);
+    // Watch common git dir for object/ref updates.
+    gitWatcher = fs.watch(gitPaths.commonGitDir, { recursive: true }, onRepoChanged);
   } catch (e) {
-    console.error("Error starting .git watcher:", e);
+    console.error("Error starting common git watcher:", e);
+  }
+
+  // Linked worktrees have per-worktree metadata in a separate git dir.
+  if (gitPaths.worktreeGitDir !== gitPaths.commonGitDir) {
+    try {
+      worktreeGitWatcher = fs.watch(
+        gitPaths.worktreeGitDir,
+        { recursive: true },
+        onRepoChanged,
+      );
+    } catch (e) {
+      console.error("Error starting worktree git watcher:", e);
+    }
   }
 
   try {

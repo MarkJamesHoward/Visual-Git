@@ -6,6 +6,7 @@ import {
   radiusTAG,
   radiusTREE,
   radiusBLOB,
+  radiusWORKTREE,
   NodeType,
 } from "./Types";
 import type { GitNode } from "./Types";
@@ -57,6 +58,10 @@ export function DrawCircle(
       gradient.addColorStop(0, "red");
       gradient.addColorStop(1, "red");
       break;
+    case NodeType.worktree:
+      gradient.addColorStop(0, "teal");
+      gradient.addColorStop(1, "teal");
+      break;
   }
 
   ctx.beginPath();
@@ -73,6 +78,8 @@ export function DrawCircle(
     ctx.arc(node.xPos, node.yPos, radiusTREE, 0, 2 * Math.PI);
   } else if (node.type == NodeType.blob) {
     ctx.arc(node.xPos, node.yPos, radiusBLOB, 0, 2 * Math.PI);
+  } else if (node.type == NodeType.worktree) {
+    ctx.arc(node.xPos, node.yPos, radiusWORKTREE, 0, 2 * Math.PI);
   } else {
     ctx.arc(node.xPos, node.yPos, radius, 0, 2 * Math.PI);
   }
@@ -96,6 +103,7 @@ export function DrawCircle(
     else if (node.type === NodeType.remotebranch) focusRadius = radiusBRANCH;
     else if (node.type === NodeType.tree) focusRadius = radiusTREE;
     else if (node.type === NodeType.blob) focusRadius = radiusBLOB;
+    else if (node.type === NodeType.worktree) focusRadius = radiusWORKTREE;
 
     ctx.arc(node.xPos, node.yPos, focusRadius + 8, 0, 2 * Math.PI);
     ctx.lineWidth = 4;

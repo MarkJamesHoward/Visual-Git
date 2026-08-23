@@ -21,6 +21,11 @@ export function DrawText(ctx: CanvasRenderingContext2D, node: GitNode) {
       ctx.fillText(`Remote`, node.xPos, node.yPos - 10);
       ctx.fillText(`${node.name}`, node.xPos, node.yPos + radius / 3);
       break;
+    case NodeType.worktree:
+      ctx.fillText(`Worktree`, node.xPos, node.yPos - 18);
+      ctx.fillText(`${node.name}`, node.xPos, node.yPos - 2);
+      ctx.fillText(`${node.text}`, node.xPos, node.yPos + radius / 3);
+      break;
     case NodeType.head:
       ctx.fillStyle = "#000";
       ctx.fillText("HEAD", node.xPos, node.yPos);

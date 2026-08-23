@@ -38,3 +38,16 @@ export function lsFiles(cwd: string): string {
     return "";
   }
 }
+
+export function worktreeList(cwd: string): string {
+  try {
+    const output = execFileSync("git", ["worktree", "list", "--porcelain"], {
+      cwd,
+      encoding: "utf-8",
+      timeout: 5000,
+    });
+    return output;
+  } catch {
+    return "";
+  }
+}

@@ -134,6 +134,8 @@ export function layoutNodes(
 
   // --- Determine which columns are active ---
   const columns: string[] = ["head", "branches"];
+  if (state.showWorktrees && state.WorktreeNodes.length > 0)
+    columns.push("worktrees");
   if (state.showTags && state.TagNodes.length > 0) columns.push("tags");
   columns.push("commits");
   if (state.showTrees && state.TreeNodes.length > 0) columns.push("trees");
@@ -434,6 +436,42 @@ export function layoutNodes(
     if (commitY === undefined) branchFallbackY += MIN_NODE_SPACING * 0.7;
     branchEntries.push({ key: `branch:${branch.name}`, y: cy });
   }
+
+  // --- Worktrees ---
+  const worktreeX = colX("worktrees");
+  let worktreeFallbackY = PADDING;
+  const worktreeEntries: Array<{ key: string; y: number }> = [];
+  for (const wt of state.WorktreeNodes) {
+    let cy: number;
+
+    if (wt.branch) {
+      const branchComputed = computedPositions.get(`branch:${wt.branch}`);
+      cy = branchComputed?.y ?? worktreeFallbackY;
+      if (!branchComputed) worktreeFallbackY += MIN_NODE_SPACING * 0.7;
+    } else {
+      const commitY = commitYMap.get(wt.hash);
+      cy = commitY ?? worktreeFallbackY;
+      if (commitY === undefined) worktreeFallbackY += MIN_NODE_SPACING * 0.7;
+    }
+
+    worktreeEntries.push({ key: `worktree:${wt.path}`, y: cy });
+  }
+
+  const worktreeResolved = resolveColumnOverlaps(
+    worktreeEntries,
+    PADDING,
+    maxNodeY,
+  );
+
+  for (const wt of state.WorktreeNodes) {
+    const key = `worktree:${wt.path}`;
+    const cx = worktreeX;
+    const cy = worktreeResolved.get(key)!;
+    computedPositions.set(key, { x: cx, y: cy });
+    const pos = applyUserOffset(key, cx, cy, viewportWidth, viewportHeight);
+    wt.xPos = pos.x;
+    wt.yPos = pos.y;
+  }
   const branchResolved = resolveColumnOverlaps(
     branchEntries,
     PADDING,
@@ -525,6 +563,7 @@ export function getNodeLayoutKey(node: any): string {
   if (node.type === 0) return `branch:${node.name}`; // branch
   if (node.type === 6) return `tag:${node.name}`; // tag
   if (node.type === 5) return `remote:${node.name}`; // remotebranch
+  if (node.type === 7) return `worktree:${node.path}`; // worktree
   return node.hash;
 }
 

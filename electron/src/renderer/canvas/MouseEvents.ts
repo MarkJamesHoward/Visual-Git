@@ -20,6 +20,7 @@ function DetectNode(ClickX: number, ClickY: number, state: VisState) {
 
   const allNodes = [
     ...state.BranchNodes,
+    ...state.WorktreeNodes,
     ...state.TagNodes,
     ...state.RemoteBranchNodes,
     ...state.CommitNodes,

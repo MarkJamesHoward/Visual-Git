@@ -5,12 +5,14 @@ import type {
   GitCommit,
   GitBranch,
   GitTag,
+  GitWorktree,
 } from "./canvas/Types";
 import {
   ExtractCommitJsonToNodes,
   ExtractBranchJsonToNodes,
   ExtractTagJsonToNodes,
   ExtractRemoteBranchJsonToNodes,
+  ExtractWorktreeJsonToNodes,
   ExtractTreeJsonToNodes,
   ExtractBlobJsonToNodes,
   ExtractHeadJsonToNodes,
@@ -44,9 +46,11 @@ const state: VisState = {
   TagNodes: [],
   RemoteBranchNodes: [],
   HEADNodes: [],
+  WorktreeNodes: [],
   showTrees: true,
   showBlobs: true,
   showTags: true,
+  showWorktrees: false,
 };
 
 (window as any).__visState = state;
@@ -86,6 +90,11 @@ function processData(data: any) {
   ExtractRemoteBranchJsonToNodes(
     JSON.parse(data.remoteBranchNodes),
     state.RemoteBranchNodes,
+    tmpCtx,
+  );
+  ExtractWorktreeJsonToNodes(
+    JSON.parse(data.worktreeNodes || "[]"),
+    state.WorktreeNodes,
     tmpCtx,
   );
   ExtractTreeJsonToNodes(
@@ -313,6 +322,7 @@ async function openRepo() {
   state.TagNodes = [];
   state.RemoteBranchNodes = [];
   state.HEADNodes = [];
+  state.WorktreeNodes = [];
   mouseListenersSetup = false;
   keyboardListenersSetup = false;
 
@@ -353,6 +363,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   document.getElementById("show-tags")!.addEventListener("change", (e) => {
     state.showTags = (e.target as HTMLInputElement).checked;
+    redraw();
+  });
+  document.getElementById("show-worktrees")!.addEventListener("change", (e) => {
+    state.showWorktrees = (e.target as HTMLInputElement).checked;
     redraw();
   });
 

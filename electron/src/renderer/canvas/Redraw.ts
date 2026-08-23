@@ -8,6 +8,7 @@ import {
   DrawHeadToCommitLinks,
   DrawTagToCommitLinks,
   DrawTreeToParentTreeLinks,
+  DrawWorktreeToRefLinks,
 } from "./DrawLinks";
 import { DrawNodes } from "./DrawNodes";
 import type {
@@ -17,6 +18,7 @@ import type {
   GitCommit,
   GitBranch,
   GitTag,
+  GitWorktree,
 } from "./Types";
 
 export interface VisState {
@@ -27,9 +29,11 @@ export interface VisState {
   TagNodes: GitTag[];
   RemoteBranchNodes: GitBranch[];
   HEADNodes: GitNode[];
+  WorktreeNodes: GitWorktree[];
   showTrees: boolean;
   showBlobs: boolean;
   showTags: boolean;
+  showWorktrees: boolean;
 }
 
 export function ReDraw(
@@ -51,6 +55,9 @@ export function ReDraw(
   }
 
   DrawNodes(ctx, state.BranchNodes, focusedNode);
+  if (state.showWorktrees) {
+    DrawNodes(ctx, state.WorktreeNodes, focusedNode);
+  }
   if (state.showTags) {
     DrawNodes(ctx, state.TagNodes, focusedNode);
   }
@@ -68,6 +75,14 @@ export function ReDraw(
 
   DrawCommitToParentCommitLinks(ctx, state.CommitNodes);
   DrawHeadToCommitLinks(ctx, state.BranchNodes, state.CommitNodes, state.HEADNodes);
+  if (state.showWorktrees) {
+    DrawWorktreeToRefLinks(
+      ctx,
+      state.WorktreeNodes,
+      state.BranchNodes,
+      state.CommitNodes
+    );
+  }
   DrawBranchToCommitLinks(ctx, state.BranchNodes, state.CommitNodes);
   if (state.showTags) {
     DrawTagToCommitLinks(ctx, state.TagNodes, state.CommitNodes);

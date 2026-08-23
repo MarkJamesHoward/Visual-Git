@@ -1,14 +1,14 @@
-import type { GitNode, GitCommit, GitTree, GitBlob, GitBranch, GitTag } from "./Types";
+import type { GitNode, GitCommit, GitTree, GitBlob, GitBranch, GitTag, GitWorktree } from "./Types";
 import { NodeType } from "./Types";
 import type { VisState } from "./Redraw";
 
-type AnyNode = GitNode | GitCommit | GitTree | GitBlob | GitBranch | GitTag;
+type AnyNode = GitNode | GitCommit | GitTree | GitBlob | GitBranch | GitTag | GitWorktree;
 
 let focusedNode: AnyNode | null = null;
 let focusableNodes: AnyNode[] = [];
 let focusIndex = -1;
 
-const TYPE_NAMES = ["Branch", "Commit", "Tree", "Blob", "HEAD", "Remote Branch", "Tag"];
+const TYPE_NAMES = ["Branch", "Commit", "Tree", "Blob", "HEAD", "Remote Branch", "Tag", "Worktree"];
 
 export function getFocusedNode(): AnyNode | null {
   return focusedNode;
@@ -31,6 +31,7 @@ export function buildFocusableList(state: VisState): AnyNode[] {
   // Add in visual column order (left to right)
   nodes.push(...state.HEADNodes);
   nodes.push(...state.BranchNodes);
+  if (state.showWorktrees) nodes.push(...state.WorktreeNodes);
   if (state.showTags) nodes.push(...state.TagNodes);
   nodes.push(...state.CommitNodes);
   if (state.showTrees) nodes.push(...state.TreeNodes);
@@ -136,6 +137,7 @@ function getNextTypeGroup(currentType: NodeType, state: VisState, reverse: boole
   const typeOrder = [
     NodeType.head,
     NodeType.branch,
+    NodeType.worktree,
     NodeType.tag,
     NodeType.commit,
     NodeType.tree,
@@ -152,6 +154,7 @@ function getNextTypeGroup(currentType: NodeType, state: VisState, reverse: boole
 
     // Check if this type is visible
     if (nextType === NodeType.tag && !state.showTags) continue;
+    if (nextType === NodeType.worktree && !state.showWorktrees) continue;
     if (nextType === NodeType.tree && !state.showTrees) continue;
     if (nextType === NodeType.blob && !state.showBlobs) continue;
 

@@ -14,6 +14,7 @@ import type {
   GitCommit,
   GitBranch,
   GitTag,
+  GitWorktree,
 } from "./Types";
 
 export function ExtractCommitJsonToNodes(
@@ -302,6 +303,61 @@ export function ExtractRemoteBranchJsonToNodes(
     }
   } catch (e) {
     console.error(`Error extracting Remotes ${e}`);
+  }
+}
+
+export function ExtractWorktreeJsonToNodes(
+  WorktreeJson: Array<GitWorktree>,
+  WorktreeNodes: Array<GitWorktree>,
+  ctx: CanvasRenderingContext2D
+) {
+  let yPos = 50;
+
+  WorktreeNodes.forEach((existingWorktree) => {
+    if (!WorktreeJson.find((i) => i.path == existingWorktree.path)) {
+      const NodeToRemoveIndex = WorktreeNodes.indexOf(existingWorktree);
+      WorktreeNodes.splice(NodeToRemoveIndex, 1);
+    }
+  });
+
+  for (const node of WorktreeJson) {
+    if (WorktreeNodes.length > 0)
+      yPos = 50 + WorktreeNodes.length * NodeVerticalSpacing;
+
+    const summary = node.detached
+      ? `Detached @ #${node.hash}`
+      : node.branch
+        ? `Branch ${node.branch}`
+        : node.bare
+          ? "Bare"
+          : "Worktree";
+
+    const worktree: GitWorktree = {
+      type: NodeType.worktree,
+      hash: `${node.hash}`,
+      name: node.name,
+      path: node.path,
+      branch: node.branch,
+      detached: !!node.detached,
+      bare: !!node.bare,
+      isCurrent: !!node.isCurrent,
+      text: summary,
+      xPos: NodePositionX.column1,
+      yPos,
+    };
+
+    const existingNode = WorktreeNodes.find((n) => n.path === worktree.path);
+    if (existingNode) {
+      existingNode.hash = worktree.hash;
+      existingNode.name = worktree.name;
+      existingNode.branch = worktree.branch;
+      existingNode.detached = worktree.detached;
+      existingNode.bare = worktree.bare;
+      existingNode.isCurrent = worktree.isCurrent;
+      existingNode.text = worktree.text;
+    } else {
+      WorktreeNodes.push(worktree);
+    }
   }
 }
 

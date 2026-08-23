@@ -33,6 +33,16 @@ export interface HEADNode {
   hash: string;
 }
 
+export interface Worktree {
+  path: string;
+  name: string;
+  hash: string;
+  branch: string;
+  detached: boolean;
+  bare: boolean;
+  isCurrent: boolean;
+}
+
 export interface IndexFile {
   filename: string;
 }
@@ -47,6 +57,7 @@ export interface GitRepoData {
   branchNodes: string;
   tagNodes: string;
   remoteBranchNodes: string;
+  worktreeNodes: string;
   treeNodes: string;
   blobNodes: string;
   headNodes: string;
