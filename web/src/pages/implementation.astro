@@ -1,88 +1,460 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import "../styles/mimic.css";
 ---
 
-<Layout title="Implementation">
-	<main class="">
-      
-    <div class="margin-bottom:lg lg?margin-bottom:2xl">
+<Layout title="Visual Git - Implementation">
+  <section class="color:c1text2 background-color:c1background1">
 
-      <div class="margin-top:xl text-align:center margin-bottom:xl">
-        <div class="font-size:xl lg?font-size:xl titleFont color:c1text2">
-          How Does It Work?
+    <!-- Hero -->
+    <div class="text-align:center padding:xl padding-top:2xl">
+      <h1 class="titleFont font-size:xl lg?font-size:xl margin-bottom:lg">How Does It Work?</h1>
+      <p class="font-size:lg max-width:60ch margin-left:auto margin-right:auto">
+        Visual Git does not invent a picture of your repository. It reads the real
+        thing &mdash; the objects and references Git itself stores in the
+        <code>.git</code> folder &mdash; and draws exactly what is there.
+      </p>
+    </div>
+
+    <!-- Local-only badge row -->
+    <div class="fade-in-on-scroll display:flex flex-wrap:wrap justify-content:center gap:lg padding:xl">
+      <div class="fact-pill">Reads your repository directly</div>
+      <div class="fact-pill">Never modifies anything</div>
+      <div class="fact-pill">Runs entirely on your machine</div>
+    </div>
+
+    <!-- What's inside .git -->
+    <div class="fade-in-on-scroll display:flex flex-direction:column lg?flex-direction:row align-items:center padding:xl gap:xl background-color:c1background2">
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Everything lives in the .git folder</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          Every repository has a hidden <code>.git</code> folder, and almost
+          everything Git knows is stored inside it. Your entire history, every
+          version of every file, every branch and tag &mdash; all of it sits in
+          there as ordinary files on disk.
+        </p>
+        <p class="line-height:1.6">
+          Most tools hide this from you and show a tidy list of commits instead.
+          Visual Git opens it up and shows you the actual contents, because once
+          you can see the shape of it, commands like rebase and reset stop being
+          mysterious.
+        </p>
+      </div>
+      <div class="lg?flex-basis:50% display:flex justify-content:center">
+        <div class="code-panel">
+          <div class="code-panel-header">your-project/.git</div>
+          <pre class="code-panel-body">objects/   <span class="c-dim">every version of everything</span>
+refs/
+├── heads/  <span class="c-dim">your branches</span>
+└── tags/   <span class="c-dim">your tags</span>
+HEAD       <span class="c-dim">where you are right now</span>
+index      <span class="c-dim">the staging area</span></pre>
         </div>
       </div>
+    </div>
 
-    <section>
-      <div class="font-size:lg text-align:center">
-        <div
-          class="color:white display:flex flex-direction:column width:100% place-items:center"
-        >
-          <div class="display:flex align-items:center padding:md width:100% flex-direction:column">
-            <div class="display:none">
-              <div class="font-weight:800 margin-bottom:md">
-                GitHub Repositories - PRs Welcome
-              </div>
-              <div>
-                <div
-                  class="display:flex flex-direction:column items-start margin-bottom:lg align-self:center"
-                >
-                  <a
-                    class="self-start"
-                    href="https://github.com/MarkJamesHoward/VisualGitCmd"
-                    >https://github.com/MarkJamesHoward/VisualGitCmd</a
-                  >
-                  <a href="https://github.com/MarkJamesHoward/VisualGit"
-                    >https://github.com/MarkJamesHoward/VisualGit</a
-                  >
-                  <a href="https://github.com/MarkJamesHoward/VisualGitAPI"
-                    >https://github.com/MarkJamesHoward/VisualGitAPI</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="max-width:50ch margin:lg background:c5background2 color:c5text1  padding:xl border-radius:md">
-              <div class="font-weight:800 text-align:left margin-bottom:lg">
-                Step 1: Extract details from Repo into Json form
-              </div>
-              <div class="text-align:left">
-                The application delves into the .git folder and looks at all the
-                objects that are contained within. By running 'git cat-file'
-                against these objects we can determine various details and use
-                this to construct the git graph in Json form.
-              </div>
-            </div>
+    <!-- The four object types -->
+    <div class="fade-in-on-scroll padding:xl">
+      <h2 class="titleFont font-size:lg text-align:center margin-bottom:md">Git stores just a few kinds of thing</h2>
+      <p class="line-height:1.6 max-width:60ch margin-left:auto margin-right:auto text-align:center margin-bottom:lg">
+        The object folder holds thousands of files, but they are only ever one of
+        a handful of types. Each one gets its own colour on the canvas.
+      </p>
+      <div class="display:flex flex-wrap:wrap justify-content:center gap:md">
+        <div class="object-card">
+          <div class="object-head"><span class="node-dot node-blob"></span>Blob</div>
+          <div class="object-desc">
+            The contents of a file, with no name attached. Save the same file twice
+            and Git stores it once.
           </div>
-          <div
-            class="display:flex align-items:center flex-direction:column width:100% margin-top:xl margin-bottom:xl"
-          >
-            <div  class="max-width:50ch margin:lg background:c5background2 color:c5text1 padding:xl border-radius:md">
-              <div class="font-weight:800 text-align:left margin-bottom:lg">
-                Step 2: Upload the Json to the cloud
-              </div>
-              <div class="text-align:left">
-                The extracted Json from step 1 is now uploaded to the cloud and
-                assigned a unique random ID so that it can be accessed only by
-                yourself.
-              </div>
-            </div>
+        </div>
+        <div class="object-card">
+          <div class="object-head"><span class="node-dot node-tree"></span>Tree</div>
+          <div class="object-desc">
+            A folder. It lists filenames and points at the blobs and trees inside
+            it.
           </div>
-          <div
-            class="display:flex width:100% flex-direction:column  align-items:center margin-bottom:xl"
-          >
-          <div  class="max-width:50ch margin:lg background:c5background2 color:c5text1 padding:xl border-radius:md">
-            <div class="font-weight:800 text-align:left margin-bottom:lg">
-              Step 3: The Visual Git website extracts this information
-            </div>
-            <div class="text-align:left">
-              Poll the Cloud storage and compare the data against our current
-              data. If different then draw the Json objects to the screen
-            </div>
+        </div>
+        <div class="object-card">
+          <div class="object-head"><span class="node-dot node-commit"></span>Commit</div>
+          <div class="object-desc">
+            A snapshot. It points at one tree, at the commit or commits that came
+            before it, and carries your message.
           </div>
+        </div>
+        <div class="object-card">
+          <div class="object-head"><span class="node-dot node-branch"></span>Branch</div>
+          <div class="object-desc">
+            Just a name pointing at a commit. This is why creating a branch is
+            instant &mdash; nothing is copied.
+          </div>
+        </div>
+        <div class="object-card">
+          <div class="object-head"><span class="node-dot node-tag"></span>Tag</div>
+          <div class="object-desc">
+            Another name pointing at a commit, but one that is meant to stay put.
+          </div>
+        </div>
+        <div class="object-card">
+          <div class="object-head"><span class="node-dot node-head"></span>HEAD</div>
+          <div class="object-desc">
+            A pointer to the branch you have checked out, so Git knows where your
+            next commit goes.
           </div>
         </div>
       </div>
-    </section>
-  </div>
-	</main>
+    </div>
+
+    <!-- How the graph is built -->
+    <div class="slide-in-right-on-scroll display:flex flex-direction:column-reverse lg?flex-direction:row align-items:center padding:xl gap:xl background-color:c1background2">
+      <div class="lg?flex-basis:50% display:flex justify-content:center">
+        <div class="layout-demo">
+          <div class="layout-row"><span class="node-dot node-head"></span><span class="node-dot node-branch"></span><span class="layout-row-label">point at commits</span></div>
+          <div class="layout-arrow">&darr;</div>
+          <div class="layout-row"><span class="node-dot node-commit"></span><span class="node-dot node-commit"></span><span class="node-dot node-commit"></span><span class="layout-row-label">point at a tree</span></div>
+          <div class="layout-arrow">&darr;</div>
+          <div class="layout-row"><span class="node-dot node-tree"></span><span class="node-dot node-tree"></span><span class="layout-row-label">point at files</span></div>
+          <div class="layout-arrow">&darr;</div>
+          <div class="layout-row"><span class="node-dot node-blob"></span><span class="node-dot node-blob"></span><span class="node-dot node-blob"></span><span class="layout-row-label">file contents</span></div>
+        </div>
+      </div>
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Following the connections</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          Every object is stored under a long hash rather than a filename, and each
+          one refers to others by hash. Visual Git reads each object in turn, asks
+          Git what type it is and what it contains, and follows those references
+          outward.
+        </p>
+        <p class="line-height:1.6 margin-bottom:md">
+          A commit leads to its tree, that tree leads to its files and
+          sub&#8209;folders, and its parent link leads back through your history.
+          Branches, tags and HEAD are read from the reference files and hooked onto
+          the commits they name.
+        </p>
+        <p class="line-height:1.6">
+          Follow all of that and you have the whole graph &mdash; which is exactly
+          what appears on screen, arrows and all.
+        </p>
+      </div>
+    </div>
+
+    <!-- Loose objects / staging -->
+    <div class="fade-in-on-scroll display:flex flex-direction:column lg?flex-direction:row align-items:center padding:xl gap:xl">
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Including the parts you normally can't see</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          The interesting moments in Git are often the in&#8209;between ones. When
+          you stage a file, Git writes a blob straight away &mdash; before any
+          commit exists. Visual Git picks these up and shows them floating there,
+          unattached, waiting.
+        </p>
+        <p class="line-height:1.6 margin-bottom:md">
+          The same goes for objects left behind by a reset or an amended commit.
+          They are still on disk, no longer reachable from any branch, and you can
+          watch them sit there until Git eventually cleans them up.
+        </p>
+        <p class="line-height:1.6">
+          Alongside the graph, panels show your working directory and staging area,
+          so you can see a change move from one to the other as you type.
+        </p>
+      </div>
+      <div class="lg?flex-basis:50% display:flex justify-content:center">
+        <div class="stage-demo">
+          <div class="stage-col">
+            <div class="stage-label">Working</div>
+            <div class="stage-file">data.txt</div>
+          </div>
+          <div class="stage-sep">&rarr;</div>
+          <div class="stage-col">
+            <div class="stage-label">Staged</div>
+            <div class="stage-file">data.txt</div>
+            <span class="node-dot node-blob stage-dot"></span>
+          </div>
+          <div class="stage-sep">&rarr;</div>
+          <div class="stage-col">
+            <div class="stage-label">Committed</div>
+            <span class="node-dot node-commit stage-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live updates -->
+    <div class="slide-in-left-on-scroll display:flex flex-direction:column-reverse lg?flex-direction:row align-items:center padding:xl gap:xl background-color:c1background2">
+      <div class="lg?flex-basis:50% display:flex justify-content:center">
+        <div class="watch-demo">
+          <div class="watch-ring"></div>
+          <div class="watch-ring watch-ring-delay"></div>
+          <div class="watch-dot"></div>
+          <div class="watch-label">watching</div>
+        </div>
+      </div>
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Keeping up as you work</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          Because everything Git does ends up as a change to a file on disk, Visual
+          Git can simply watch the repository folder. Run a command in your terminal
+          and the app notices immediately, re&#8209;reads the repository and redraws.
+        </p>
+        <p class="line-height:1.6">
+          There is no refresh button and no polling delay. Put your terminal beside
+          the app, run <code>git commit</code>, and watch the new node appear and
+          the branch pointer move across to it.
+        </p>
+      </div>
+    </div>
+
+    <!-- Worktrees -->
+    <div class="fade-in-on-scroll display:flex flex-direction:column lg?flex-direction:row align-items:center padding:xl gap:xl">
+      <div class="lg?flex-basis:50% max-width:50ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Worktrees too</h2>
+        <p class="line-height:1.6 margin-bottom:md">
+          If you use worktrees to keep several branches checked out at once, they
+          share a single object store between them &mdash; one history, several
+          working folders.
+        </p>
+        <p class="line-height:1.6">
+          Visual Git understands this arrangement and shows each worktree along with
+          the branch it has checked out, so you can see how they sit against the
+          shared history.
+        </p>
+      </div>
+      <div class="lg?flex-basis:50% display:flex justify-content:center">
+        <div class="layout-demo">
+          <div class="layout-row"><span class="node-dot node-worktree"></span><span class="layout-row-label">main</span></div>
+          <div class="layout-row"><span class="node-dot node-worktree"></span><span class="layout-row-label">feature-a</span></div>
+          <div class="layout-row"><span class="node-dot node-worktree"></span><span class="layout-row-label">hotfix</span></div>
+          <div class="layout-arrow">&darr;</div>
+          <div class="layout-row"><span class="node-dot node-commit"></span><span class="node-dot node-commit"></span><span class="node-dot node-commit"></span><span class="layout-row-label">shared history</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy note -->
+    <div class="fade-in-on-scroll padding:xl padding-bottom:2xl display:flex justify-content:center">
+      <div class="privacy-note max-width:60ch">
+        <h2 class="titleFont font-size:lg margin-bottom:md">Your Code Stays Yours</h2>
+        <p class="line-height:1.6">
+          Earlier versions of Visual Git uploaded a snapshot of your repository to
+          the cloud so that a website could draw it. That is gone. Everything now
+          happens inside the desktop app: your repository is read on your machine,
+          drawn on your machine, and never sent anywhere. The only thing the app
+          sends is an anonymous count of how often it is used, which contains no
+          file names, no history and no code.
+        </p>
+      </div>
+    </div>
+
+  </section>
 </Layout>
+
+<style>
+  /* Node color dots — matches the palette used on the canvas */
+  .node-dot {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .node-commit { background: #e94560; }
+  .node-tree { background: #4ade80; }
+  .node-blob { background: #60a5fa; }
+  .node-branch { background: #a855f7; }
+  .node-tag { background: #fb923c; }
+  .node-head { background: #facc15; }
+  .node-worktree { background: #22d3ee; }
+
+  /* Fact pills */
+  .fact-pill {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 999px;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    color: #cbd5e1;
+  }
+
+  /* Code panels */
+  .code-panel {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid #475569;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+  }
+  .code-panel-header {
+    background: #4b0082;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-family: monospace;
+  }
+  .code-panel-body {
+    margin: 0;
+    padding: 14px 16px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    overflow-x: auto;
+  }
+  .c-dim { color: #64748b; }
+
+  /* Object type cards */
+  .object-card {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 18px 22px;
+    width: 260px;
+  }
+  .object-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .object-desc {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.55;
+  }
+
+  /* Graph relationship demo */
+  .layout-demo {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 280px;
+  }
+  .layout-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .layout-row-label {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    letter-spacing: 1px;
+  }
+  .layout-arrow {
+    color: #475569;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding-left: 4px;
+  }
+
+  /* Working → staged → committed demo */
+  .stage-demo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .stage-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 84px;
+  }
+  .stage-label {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+  .stage-file {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #cbd5e1;
+  }
+  .stage-dot { width: 14px; height: 14px; }
+  .stage-sep { color: #475569; }
+
+  /* File watcher pulse */
+  .watch-demo {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .watch-dot {
+    width: 16px;
+    height: 16px;
+    background: #4ade80;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .watch-ring {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #4ade80;
+    animation: watch-pulse 2s ease-out infinite;
+  }
+  .watch-ring-delay { animation-delay: 1s; }
+  .watch-label {
+    position: absolute;
+    bottom: 8px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: #4ade80;
+  }
+  @keyframes watch-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(4.5); opacity: 0; }
+  }
+
+  /* Privacy note */
+  .privacy-note {
+    background: #0f172a;
+    border-left: 4px solid #4ade80;
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+
+  code {
+    background: #1e293b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+</style>
+
+<script is:inline>
+  function initScrollAnimations() {
+    const classes = [
+      ["fade-in-on-scroll", "fade-in-visible"],
+      ["slide-in-right-on-scroll", "slide-in-right-visible"],
+      ["slide-in-left-on-scroll", "slide-in-left-visible"],
+    ];
+    classes.forEach(([trigger, visible]) => {
+      const els = document.querySelectorAll("." + trigger);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add(visible);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      els.forEach((el) => observer.observe(el));
+    });
+  }
+  initScrollAnimations();
+</script>
