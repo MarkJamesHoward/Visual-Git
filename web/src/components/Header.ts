@@ -145,7 +145,7 @@ export class Header extends LitElement {
           <a
             target="_blank"
             class="text-decoration:none color:blue:hover margin:md"
-            href="https://github.com/MarkJamesHoward/VisualGitCmd"
+            href="https://github.com/MarkJamesHoward/Visual-Git"
           >
             <img width="50" src="/github-mark.png" alt="GitHub Cat" />
           </a>

@@ -32,19 +32,14 @@ export class Footer extends LitElement {
             class="display:flex flex-direction:column justify-content:space-around"
           >
             <a
-              class="color:c1text2  color:white:hover text-decoration:none display:none"
-              href="/visualize/"
-              >Visualize</a
-            >
-            <a
               class="color:c1text2 color:white:hover text-decoration:none margin-bottom:lg"
               href="/tutorials/"
               >Tutorials</a
             >
             <a
               class="color:c1text2  color:white:hover text-decoration:none"
-              href="/cmdOptions/"
-              >Running Visual</a
+              href="/usinglivevisualisation/"
+              >Using Visual Git</a
             >
           </div>
 
