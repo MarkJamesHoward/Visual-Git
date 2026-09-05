@@ -31,8 +31,6 @@ See all releases: [GitHub Releases](https://github.com/MarkJamesHoward/Visual-Gi
 /
 ├── electron/    # Desktop application (Electron + TypeScript)
 ├── web/         # Website (Astro)
-├── cli/         # Command line tool (C# .NET)
-├── api/         # Backend API (C# .NET)
 └── .github/     # CI/CD workflows
 ```
 
@@ -55,13 +53,6 @@ npm run dev
 ```
 
 The website runs at `http://localhost:4321`.
-
-### CLI
-
-```bash
-cd cli
-dotnet build
-```
 
 ## Testing
 

@@ -17,12 +17,11 @@ git status  # ❌
 
 ## Project Structure
 
-- `/cli` - Command line application (C# .NET)
-- `/web` - Website (Astro framework)
-- `/api` - Backend API (C# .NET)
+- `/electron` - The Visual Git desktop application (Electron + TypeScript). This is the actively maintained solution.
+- `/web` - Website (Astro framework), deployed to Azure Static Web Apps
+
+The legacy `/api` (C# .NET backend) and `/cli` (C# .NET command line app) have been removed.
 
 ## Additional Documentation
 
 - See [web/claude.md](web/claude.md) for website-specific development notes (mimic.css workflow, styling conventions)
-
-- Electron is the currenlty  maintained solution - the api/cli and web are legacy and should not be modified

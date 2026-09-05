@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "visual": {
-      "commandName": "Project",
-      "commandLineArgs": "-p c:\\dev\\test -ld"
-      }
-  }
-}
